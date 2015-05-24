@@ -1,0 +1,9 @@
+propel.database = mysql
+
+propel.project = cscrew
+
+propel.database.url = mysql:host=DBHOST;dbname=DBNAME
+propel.database.user = DBUSER
+propel.database.password = DBPASSWORD
+
+propel.defaultTimeStampFormat = c

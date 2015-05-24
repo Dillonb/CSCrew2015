@@ -1,0 +1,16 @@
+.main-panel div#usage-chart {
+  float: right; }
+.main-panel div.tiling-panel {
+  width: calc(50% - 10px);
+  margin: 5px;
+  float: left; }
+.main-panel .main-panel-heading {
+  background-color: #333; }
+  .main-panel .main-panel-heading h1 {
+    color: #ccc;
+    font-weight: bold; }
+    .main-panel .main-panel-heading h1 img {
+      width: 10%;
+      height: 10%; }
+
+/*# sourceMappingURL=tvdash.css.map */

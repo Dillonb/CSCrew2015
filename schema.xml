@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="cscrew" defaultIdMethod="native">
+    <table name="user" phpName="User">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="netid" type="varchar" size="10" required="true" />
+        <column name="name" type="longvarchar" />
+        <column name="picture" type="longvarchar" />
+        <column name="year" type="longvarchar" />
+        <column name="is_admin" type="boolean" default="false" />
+    </table>
+
+    <table name="signin_reason" phpName="signInReason">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="text" type="varchar" size="255" required="true" />
+    </table>
+
+    <table name="signin" phpName="signIn">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="user_id" type="integer" required="true" />
+        <column name="reason_id" type="integer" required="true" />
+
+        <foreign-key foreignTable="user" phpName="User" refPhpName="signIn">
+            <reference local="user_id" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="signin_reason" phpName="signInReason" refPhpName="signIn">
+            <reference local="reason_id" foreign="id" />
+        </foreign-key>
+
+        <behavior name="timestampable" />
+    </table>
+</database>
+
