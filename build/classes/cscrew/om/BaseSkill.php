@@ -2,24 +2,24 @@
 
 
 /**
- * Base class that represents a row from the 'user' table.
+ * Base class that represents a row from the 'skill' table.
  *
  *
  *
  * @package    propel.generator.cscrew.om
  */
-abstract class BaseUser extends BaseObject implements Persistent
+abstract class BaseSkill extends BaseObject implements Persistent
 {
     /**
      * Peer class name
      */
-    const PEER = 'UserPeer';
+    const PEER = 'SkillPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        UserPeer
+     * @var        SkillPeer
      */
     protected static $peer;
 
@@ -36,41 +36,10 @@ abstract class BaseUser extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the netid field.
-     * @var        string
-     */
-    protected $netid;
-
-    /**
      * The value for the name field.
      * @var        string
      */
     protected $name;
-
-    /**
-     * The value for the picture field.
-     * @var        string
-     */
-    protected $picture;
-
-    /**
-     * The value for the year field.
-     * @var        string
-     */
-    protected $year;
-
-    /**
-     * The value for the is_admin field.
-     * Note: this column has a database default value of: false
-     * @var        boolean
-     */
-    protected $is_admin;
-
-    /**
-     * @var        PropelObjectCollection|signIn[] Collection to store aggregation of signIn objects.
-     */
-    protected $collsignIns;
-    protected $collsignInsPartial;
 
     /**
      * @var        PropelObjectCollection|UserSkill[] Collection to store aggregation of UserSkill objects.
@@ -79,15 +48,9 @@ abstract class BaseUser extends BaseObject implements Persistent
     protected $collUserSkillsPartial;
 
     /**
-     * @var        PropelObjectCollection|helpHour[] Collection to store aggregation of helpHour objects.
+     * @var        PropelObjectCollection|User[] Collection to store aggregation of User objects.
      */
-    protected $collhelpHours;
-    protected $collhelpHoursPartial;
-
-    /**
-     * @var        PropelObjectCollection|Skill[] Collection to store aggregation of Skill objects.
-     */
-    protected $collSkills;
+    protected $collUsers;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -113,46 +76,13 @@ abstract class BaseUser extends BaseObject implements Persistent
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $skillsScheduledForDeletion = null;
-
-    /**
-     * An array of objects scheduled for deletion.
-     * @var		PropelObjectCollection
-     */
-    protected $signInsScheduledForDeletion = null;
+    protected $usersScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
     protected $userSkillsScheduledForDeletion = null;
-
-    /**
-     * An array of objects scheduled for deletion.
-     * @var		PropelObjectCollection
-     */
-    protected $helpHoursScheduledForDeletion = null;
-
-    /**
-     * Applies default values to this object.
-     * This method should be called from the object's constructor (or
-     * equivalent initialization method).
-     * @see        __construct()
-     */
-    public function applyDefaultValues()
-    {
-        $this->is_admin = false;
-    }
-
-    /**
-     * Initializes internal state of BaseUser object.
-     * @see        applyDefaults()
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->applyDefaultValues();
-    }
 
     /**
      * Get the [id] column value.
@@ -163,17 +93,6 @@ abstract class BaseUser extends BaseObject implements Persistent
     {
 
         return $this->id;
-    }
-
-    /**
-     * Get the [netid] column value.
-     *
-     * @return string
-     */
-    public function getNetid()
-    {
-
-        return $this->netid;
     }
 
     /**
@@ -188,43 +107,10 @@ abstract class BaseUser extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [picture] column value.
-     *
-     * @return string
-     */
-    public function getPicture()
-    {
-
-        return $this->picture;
-    }
-
-    /**
-     * Get the [year] column value.
-     *
-     * @return string
-     */
-    public function getYear()
-    {
-
-        return $this->year;
-    }
-
-    /**
-     * Get the [is_admin] column value.
-     *
-     * @return boolean
-     */
-    public function getIsAdmin()
-    {
-
-        return $this->is_admin;
-    }
-
-    /**
      * Set the value of [id] column.
      *
      * @param  int $v new value
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
     public function setId($v)
     {
@@ -234,7 +120,7 @@ abstract class BaseUser extends BaseObject implements Persistent
 
         if ($this->id !== $v) {
             $this->id = $v;
-            $this->modifiedColumns[] = UserPeer::ID;
+            $this->modifiedColumns[] = SkillPeer::ID;
         }
 
 
@@ -242,31 +128,10 @@ abstract class BaseUser extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [netid] column.
-     *
-     * @param  string $v new value
-     * @return User The current object (for fluent API support)
-     */
-    public function setNetid($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->netid !== $v) {
-            $this->netid = $v;
-            $this->modifiedColumns[] = UserPeer::NETID;
-        }
-
-
-        return $this;
-    } // setNetid()
-
-    /**
      * Set the value of [name] column.
      *
      * @param  string $v new value
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
     public function setName($v)
     {
@@ -276,83 +141,12 @@ abstract class BaseUser extends BaseObject implements Persistent
 
         if ($this->name !== $v) {
             $this->name = $v;
-            $this->modifiedColumns[] = UserPeer::NAME;
+            $this->modifiedColumns[] = SkillPeer::NAME;
         }
 
 
         return $this;
     } // setName()
-
-    /**
-     * Set the value of [picture] column.
-     *
-     * @param  string $v new value
-     * @return User The current object (for fluent API support)
-     */
-    public function setPicture($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->picture !== $v) {
-            $this->picture = $v;
-            $this->modifiedColumns[] = UserPeer::PICTURE;
-        }
-
-
-        return $this;
-    } // setPicture()
-
-    /**
-     * Set the value of [year] column.
-     *
-     * @param  string $v new value
-     * @return User The current object (for fluent API support)
-     */
-    public function setYear($v)
-    {
-        if ($v !== null) {
-            $v = (string) $v;
-        }
-
-        if ($this->year !== $v) {
-            $this->year = $v;
-            $this->modifiedColumns[] = UserPeer::YEAR;
-        }
-
-
-        return $this;
-    } // setYear()
-
-    /**
-     * Sets the value of the [is_admin] column.
-     * Non-boolean arguments are converted using the following rules:
-     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
-     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
-     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
-     *
-     * @param boolean|integer|string $v The new value
-     * @return User The current object (for fluent API support)
-     */
-    public function setIsAdmin($v)
-    {
-        if ($v !== null) {
-            if (is_string($v)) {
-                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
-            } else {
-                $v = (boolean) $v;
-            }
-        }
-
-        if ($this->is_admin !== $v) {
-            $this->is_admin = $v;
-            $this->modifiedColumns[] = UserPeer::IS_ADMIN;
-        }
-
-
-        return $this;
-    } // setIsAdmin()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -364,10 +158,6 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
-            if ($this->is_admin !== false) {
-                return false;
-            }
-
         // otherwise, everything was equal, so return true
         return true;
     } // hasOnlyDefaultValues()
@@ -391,11 +181,7 @@ abstract class BaseUser extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->netid = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->picture = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->year = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->is_admin = ($row[$startcol + 5] !== null) ? (boolean) $row[$startcol + 5] : null;
+            $this->name = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -405,10 +191,10 @@ abstract class BaseUser extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 6; // 6 = UserPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 2; // 2 = SkillPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating User object", $e);
+            throw new PropelException("Error populating Skill object", $e);
         }
     }
 
@@ -451,13 +237,13 @@ abstract class BaseUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SkillPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = UserPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = SkillPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -467,13 +253,9 @@ abstract class BaseUser extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->collsignIns = null;
-
             $this->collUserSkills = null;
 
-            $this->collhelpHours = null;
-
-            $this->collSkills = null;
+            $this->collUsers = null;
         } // if (deep)
     }
 
@@ -494,12 +276,12 @@ abstract class BaseUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SkillPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = UserQuery::create()
+            $deleteQuery = SkillQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -537,7 +319,7 @@ abstract class BaseUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(UserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SkillPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -557,7 +339,7 @@ abstract class BaseUser extends BaseObject implements Persistent
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                UserPeer::addInstanceToPool($this);
+                SkillPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -598,45 +380,28 @@ abstract class BaseUser extends BaseObject implements Persistent
                 $this->resetModified();
             }
 
-            if ($this->skillsScheduledForDeletion !== null) {
-                if (!$this->skillsScheduledForDeletion->isEmpty()) {
+            if ($this->usersScheduledForDeletion !== null) {
+                if (!$this->usersScheduledForDeletion->isEmpty()) {
                     $pks = array();
                     $pk = $this->getPrimaryKey();
-                    foreach ($this->skillsScheduledForDeletion->getPrimaryKeys(false) as $remotePk) {
-                        $pks[] = array($pk, $remotePk);
+                    foreach ($this->usersScheduledForDeletion->getPrimaryKeys(false) as $remotePk) {
+                        $pks[] = array($remotePk, $pk);
                     }
                     UserSkillQuery::create()
                         ->filterByPrimaryKeys($pks)
                         ->delete($con);
-                    $this->skillsScheduledForDeletion = null;
+                    $this->usersScheduledForDeletion = null;
                 }
 
-                foreach ($this->getSkills() as $skill) {
-                    if ($skill->isModified()) {
-                        $skill->save($con);
+                foreach ($this->getUsers() as $user) {
+                    if ($user->isModified()) {
+                        $user->save($con);
                     }
                 }
-            } elseif ($this->collSkills) {
-                foreach ($this->collSkills as $skill) {
-                    if ($skill->isModified()) {
-                        $skill->save($con);
-                    }
-                }
-            }
-
-            if ($this->signInsScheduledForDeletion !== null) {
-                if (!$this->signInsScheduledForDeletion->isEmpty()) {
-                    signInQuery::create()
-                        ->filterByPrimaryKeys($this->signInsScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
-                    $this->signInsScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collsignIns !== null) {
-                foreach ($this->collsignIns as $referrerFK) {
-                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
-                        $affectedRows += $referrerFK->save($con);
+            } elseif ($this->collUsers) {
+                foreach ($this->collUsers as $user) {
+                    if ($user->isModified()) {
+                        $user->save($con);
                     }
                 }
             }
@@ -652,24 +417,6 @@ abstract class BaseUser extends BaseObject implements Persistent
 
             if ($this->collUserSkills !== null) {
                 foreach ($this->collUserSkills as $referrerFK) {
-                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
-                }
-            }
-
-            if ($this->helpHoursScheduledForDeletion !== null) {
-                if (!$this->helpHoursScheduledForDeletion->isEmpty()) {
-                    foreach ($this->helpHoursScheduledForDeletion as $helpHour) {
-                        // need to save related object because we set the relation to null
-                        $helpHour->save($con);
-                    }
-                    $this->helpHoursScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collhelpHours !== null) {
-                foreach ($this->collhelpHours as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -696,33 +443,21 @@ abstract class BaseUser extends BaseObject implements Persistent
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = UserPeer::ID;
+        $this->modifiedColumns[] = SkillPeer::ID;
         if (null !== $this->id) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . UserPeer::ID . ')');
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . SkillPeer::ID . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(UserPeer::ID)) {
+        if ($this->isColumnModified(SkillPeer::ID)) {
             $modifiedColumns[':p' . $index++]  = '`id`';
         }
-        if ($this->isColumnModified(UserPeer::NETID)) {
-            $modifiedColumns[':p' . $index++]  = '`netid`';
-        }
-        if ($this->isColumnModified(UserPeer::NAME)) {
+        if ($this->isColumnModified(SkillPeer::NAME)) {
             $modifiedColumns[':p' . $index++]  = '`name`';
-        }
-        if ($this->isColumnModified(UserPeer::PICTURE)) {
-            $modifiedColumns[':p' . $index++]  = '`picture`';
-        }
-        if ($this->isColumnModified(UserPeer::YEAR)) {
-            $modifiedColumns[':p' . $index++]  = '`year`';
-        }
-        if ($this->isColumnModified(UserPeer::IS_ADMIN)) {
-            $modifiedColumns[':p' . $index++]  = '`is_admin`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `user` (%s) VALUES (%s)',
+            'INSERT INTO `skill` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -734,20 +469,8 @@ abstract class BaseUser extends BaseObject implements Persistent
                     case '`id`':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`netid`':
-                        $stmt->bindValue($identifier, $this->netid, PDO::PARAM_STR);
-                        break;
                     case '`name`':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
-                        break;
-                    case '`picture`':
-                        $stmt->bindValue($identifier, $this->picture, PDO::PARAM_STR);
-                        break;
-                    case '`year`':
-                        $stmt->bindValue($identifier, $this->year, PDO::PARAM_STR);
-                        break;
-                    case '`is_admin`':
-                        $stmt->bindValue($identifier, (int) $this->is_admin, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -843,29 +566,13 @@ abstract class BaseUser extends BaseObject implements Persistent
             $failureMap = array();
 
 
-            if (($retval = UserPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = SkillPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
 
-                if ($this->collsignIns !== null) {
-                    foreach ($this->collsignIns as $referrerFK) {
-                        if (!$referrerFK->validate($columns)) {
-                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-                        }
-                    }
-                }
-
                 if ($this->collUserSkills !== null) {
                     foreach ($this->collUserSkills as $referrerFK) {
-                        if (!$referrerFK->validate($columns)) {
-                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-                        }
-                    }
-                }
-
-                if ($this->collhelpHours !== null) {
-                    foreach ($this->collhelpHours as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -891,7 +598,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SkillPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -911,19 +618,7 @@ abstract class BaseUser extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getNetid();
-                break;
-            case 2:
                 return $this->getName();
-                break;
-            case 3:
-                return $this->getPicture();
-                break;
-            case 4:
-                return $this->getYear();
-                break;
-            case 5:
-                return $this->getIsAdmin();
                 break;
             default:
                 return null;
@@ -948,18 +643,14 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['User'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['Skill'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['User'][$this->getPrimaryKey()] = true;
-        $keys = UserPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['Skill'][$this->getPrimaryKey()] = true;
+        $keys = SkillPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getNetid(),
-            $keys[2] => $this->getName(),
-            $keys[3] => $this->getPicture(),
-            $keys[4] => $this->getYear(),
-            $keys[5] => $this->getIsAdmin(),
+            $keys[1] => $this->getName(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -967,14 +658,8 @@ abstract class BaseUser extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
-            if (null !== $this->collsignIns) {
-                $result['signIns'] = $this->collsignIns->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
-            }
             if (null !== $this->collUserSkills) {
                 $result['UserSkills'] = $this->collUserSkills->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
-            }
-            if (null !== $this->collhelpHours) {
-                $result['helpHours'] = $this->collhelpHours->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -994,7 +679,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SkillPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -1014,19 +699,7 @@ abstract class BaseUser extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setNetid($value);
-                break;
-            case 2:
                 $this->setName($value);
-                break;
-            case 3:
-                $this->setPicture($value);
-                break;
-            case 4:
-                $this->setYear($value);
-                break;
-            case 5:
-                $this->setIsAdmin($value);
                 break;
         } // switch()
     }
@@ -1050,14 +723,10 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = UserPeer::getFieldNames($keyType);
+        $keys = SkillPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNetid($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setName($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setPicture($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setYear($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setIsAdmin($arr[$keys[5]]);
+        if (array_key_exists($keys[1], $arr)) $this->setName($arr[$keys[1]]);
     }
 
     /**
@@ -1067,14 +736,10 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(UserPeer::DATABASE_NAME);
+        $criteria = new Criteria(SkillPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(UserPeer::ID)) $criteria->add(UserPeer::ID, $this->id);
-        if ($this->isColumnModified(UserPeer::NETID)) $criteria->add(UserPeer::NETID, $this->netid);
-        if ($this->isColumnModified(UserPeer::NAME)) $criteria->add(UserPeer::NAME, $this->name);
-        if ($this->isColumnModified(UserPeer::PICTURE)) $criteria->add(UserPeer::PICTURE, $this->picture);
-        if ($this->isColumnModified(UserPeer::YEAR)) $criteria->add(UserPeer::YEAR, $this->year);
-        if ($this->isColumnModified(UserPeer::IS_ADMIN)) $criteria->add(UserPeer::IS_ADMIN, $this->is_admin);
+        if ($this->isColumnModified(SkillPeer::ID)) $criteria->add(SkillPeer::ID, $this->id);
+        if ($this->isColumnModified(SkillPeer::NAME)) $criteria->add(SkillPeer::NAME, $this->name);
 
         return $criteria;
     }
@@ -1089,8 +754,8 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(UserPeer::DATABASE_NAME);
-        $criteria->add(UserPeer::ID, $this->id);
+        $criteria = new Criteria(SkillPeer::DATABASE_NAME);
+        $criteria->add(SkillPeer::ID, $this->id);
 
         return $criteria;
     }
@@ -1131,18 +796,14 @@ abstract class BaseUser extends BaseObject implements Persistent
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of User (or compatible) type.
+     * @param object $copyObj An object of Skill (or compatible) type.
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setNetid($this->getNetid());
         $copyObj->setName($this->getName());
-        $copyObj->setPicture($this->getPicture());
-        $copyObj->setYear($this->getYear());
-        $copyObj->setIsAdmin($this->getIsAdmin());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1151,21 +812,9 @@ abstract class BaseUser extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getsignIns() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addsignIn($relObj->copy($deepCopy));
-                }
-            }
-
             foreach ($this->getUserSkills() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addUserSkill($relObj->copy($deepCopy));
-                }
-            }
-
-            foreach ($this->gethelpHours() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addhelpHour($relObj->copy($deepCopy));
                 }
             }
 
@@ -1188,7 +837,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      * objects.
      *
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return User Clone of current object.
+     * @return Skill Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1208,12 +857,12 @@ abstract class BaseUser extends BaseObject implements Persistent
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return UserPeer
+     * @return SkillPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new UserPeer();
+            self::$peer = new SkillPeer();
         }
 
         return self::$peer;
@@ -1230,265 +879,9 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
-        if ('signIn' == $relationName) {
-            $this->initsignIns();
-        }
         if ('UserSkill' == $relationName) {
             $this->initUserSkills();
         }
-        if ('helpHour' == $relationName) {
-            $this->inithelpHours();
-        }
-    }
-
-    /**
-     * Clears out the collsignIns collection
-     *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return User The current object (for fluent API support)
-     * @see        addsignIns()
-     */
-    public function clearsignIns()
-    {
-        $this->collsignIns = null; // important to set this to null since that means it is uninitialized
-        $this->collsignInsPartial = null;
-
-        return $this;
-    }
-
-    /**
-     * reset is the collsignIns collection loaded partially
-     *
-     * @return void
-     */
-    public function resetPartialsignIns($v = true)
-    {
-        $this->collsignInsPartial = $v;
-    }
-
-    /**
-     * Initializes the collsignIns collection.
-     *
-     * By default this just sets the collsignIns collection to an empty array (like clearcollsignIns());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initsignIns($overrideExisting = true)
-    {
-        if (null !== $this->collsignIns && !$overrideExisting) {
-            return;
-        }
-        $this->collsignIns = new PropelObjectCollection();
-        $this->collsignIns->setModel('signIn');
-    }
-
-    /**
-     * Gets an array of signIn objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this User is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @return PropelObjectCollection|signIn[] List of signIn objects
-     * @throws PropelException
-     */
-    public function getsignIns($criteria = null, PropelPDO $con = null)
-    {
-        $partial = $this->collsignInsPartial && !$this->isNew();
-        if (null === $this->collsignIns || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collsignIns) {
-                // return empty collection
-                $this->initsignIns();
-            } else {
-                $collsignIns = signInQuery::create(null, $criteria)
-                    ->filterByUser($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    if (false !== $this->collsignInsPartial && count($collsignIns)) {
-                      $this->initsignIns(false);
-
-                      foreach ($collsignIns as $obj) {
-                        if (false == $this->collsignIns->contains($obj)) {
-                          $this->collsignIns->append($obj);
-                        }
-                      }
-
-                      $this->collsignInsPartial = true;
-                    }
-
-                    $collsignIns->getInternalIterator()->rewind();
-
-                    return $collsignIns;
-                }
-
-                if ($partial && $this->collsignIns) {
-                    foreach ($this->collsignIns as $obj) {
-                        if ($obj->isNew()) {
-                            $collsignIns[] = $obj;
-                        }
-                    }
-                }
-
-                $this->collsignIns = $collsignIns;
-                $this->collsignInsPartial = false;
-            }
-        }
-
-        return $this->collsignIns;
-    }
-
-    /**
-     * Sets a collection of signIn objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param PropelCollection $signIns A Propel collection.
-     * @param PropelPDO $con Optional connection object
-     * @return User The current object (for fluent API support)
-     */
-    public function setsignIns(PropelCollection $signIns, PropelPDO $con = null)
-    {
-        $signInsToDelete = $this->getsignIns(new Criteria(), $con)->diff($signIns);
-
-
-        $this->signInsScheduledForDeletion = $signInsToDelete;
-
-        foreach ($signInsToDelete as $signInRemoved) {
-            $signInRemoved->setUser(null);
-        }
-
-        $this->collsignIns = null;
-        foreach ($signIns as $signIn) {
-            $this->addsignIn($signIn);
-        }
-
-        $this->collsignIns = $signIns;
-        $this->collsignInsPartial = false;
-
-        return $this;
-    }
-
-    /**
-     * Returns the number of related signIn objects.
-     *
-     * @param Criteria $criteria
-     * @param boolean $distinct
-     * @param PropelPDO $con
-     * @return int             Count of related signIn objects.
-     * @throws PropelException
-     */
-    public function countsignIns(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-    {
-        $partial = $this->collsignInsPartial && !$this->isNew();
-        if (null === $this->collsignIns || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collsignIns) {
-                return 0;
-            }
-
-            if ($partial && !$criteria) {
-                return count($this->getsignIns());
-            }
-            $query = signInQuery::create(null, $criteria);
-            if ($distinct) {
-                $query->distinct();
-            }
-
-            return $query
-                ->filterByUser($this)
-                ->count($con);
-        }
-
-        return count($this->collsignIns);
-    }
-
-    /**
-     * Method called to associate a signIn object to this object
-     * through the signIn foreign key attribute.
-     *
-     * @param    signIn $l signIn
-     * @return User The current object (for fluent API support)
-     */
-    public function addsignIn(signIn $l)
-    {
-        if ($this->collsignIns === null) {
-            $this->initsignIns();
-            $this->collsignInsPartial = true;
-        }
-
-        if (!in_array($l, $this->collsignIns->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
-            $this->doAddsignIn($l);
-
-            if ($this->signInsScheduledForDeletion and $this->signInsScheduledForDeletion->contains($l)) {
-                $this->signInsScheduledForDeletion->remove($this->signInsScheduledForDeletion->search($l));
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param	signIn $signIn The signIn object to add.
-     */
-    protected function doAddsignIn($signIn)
-    {
-        $this->collsignIns[]= $signIn;
-        $signIn->setUser($this);
-    }
-
-    /**
-     * @param	signIn $signIn The signIn object to remove.
-     * @return User The current object (for fluent API support)
-     */
-    public function removesignIn($signIn)
-    {
-        if ($this->getsignIns()->contains($signIn)) {
-            $this->collsignIns->remove($this->collsignIns->search($signIn));
-            if (null === $this->signInsScheduledForDeletion) {
-                $this->signInsScheduledForDeletion = clone $this->collsignIns;
-                $this->signInsScheduledForDeletion->clear();
-            }
-            $this->signInsScheduledForDeletion[]= clone $signIn;
-            $signIn->setUser(null);
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * If this collection has already been initialized with
-     * an identical criteria, it returns the collection.
-     * Otherwise if this User is new, it will return
-     * an empty collection; or if this User has previously
-     * been saved, it will retrieve related signIns from storage.
-     *
-     * This method is protected by default in order to keep the public
-     * api reasonable.  You can provide public methods for those you
-     * actually need in User.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|signIn[] List of signIn objects
-     */
-    public function getsignInsJoinsignInReason($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $query = signInQuery::create(null, $criteria);
-        $query->joinWith('signInReason', $join_behavior);
-
-        return $this->getsignIns($query, $con);
     }
 
     /**
@@ -1497,7 +890,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      * @see        addUserSkills()
      */
     public function clearUserSkills()
@@ -1545,7 +938,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this User is new, it will return
+     * If this Skill is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param Criteria $criteria optional Criteria object to narrow the query
@@ -1562,7 +955,7 @@ abstract class BaseUser extends BaseObject implements Persistent
                 $this->initUserSkills();
             } else {
                 $collUserSkills = UserSkillQuery::create(null, $criteria)
-                    ->filterByUser($this)
+                    ->filterBySkill($this)
                     ->find($con);
                 if (null !== $criteria) {
                     if (false !== $this->collUserSkillsPartial && count($collUserSkills)) {
@@ -1606,7 +999,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      *
      * @param PropelCollection $userSkills A Propel collection.
      * @param PropelPDO $con Optional connection object
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
     public function setUserSkills(PropelCollection $userSkills, PropelPDO $con = null)
     {
@@ -1619,7 +1012,7 @@ abstract class BaseUser extends BaseObject implements Persistent
         $this->userSkillsScheduledForDeletion = clone $userSkillsToDelete;
 
         foreach ($userSkillsToDelete as $userSkillRemoved) {
-            $userSkillRemoved->setUser(null);
+            $userSkillRemoved->setSkill(null);
         }
 
         $this->collUserSkills = null;
@@ -1659,7 +1052,7 @@ abstract class BaseUser extends BaseObject implements Persistent
             }
 
             return $query
-                ->filterByUser($this)
+                ->filterBySkill($this)
                 ->count($con);
         }
 
@@ -1671,7 +1064,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      * through the UserSkill foreign key attribute.
      *
      * @param    UserSkill $l UserSkill
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
     public function addUserSkill(UserSkill $l)
     {
@@ -1697,12 +1090,12 @@ abstract class BaseUser extends BaseObject implements Persistent
     protected function doAddUserSkill($userSkill)
     {
         $this->collUserSkills[]= $userSkill;
-        $userSkill->setUser($this);
+        $userSkill->setSkill($this);
     }
 
     /**
      * @param	UserSkill $userSkill The userSkill object to remove.
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
     public function removeUserSkill($userSkill)
     {
@@ -1713,7 +1106,7 @@ abstract class BaseUser extends BaseObject implements Persistent
                 $this->userSkillsScheduledForDeletion->clear();
             }
             $this->userSkillsScheduledForDeletion[]= clone $userSkill;
-            $userSkill->setUser(null);
+            $userSkill->setSkill(null);
         }
 
         return $this;
@@ -1723,396 +1116,171 @@ abstract class BaseUser extends BaseObject implements Persistent
     /**
      * If this collection has already been initialized with
      * an identical criteria, it returns the collection.
-     * Otherwise if this User is new, it will return
-     * an empty collection; or if this User has previously
+     * Otherwise if this Skill is new, it will return
+     * an empty collection; or if this Skill has previously
      * been saved, it will retrieve related UserSkills from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
-     * actually need in User.
+     * actually need in Skill.
      *
      * @param Criteria $criteria optional Criteria object to narrow the query
      * @param PropelPDO $con optional connection object
      * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
      * @return PropelObjectCollection|UserSkill[] List of UserSkill objects
      */
-    public function getUserSkillsJoinSkill($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getUserSkillsJoinUser($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $query = UserSkillQuery::create(null, $criteria);
-        $query->joinWith('Skill', $join_behavior);
+        $query->joinWith('User', $join_behavior);
 
         return $this->getUserSkills($query, $con);
     }
 
     /**
-     * Clears out the collhelpHours collection
+     * Clears out the collUsers collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
-     * @return User The current object (for fluent API support)
-     * @see        addhelpHours()
+     * @return Skill The current object (for fluent API support)
+     * @see        addUsers()
      */
-    public function clearhelpHours()
+    public function clearUsers()
     {
-        $this->collhelpHours = null; // important to set this to null since that means it is uninitialized
-        $this->collhelpHoursPartial = null;
+        $this->collUsers = null; // important to set this to null since that means it is uninitialized
+        $this->collUsersPartial = null;
 
         return $this;
     }
 
     /**
-     * reset is the collhelpHours collection loaded partially
+     * Initializes the collUsers collection.
      *
-     * @return void
-     */
-    public function resetPartialhelpHours($v = true)
-    {
-        $this->collhelpHoursPartial = $v;
-    }
-
-    /**
-     * Initializes the collhelpHours collection.
-     *
-     * By default this just sets the collhelpHours collection to an empty array (like clearcollhelpHours());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function inithelpHours($overrideExisting = true)
-    {
-        if (null !== $this->collhelpHours && !$overrideExisting) {
-            return;
-        }
-        $this->collhelpHours = new PropelObjectCollection();
-        $this->collhelpHours->setModel('helpHour');
-    }
-
-    /**
-     * Gets an array of helpHour objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this User is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @return PropelObjectCollection|helpHour[] List of helpHour objects
-     * @throws PropelException
-     */
-    public function gethelpHours($criteria = null, PropelPDO $con = null)
-    {
-        $partial = $this->collhelpHoursPartial && !$this->isNew();
-        if (null === $this->collhelpHours || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collhelpHours) {
-                // return empty collection
-                $this->inithelpHours();
-            } else {
-                $collhelpHours = helpHourQuery::create(null, $criteria)
-                    ->filterByUser($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    if (false !== $this->collhelpHoursPartial && count($collhelpHours)) {
-                      $this->inithelpHours(false);
-
-                      foreach ($collhelpHours as $obj) {
-                        if (false == $this->collhelpHours->contains($obj)) {
-                          $this->collhelpHours->append($obj);
-                        }
-                      }
-
-                      $this->collhelpHoursPartial = true;
-                    }
-
-                    $collhelpHours->getInternalIterator()->rewind();
-
-                    return $collhelpHours;
-                }
-
-                if ($partial && $this->collhelpHours) {
-                    foreach ($this->collhelpHours as $obj) {
-                        if ($obj->isNew()) {
-                            $collhelpHours[] = $obj;
-                        }
-                    }
-                }
-
-                $this->collhelpHours = $collhelpHours;
-                $this->collhelpHoursPartial = false;
-            }
-        }
-
-        return $this->collhelpHours;
-    }
-
-    /**
-     * Sets a collection of helpHour objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param PropelCollection $helpHours A Propel collection.
-     * @param PropelPDO $con Optional connection object
-     * @return User The current object (for fluent API support)
-     */
-    public function sethelpHours(PropelCollection $helpHours, PropelPDO $con = null)
-    {
-        $helpHoursToDelete = $this->gethelpHours(new Criteria(), $con)->diff($helpHours);
-
-
-        $this->helpHoursScheduledForDeletion = $helpHoursToDelete;
-
-        foreach ($helpHoursToDelete as $helpHourRemoved) {
-            $helpHourRemoved->setUser(null);
-        }
-
-        $this->collhelpHours = null;
-        foreach ($helpHours as $helpHour) {
-            $this->addhelpHour($helpHour);
-        }
-
-        $this->collhelpHours = $helpHours;
-        $this->collhelpHoursPartial = false;
-
-        return $this;
-    }
-
-    /**
-     * Returns the number of related helpHour objects.
-     *
-     * @param Criteria $criteria
-     * @param boolean $distinct
-     * @param PropelPDO $con
-     * @return int             Count of related helpHour objects.
-     * @throws PropelException
-     */
-    public function counthelpHours(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-    {
-        $partial = $this->collhelpHoursPartial && !$this->isNew();
-        if (null === $this->collhelpHours || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collhelpHours) {
-                return 0;
-            }
-
-            if ($partial && !$criteria) {
-                return count($this->gethelpHours());
-            }
-            $query = helpHourQuery::create(null, $criteria);
-            if ($distinct) {
-                $query->distinct();
-            }
-
-            return $query
-                ->filterByUser($this)
-                ->count($con);
-        }
-
-        return count($this->collhelpHours);
-    }
-
-    /**
-     * Method called to associate a helpHour object to this object
-     * through the helpHour foreign key attribute.
-     *
-     * @param    helpHour $l helpHour
-     * @return User The current object (for fluent API support)
-     */
-    public function addhelpHour(helpHour $l)
-    {
-        if ($this->collhelpHours === null) {
-            $this->inithelpHours();
-            $this->collhelpHoursPartial = true;
-        }
-
-        if (!in_array($l, $this->collhelpHours->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
-            $this->doAddhelpHour($l);
-
-            if ($this->helpHoursScheduledForDeletion and $this->helpHoursScheduledForDeletion->contains($l)) {
-                $this->helpHoursScheduledForDeletion->remove($this->helpHoursScheduledForDeletion->search($l));
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param	helpHour $helpHour The helpHour object to add.
-     */
-    protected function doAddhelpHour($helpHour)
-    {
-        $this->collhelpHours[]= $helpHour;
-        $helpHour->setUser($this);
-    }
-
-    /**
-     * @param	helpHour $helpHour The helpHour object to remove.
-     * @return User The current object (for fluent API support)
-     */
-    public function removehelpHour($helpHour)
-    {
-        if ($this->gethelpHours()->contains($helpHour)) {
-            $this->collhelpHours->remove($this->collhelpHours->search($helpHour));
-            if (null === $this->helpHoursScheduledForDeletion) {
-                $this->helpHoursScheduledForDeletion = clone $this->collhelpHours;
-                $this->helpHoursScheduledForDeletion->clear();
-            }
-            $this->helpHoursScheduledForDeletion[]= $helpHour;
-            $helpHour->setUser(null);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Clears out the collSkills collection
-     *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return User The current object (for fluent API support)
-     * @see        addSkills()
-     */
-    public function clearSkills()
-    {
-        $this->collSkills = null; // important to set this to null since that means it is uninitialized
-        $this->collSkillsPartial = null;
-
-        return $this;
-    }
-
-    /**
-     * Initializes the collSkills collection.
-     *
-     * By default this just sets the collSkills collection to an empty collection (like clearSkills());
+     * By default this just sets the collUsers collection to an empty collection (like clearUsers());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
      * @return void
      */
-    public function initSkills()
+    public function initUsers()
     {
-        $this->collSkills = new PropelObjectCollection();
-        $this->collSkills->setModel('Skill');
+        $this->collUsers = new PropelObjectCollection();
+        $this->collUsers->setModel('User');
     }
 
     /**
-     * Gets a collection of Skill objects related by a many-to-many relationship
+     * Gets a collection of User objects related by a many-to-many relationship
      * to the current object by way of the user_skill cross-reference table.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
      * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this User is new, it will return
+     * If this Skill is new, it will return
      * an empty collection or the current collection; the criteria is ignored on a new object.
      *
      * @param Criteria $criteria Optional query object to filter the query
      * @param PropelPDO $con Optional connection object
      *
-     * @return PropelObjectCollection|Skill[] List of Skill objects
+     * @return PropelObjectCollection|User[] List of User objects
      */
-    public function getSkills($criteria = null, PropelPDO $con = null)
+    public function getUsers($criteria = null, PropelPDO $con = null)
     {
-        if (null === $this->collSkills || null !== $criteria) {
-            if ($this->isNew() && null === $this->collSkills) {
+        if (null === $this->collUsers || null !== $criteria) {
+            if ($this->isNew() && null === $this->collUsers) {
                 // return empty collection
-                $this->initSkills();
+                $this->initUsers();
             } else {
-                $collSkills = SkillQuery::create(null, $criteria)
-                    ->filterByUser($this)
+                $collUsers = UserQuery::create(null, $criteria)
+                    ->filterBySkill($this)
                     ->find($con);
                 if (null !== $criteria) {
-                    return $collSkills;
+                    return $collUsers;
                 }
-                $this->collSkills = $collSkills;
+                $this->collUsers = $collUsers;
             }
         }
 
-        return $this->collSkills;
+        return $this->collUsers;
     }
 
     /**
-     * Sets a collection of Skill objects related by a many-to-many relationship
+     * Sets a collection of User objects related by a many-to-many relationship
      * to the current object by way of the user_skill cross-reference table.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param PropelCollection $skills A Propel collection.
+     * @param PropelCollection $users A Propel collection.
      * @param PropelPDO $con Optional connection object
-     * @return User The current object (for fluent API support)
+     * @return Skill The current object (for fluent API support)
      */
-    public function setSkills(PropelCollection $skills, PropelPDO $con = null)
+    public function setUsers(PropelCollection $users, PropelPDO $con = null)
     {
-        $this->clearSkills();
-        $currentSkills = $this->getSkills(null, $con);
+        $this->clearUsers();
+        $currentUsers = $this->getUsers(null, $con);
 
-        $this->skillsScheduledForDeletion = $currentSkills->diff($skills);
+        $this->usersScheduledForDeletion = $currentUsers->diff($users);
 
-        foreach ($skills as $skill) {
-            if (!$currentSkills->contains($skill)) {
-                $this->doAddSkill($skill);
+        foreach ($users as $user) {
+            if (!$currentUsers->contains($user)) {
+                $this->doAddUser($user);
             }
         }
 
-        $this->collSkills = $skills;
+        $this->collUsers = $users;
 
         return $this;
     }
 
     /**
-     * Gets the number of Skill objects related by a many-to-many relationship
+     * Gets the number of User objects related by a many-to-many relationship
      * to the current object by way of the user_skill cross-reference table.
      *
      * @param Criteria $criteria Optional query object to filter the query
      * @param boolean $distinct Set to true to force count distinct
      * @param PropelPDO $con Optional connection object
      *
-     * @return int the number of related Skill objects
+     * @return int the number of related User objects
      */
-    public function countSkills($criteria = null, $distinct = false, PropelPDO $con = null)
+    public function countUsers($criteria = null, $distinct = false, PropelPDO $con = null)
     {
-        if (null === $this->collSkills || null !== $criteria) {
-            if ($this->isNew() && null === $this->collSkills) {
+        if (null === $this->collUsers || null !== $criteria) {
+            if ($this->isNew() && null === $this->collUsers) {
                 return 0;
             } else {
-                $query = SkillQuery::create(null, $criteria);
+                $query = UserQuery::create(null, $criteria);
                 if ($distinct) {
                     $query->distinct();
                 }
 
                 return $query
-                    ->filterByUser($this)
+                    ->filterBySkill($this)
                     ->count($con);
             }
         } else {
-            return count($this->collSkills);
+            return count($this->collUsers);
         }
     }
 
     /**
-     * Associate a Skill object to this object
+     * Associate a User object to this object
      * through the user_skill cross reference table.
      *
-     * @param  Skill $skill The UserSkill object to relate
-     * @return User The current object (for fluent API support)
+     * @param  User $user The UserSkill object to relate
+     * @return Skill The current object (for fluent API support)
      */
-    public function addSkill(Skill $skill)
+    public function addUser(User $user)
     {
-        if ($this->collSkills === null) {
-            $this->initSkills();
+        if ($this->collUsers === null) {
+            $this->initUsers();
         }
 
-        if (!$this->collSkills->contains($skill)) { // only add it if the **same** object is not already associated
-            $this->doAddSkill($skill);
-            $this->collSkills[] = $skill;
+        if (!$this->collUsers->contains($user)) { // only add it if the **same** object is not already associated
+            $this->doAddUser($user);
+            $this->collUsers[] = $user;
 
-            if ($this->skillsScheduledForDeletion and $this->skillsScheduledForDeletion->contains($skill)) {
-                $this->skillsScheduledForDeletion->remove($this->skillsScheduledForDeletion->search($skill));
+            if ($this->usersScheduledForDeletion and $this->usersScheduledForDeletion->contains($user)) {
+                $this->usersScheduledForDeletion->remove($this->usersScheduledForDeletion->search($user));
             }
         }
 
@@ -2120,37 +1288,37 @@ abstract class BaseUser extends BaseObject implements Persistent
     }
 
     /**
-     * @param	Skill $skill The skill object to add.
+     * @param	User $user The user object to add.
      */
-    protected function doAddSkill(Skill $skill)
+    protected function doAddUser(User $user)
     {
         // set the back reference to this object directly as using provided method either results
         // in endless loop or in multiple relations
-        if (!$skill->getUsers()->contains($this)) { $userSkill = new UserSkill();
-            $userSkill->setSkill($skill);
+        if (!$user->getSkills()->contains($this)) { $userSkill = new UserSkill();
+            $userSkill->setUser($user);
             $this->addUserSkill($userSkill);
 
-            $foreignCollection = $skill->getUsers();
+            $foreignCollection = $user->getSkills();
             $foreignCollection[] = $this;
         }
     }
 
     /**
-     * Remove a Skill object to this object
+     * Remove a User object to this object
      * through the user_skill cross reference table.
      *
-     * @param Skill $skill The UserSkill object to relate
-     * @return User The current object (for fluent API support)
+     * @param User $user The UserSkill object to relate
+     * @return Skill The current object (for fluent API support)
      */
-    public function removeSkill(Skill $skill)
+    public function removeUser(User $user)
     {
-        if ($this->getSkills()->contains($skill)) {
-            $this->collSkills->remove($this->collSkills->search($skill));
-            if (null === $this->skillsScheduledForDeletion) {
-                $this->skillsScheduledForDeletion = clone $this->collSkills;
-                $this->skillsScheduledForDeletion->clear();
+        if ($this->getUsers()->contains($user)) {
+            $this->collUsers->remove($this->collUsers->search($user));
+            if (null === $this->usersScheduledForDeletion) {
+                $this->usersScheduledForDeletion = clone $this->collUsers;
+                $this->usersScheduledForDeletion->clear();
             }
-            $this->skillsScheduledForDeletion[]= $skill;
+            $this->usersScheduledForDeletion[]= $user;
         }
 
         return $this;
@@ -2162,16 +1330,11 @@ abstract class BaseUser extends BaseObject implements Persistent
     public function clear()
     {
         $this->id = null;
-        $this->netid = null;
         $this->name = null;
-        $this->picture = null;
-        $this->year = null;
-        $this->is_admin = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
         $this->clearAllReferences();
-        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
@@ -2190,23 +1353,13 @@ abstract class BaseUser extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->collsignIns) {
-                foreach ($this->collsignIns as $o) {
-                    $o->clearAllReferences($deep);
-                }
-            }
             if ($this->collUserSkills) {
                 foreach ($this->collUserSkills as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collhelpHours) {
-                foreach ($this->collhelpHours as $o) {
-                    $o->clearAllReferences($deep);
-                }
-            }
-            if ($this->collSkills) {
-                foreach ($this->collSkills as $o) {
+            if ($this->collUsers) {
+                foreach ($this->collUsers as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
@@ -2214,22 +1367,14 @@ abstract class BaseUser extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        if ($this->collsignIns instanceof PropelCollection) {
-            $this->collsignIns->clearIterator();
-        }
-        $this->collsignIns = null;
         if ($this->collUserSkills instanceof PropelCollection) {
             $this->collUserSkills->clearIterator();
         }
         $this->collUserSkills = null;
-        if ($this->collhelpHours instanceof PropelCollection) {
-            $this->collhelpHours->clearIterator();
+        if ($this->collUsers instanceof PropelCollection) {
+            $this->collUsers->clearIterator();
         }
-        $this->collhelpHours = null;
-        if ($this->collSkills instanceof PropelCollection) {
-            $this->collSkills->clearIterator();
-        }
-        $this->collSkills = null;
+        $this->collUsers = null;
     }
 
     /**
@@ -2239,7 +1384,7 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function __toString()
     {
-        return (string) $this->exportTo(UserPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(SkillPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**

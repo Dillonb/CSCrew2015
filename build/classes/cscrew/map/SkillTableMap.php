@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'user' table.
+ * This class defines the structure of the 'skill' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.cscrew.map
  */
-class UserTableMap extends TableMap
+class SkillTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'cscrew.map.UserTableMap';
+    const CLASS_NAME = 'cscrew.map.SkillTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,18 +32,14 @@ class UserTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('user');
-        $this->setPhpName('User');
-        $this->setClassname('User');
+        $this->setName('skill');
+        $this->setPhpName('Skill');
+        $this->setClassname('Skill');
         $this->setPackage('cscrew');
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('netid', 'Netid', 'VARCHAR', true, 10, null);
         $this->addColumn('name', 'Name', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('picture', 'Picture', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('year', 'Year', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('is_admin', 'IsAdmin', 'BOOLEAN', false, 1, false);
         // validators
     } // initialize()
 
@@ -52,10 +48,8 @@ class UserTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('signIn', 'signIn', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'signIns');
-        $this->addRelation('UserSkill', 'UserSkill', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'UserSkills');
-        $this->addRelation('helpHour', 'helpHour', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'helpHours');
-        $this->addRelation('Skill', 'Skill', RelationMap::MANY_TO_MANY, array(), null, null, 'Skills');
+        $this->addRelation('UserSkill', 'UserSkill', RelationMap::ONE_TO_MANY, array('id' => 'skill_id', ), null, null, 'UserSkills');
+        $this->addRelation('User', 'User', RelationMap::MANY_TO_MANY, array(), null, null, 'Users');
     } // buildRelations()
 
-} // UserTableMap
+} // SkillTableMap

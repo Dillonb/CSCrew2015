@@ -28,6 +28,14 @@
  * @method UserQuery rightJoinsignIn($relationAlias = null) Adds a RIGHT JOIN clause to the query using the signIn relation
  * @method UserQuery innerJoinsignIn($relationAlias = null) Adds a INNER JOIN clause to the query using the signIn relation
  *
+ * @method UserQuery leftJoinUserSkill($relationAlias = null) Adds a LEFT JOIN clause to the query using the UserSkill relation
+ * @method UserQuery rightJoinUserSkill($relationAlias = null) Adds a RIGHT JOIN clause to the query using the UserSkill relation
+ * @method UserQuery innerJoinUserSkill($relationAlias = null) Adds a INNER JOIN clause to the query using the UserSkill relation
+ *
+ * @method UserQuery leftJoinhelpHour($relationAlias = null) Adds a LEFT JOIN clause to the query using the helpHour relation
+ * @method UserQuery rightJoinhelpHour($relationAlias = null) Adds a RIGHT JOIN clause to the query using the helpHour relation
+ * @method UserQuery innerJoinhelpHour($relationAlias = null) Adds a INNER JOIN clause to the query using the helpHour relation
+ *
  * @method User findOne(PropelPDO $con = null) Return the first User matching the query
  * @method User findOneOrCreate(PropelPDO $con = null) Return the first User matching the query, or a new User object populated from the query conditions when no match is found
  *
@@ -496,6 +504,171 @@ abstract class BaseUserQuery extends ModelCriteria
         return $this
             ->joinsignIn($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'signIn', 'signInQuery');
+    }
+
+    /**
+     * Filter the query by a related UserSkill object
+     *
+     * @param   UserSkill|PropelObjectCollection $userSkill  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByUserSkill($userSkill, $comparison = null)
+    {
+        if ($userSkill instanceof UserSkill) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $userSkill->getUserId(), $comparison);
+        } elseif ($userSkill instanceof PropelObjectCollection) {
+            return $this
+                ->useUserSkillQuery()
+                ->filterByPrimaryKeys($userSkill->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByUserSkill() only accepts arguments of type UserSkill or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the UserSkill relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinUserSkill($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('UserSkill');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'UserSkill');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the UserSkill relation UserSkill object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   UserSkillQuery A secondary query class using the current class as primary query
+     */
+    public function useUserSkillQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinUserSkill($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'UserSkill', 'UserSkillQuery');
+    }
+
+    /**
+     * Filter the query by a related helpHour object
+     *
+     * @param   helpHour|PropelObjectCollection $helpHour  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByhelpHour($helpHour, $comparison = null)
+    {
+        if ($helpHour instanceof helpHour) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $helpHour->getUserId(), $comparison);
+        } elseif ($helpHour instanceof PropelObjectCollection) {
+            return $this
+                ->usehelpHourQuery()
+                ->filterByPrimaryKeys($helpHour->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByhelpHour() only accepts arguments of type helpHour or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the helpHour relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinhelpHour($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('helpHour');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'helpHour');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the helpHour relation helpHour object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   helpHourQuery A secondary query class using the current class as primary query
+     */
+    public function usehelpHourQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinhelpHour($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'helpHour', 'helpHourQuery');
+    }
+
+    /**
+     * Filter the query by a related Skill object
+     * using the user_skill table as cross reference
+     *
+     * @param   Skill $skill the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   UserQuery The current query, for fluid interface
+     */
+    public function filterBySkill($skill, $comparison = Criteria::EQUAL)
+    {
+        return $this
+            ->useUserSkillQuery()
+            ->filterBySkill($skill, $comparison)
+            ->endUse();
     }
 
     /**

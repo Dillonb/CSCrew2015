@@ -28,5 +28,56 @@
 
         <behavior name="timestampable" />
     </table>
-</database>
 
+    <table name="skill" phpName="Skill">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="longvarchar" />
+    </table>
+
+    <table name="user_skill" isCrossRef="true">
+        <column name="user_id" type="integer" primaryKey="true" />
+        <column name="skill_id" type="integer" primaryKey="true" />
+
+        <foreign-key foreignTable="user">
+            <reference local="user_id" foreign="id"/>
+        </foreign-key>
+        <foreign-key foreignTable="skill">
+            <reference local="skill_id" foreign="id"/>
+        </foreign-key>
+    </table>
+
+    <table name="helphour" phpName="helpHour">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+
+        <column name="monday" type="boolean" default="false" />
+        <column name="tuesday" type="boolean" default="false" />
+        <column name="wednesday" type="boolean" default="false" />
+        <column name="thursday" type="boolean" default="false" />
+        <column name="friday" type="boolean" default="false" />
+        <column name="saturday" type="boolean" default="false" />
+        <column name="sunday" type="boolean" default="false" />
+
+        <column name="start_time" type="time" required="true" />
+        <column name="end_time" type="time" required="true" />
+        <column name="end_date" type="date" required="true" />
+
+        <column name="approved" type="boolean" default="false" />
+
+        <column name="user_id" type="integer" />
+
+        <foreign-key foreignTable="user">
+            <reference local="user_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+    <table name="helphoursignin" phpName="helpHourSignin">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="helphour_id" type="integer" />
+
+        <foreign-key foreignTable="helphour">
+            <reference local="helphour_id" foreign="id" />
+        </foreign-key>
+
+        <behavior name="timestampable" />
+    </table>
+</database>
