@@ -30,10 +30,12 @@ include_once 'phing/filters/PrefixLines.php';
 include_once 'phing/filters/ReplaceRegexp.php';
 include_once 'phing/filters/ReplaceTokens.php';
 include_once 'phing/filters/ReplaceTokensWithFile.php';
+include_once 'phing/filters/SortFilter.php';
 include_once 'phing/filters/StripPhpComments.php';
 include_once 'phing/filters/StripLineBreaks.php';
 include_once 'phing/filters/StripLineComments.php';
 include_once 'phing/filters/StripWhitespace.php';
+include_once 'phing/filters/SuffixLines.php';
 include_once 'phing/filters/TabToSpaces.php';
 include_once 'phing/filters/TidyFilter.php';
 include_once 'phing/filters/TranslateGettext.php';
@@ -137,6 +139,15 @@ class FilterChain extends DataType
      * @param PrefixLines $o
      */
     public function addPrefixLines(PrefixLines $o)
+    {
+        $o->setProject($this->project);
+        $this->filterReaders[] = $o;
+    }
+
+    /**
+     * @param SuffixLines $o
+     */
+    public function addSuffixLines(SuffixLines $o)
     {
         $o->setProject($this->project);
         $this->filterReaders[] = $o;
@@ -250,6 +261,15 @@ class FilterChain extends DataType
         $this->filterReaders[] = $o;
     }
 
+    /**
+     * @param SortFilter $o
+     */
+    public function addSortFilter(SortFilter $o)
+    {
+        $o->setProject($this->project);
+        $this->filterReaders[] = $o;
+    }
+
     /*
      * Makes this instance in effect a reference to another FilterChain
      * instance.
@@ -280,5 +300,4 @@ class FilterChain extends DataType
         }
         parent::setRefid($r);
     }
-
 }
