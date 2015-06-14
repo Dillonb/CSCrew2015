@@ -60,7 +60,7 @@ function require_admin($who = false) {
     return false;
 }
 
-$app->group('/api', function() use ($app) {
+//$app->group('/api', function() use ($app) {
     $app->get('/netid-info/:netid', function($netid) use($app) {
         render_json(netid_info($netid));
     });
@@ -105,6 +105,6 @@ $app->group('/api', function() use ($app) {
         $who = get_loggedin_info();
         render_json($who);
     });
-});
+//});
 
 $app->run();

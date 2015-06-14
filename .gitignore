@@ -1,9 +1,9 @@
-runtime-conf.xml
-build.properties
-build/conf/*
-build/sql/*
+api/runtime-conf.xml
+api/build.properties
+api/build/conf/*
+api/build/sql/*
 *.swp
-/.htaccess
+api/.htaccess
 css/.sass-cache/*
 composer.phar
 composer.lock
