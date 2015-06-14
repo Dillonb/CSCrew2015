@@ -31,5 +31,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state("get-help", {
             url: "/get-help",
             templateUrl: "templates/get-help.html"
+        })
+        .state("profile", {
+            url: "/profile",
+            templateUrl: "templates/profile.html"
         });
 });

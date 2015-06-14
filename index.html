@@ -31,8 +31,8 @@
                 <li><a ng-show="currentUser.user.IsAdmin" href="admin">Admin</li>
                 <li><a ng-hide="currentUser.authenticated" href="login">Login</a></li>
             </ul>
-            <div class="navbar-right" ng-show="currentUser.authenticated">
-                Welcome, {{ currentUser.user.Name }}
+            <div class="navbar-right navbar-text" ng-show="currentUser.authenticated">
+                <a ui-sref="profile">Welcome, {{ currentUser.user.Name }}</a>
             </div>
         </div>
     </nav>

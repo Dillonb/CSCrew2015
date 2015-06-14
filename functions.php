@@ -114,4 +114,46 @@ function get_loggedin_info() {
 function all_users() {
     return UserQuery::create()->find();
 }
+
+function skills_netid($netid) {
+    $user = get_user($netid);
+    $allSkills = SkillQuery::create()->find();
+    $userSkills = SkillQuery::create()->filterByUser($user)->find();
+    $userSkillsArray = array();
+    // First, build an array of all the skills the user knows, keyed by their id.
+    while (!$userSkills->isEmpty()) {
+        $skill = $userSkills->pop();
+        $userSkillsArray[$skill->getId()] = $skill->toArray();
+    }
+    $finalArray = array();
+    // Then, build a final array of every skill with a new "known" property.
+    while (!$allSkills->isEmpty()) {
+        $skill = $allSkills->pop()->toArray();
+        $skill['known'] = array_key_exists($skill['Id'], $userSkillsArray);
+        array_push($finalArray,$skill);
+    }
+    //return array($allSkills->toArray(),$userSkills->toArray());
+    return $finalArray;
+}
+function update_skills($netid, $data) {
+    $user = get_user($netid);
+    $temp_allSkills = SkillQuery::create()->find();
+    $allSkills = array();
+    // Key all the skills by their id
+    foreach ($temp_allSkills as $skill) {
+        $allSkills[$skill->getId()] = $skill;
+    }
+    //Loop through the data given
+    foreach ($data as $skill) {
+        // Add a relationship if the skill is known (propel will take care of the case if the relationship already exists)
+        if ($skill['known']) {
+            $allSkills[$skill['Id']]->addUser($user);
+        }
+        // Or remove it if the skill is not known
+        else {
+            $allSkills[$skill['Id']]->removeUser($user);
+        }
+        $allSkills[$skill['Id']]->save();
+    }
+}
 ?>

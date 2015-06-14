@@ -20,11 +20,20 @@ function render_json_string($data) {
     $app->stop;
 }
 
-function require_authenticated($who = false) {
+function require_authenticated($who = false, $requireNetid = null, $adminOk = false) {
     if (!$who) {
         $who = get_loggedin_info();
     }
     if ($who['authenticated']) {
+        // If a specific netid is required, check and see if it matches.
+        if ($requireNetid != null) {
+            if ($requireNetid == $who['username']) {
+                return true;
+            }
+            elseif ($adminOk) {
+                return $who['user']['IsAdmin'];
+            }
+        }
         return true;
     }
 
@@ -75,6 +84,21 @@ $app->group('/api', function() use ($app) {
         $app->get('/list', function() use ($app) {
             if (!require_admin()) {return;}
             render_json(all_users()->toArray());
+        });
+        $app->get('/skills/:netid', function($netid) use ($app) {
+            render_json(skills_netid($netid));
+        });
+        $app->post('/skills/:netid', function($netid) use ($app) {
+            // We need to be logged in, AND have it be the correct user (or an admin)
+            if (!require_authenticated(false,$netid,true)) {return;}
+
+            $data = $app->request->getBody();
+            if (!$data) {
+                $app->stop();
+            }
+            $data = json_decode($data,true);
+            update_skills($netid, $data);
+            render_json(array("success"=>true));
         });
     });
     $app->get('/whoami', function() use ($app) {

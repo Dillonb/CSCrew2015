@@ -1,0 +1,10 @@
+<p>{{ currentUser.user.Name }}</p>
+<p>{{ currentUser.user.Netid }}</p>
+<div ng-show="currentUserSkills">
+    <form ng-init="loadCurrentUserSkills()">
+        <p ng-repeat="skill in currentUserSkills"><label><input type="checkbox" name="skills" value="{{ skill.Name }}" ng-model="skill.known"> {{ skill.Name }}</label></p>
+        <p ng-show="skillsSubmitError" class="danger">Error submitting skills.</p>
+        <p><a class="btn btn-default" ng-click="submitSkills()" ng-hide="skillsSubmitting">Submit</a></p>
+        <p><a class="btn btn-info" ng-show="skillsSubmitting">Loading...</a></p>
+    </form>
+</div>
