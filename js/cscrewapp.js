@@ -8,13 +8,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/home",
             templateUrl: "templates/home.html"
         })
-        .state("projects", {
-            url: "/projects",
-            templateUrl: "templates/projects.html"
-        })
-        .state("calendar", {
-            url: "/calendar",
-            templateUrl: "templates/calendar.html"
+        .state("events", {
+            url: "/events",
+            templateUrl: "templates/events.html"
         })
         .state("members", {
             url: "/members",
@@ -23,10 +19,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state("contact", {
             url: "/contact",
             templateUrl: "templates/contact.html"
-        })
-        .state("news", {
-            url: "/news",
-            templateUrl: "templates/news.html"
         })
         .state("get-help", {
             url: "/get-help",
