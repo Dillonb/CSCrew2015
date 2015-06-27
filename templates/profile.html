@@ -22,11 +22,9 @@
     <div class="panel-heading">Help Hours</div>
     <ul class="list-group">
         <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
-            {{ helphour }}
             <p>
                 Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
             </p>
-            <p>{{ helphour.StartTime | date: 'a' }}</p>
             <p>
                 <span ng-show="helphour.Monday">Monday</span>
                 <span ng-show="helphour.Tuesday">Tuesday</span>
@@ -36,6 +34,7 @@
                 <span ng-show="helphour.Saturday">Saturday</span>
                 <span ng-show="helphour.Sunday">Sunday</span>
             </p>
+            <p>{{ "2015-01-01 " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ "2015-01-01 " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
         </li>
         <li>
             {{ '00000000130000Z' | date: 'a' }}

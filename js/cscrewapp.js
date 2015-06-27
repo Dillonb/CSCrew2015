@@ -1,4 +1,4 @@
-var app = angular.module('cscrew', ['ui.router', 'ui.bootstrap']);
+var app = angular.module('cscrew', ['ui.router', 'ui.bootstrap', 'angularMoment']);
 app.config(function ($stateProvider, $urlRouterProvider) {
     // Unmatched urls go to the homepage
     $urlRouterProvider.otherwise("/home");
