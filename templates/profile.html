@@ -1,10 +1,76 @@
-<p>{{ currentUser.user.Name }}</p>
-<p>{{ currentUser.user.Netid }}</p>
-<div ng-show="currentUserSkills">
-    <form ng-init="loadCurrentUserSkills()">
-        <p ng-repeat="skill in currentUserSkills"><label><input type="checkbox" name="skills" value="{{ skill.Name }}" ng-model="skill.known"> {{ skill.Name }}</label></p>
-        <p ng-show="skillsSubmitError" class="danger">Error submitting skills.</p>
-        <p><a class="btn btn-default" ng-click="submitSkills()" ng-hide="skillsSubmitting">Submit</a></p>
-        <p><a class="btn btn-info" ng-show="skillsSubmitting">Loading...</a></p>
-    </form>
+<div class="panel panel-default">
+    <div class="panel-heading">User Information</div>
+    <div class="panel-body">
+        <p>{{ currentUser.user.Name }}</p>
+        <p>{{ currentUser.user.Netid }}</p>
+        <p><label><input type="checkbox" ng-model="showOnMembersPage"> Show me on the members page</label></p>
+        <p><a class="btn btn-default">Submit</a></p>
+    </div>
 </div>
+    <div ng-show="currentUserSkills" class="panel panel-default">
+    <div class="panel-heading">Skills</div>
+    <div class="panel-body">
+        <form ng-init="loadCurrentUserSkills()">
+            <p ng-repeat="skill in currentUserSkills"><label><input type="checkbox" name="skills" value="{{ skill.Name }}" ng-model="skill.known"> {{ skill.Name }}</label></p>
+            <p ng-show="skillsSubmitError" class="danger">Error submitting skills.</p>
+            <p><a class="btn btn-default" ng-click="submitSkills()" ng-hide="skillsSubmitting">Submit</a></p>
+            <p><a class="btn btn-info" ng-show="skillsSubmitting">Loading...</a></p>
+        </form>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Help Hours</div>
+    <ul class="list-group">
+        <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
+            {{ helphour }}
+            <p>
+                Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
+            </p>
+            <p>{{ helphour.StartTime | date: 'a' }}</p>
+            <p>
+                <span ng-show="helphour.Monday">Monday</span>
+                <span ng-show="helphour.Tuesday">Tuesday</span>
+                <span ng-show="helphour.Wednesday">Wednesday</span>
+                <span ng-show="helphour.Thursday">Thursday</span>
+                <span ng-show="helphour.Friday">Friday</span>
+                <span ng-show="helphour.Saturday">Saturday</span>
+                <span ng-show="helphour.Sunday">Sunday</span>
+            </p>
+        </li>
+        <li>
+            {{ '00000000130000Z' | date: 'a' }}
+        </li>
+        <li ng-if="!currentUserHelpHours.length" class="list-group-item">
+            You have no help hours active or in review!
+        </li>
+        <li class="list-group-item" ng-init="loadCurrentUserHelpHours()">
+            <h2>Submit help hours for review</h2>
+            <form name="form_new_helphour" action="#" id="form-new-helphour">
+                <p>I am available on the following days:</p>
+                <ul class="weekselect">
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Monday, 'btn-primary': new_helphour.Monday }"><input type="checkbox" ng-model="new_helphour.Monday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Monday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Tuesday, 'btn-primary': new_helphour.Tuesday }"><input type="checkbox" ng-model="new_helphour.Tuesday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Tuesday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Wednesday, 'btn-primary': new_helphour.Wednesday }"><input type="checkbox" ng-model="new_helphour.Wednesday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Wednesday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Thursday, 'btn-primary': new_helphour.Thursday }"><input type="checkbox" ng-model="new_helphour.Thursday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Thursday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Friday, 'btn-primary': new_helphour.Friday }"><input type="checkbox" ng-model="new_helphour.Friday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Friday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Saturday, 'btn-primary': new_helphour.Saturday }"><input type="checkbox" ng-model="new_helphour.Saturday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Saturday</label></li>
+                    <li><label class="btn" ng-class="{ 'btn-default': !new_helphour.Sunday, 'btn-primary': new_helphour.Sunday }"><input type="checkbox" ng-model="new_helphour.Sunday" ng-required="!(new_helphour.Monday || new_helphour.Tuesday || new_helphour.Wednesday || new_helphour.Thursday || new_helphour.Friday || new_helphour.Saturday || new_helphour.Sunday)">Sunday</label></li>
+                </ul>
+                <p>At the following times:</p>
+                <p class="timepicker">
+                    <label>Start time</label>
+                    <timepicker ng-model="new_helphour.StartTime" required></timepicker>
+                </p>
+                <p class="timepicker">
+                    <label>End time</label>
+                    <timepicker ng-model="new_helphour.EndTime" required></timepicker>
+                </p>
+                <p>
+                    <a ng-show="form_new_helphour.$valid" class="btn btn-default" ng-click="submit_helphour_form(new_helphour)">Submit for Review</a>
+                    <div class="alert alert-danger" ng-show="form_new_helphour.$invalid">Please fill out the form above completely.</div>
+                </p>
+            </form>
+        </li>
+    </ul>
+</div>
+

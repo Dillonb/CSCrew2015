@@ -60,51 +60,85 @@ function require_admin($who = false) {
     return false;
 }
 
-//$app->group('/api', function() use ($app) {
-    $app->get('/netid-info/:netid', function($netid) use($app) {
-        render_json(netid_info($netid));
+$app->get('/netid-info/:netid', function($netid) use($app) {
+    render_json(netid_info($netid));
+});
+$app->get('/netid-db/:netid', function($netid) use ($app) {
+    render_json_string(get_user($netid)->toJSON());
+});
+$app->get('/signin/:netid/:reason', function($netid, $reason) use ($app) {
+    $result = signin_netid($netid, $reason);
+    render_json($result);
+});
+$app->group('/signins', function() use ($app) {
+    $app->get('/today', function() use ($app) {
+        render_json(signins_today());
     });
-    $app->get('/netid-db/:netid', function($netid) use ($app) {
-        render_json_string(get_user($netid)->toJSON());
+    $app->get('/reasons', function() use ($app) {
+        $reasons = signInReasonQuery::create()->find();
+        render_json($reasons->toArray());
     });
-    $app->get('/signin/:netid/:reason', function($netid, $reason) use ($app) {
-        $result = signin_netid($netid, $reason);
-        render_json($result);
+});
+$app->group('/users', function() use ($app) {
+    $app->get('/list', function() use ($app) {
+        if (!require_admin()) {return;}
+        render_json(all_users()->toArray());
     });
-    $app->group('/signins', function() use ($app) {
-        $app->get('/today', function() use ($app) {
-            render_json(signins_today());
-        });
-        $app->get('/reasons', function() use ($app) {
-            $reasons = signInReasonQuery::create()->find();
-            render_json($reasons->toArray());
-        });
+    $app->get('/skills/:netid', function($netid) use ($app) {
+        render_json(skills_netid($netid));
     });
-    $app->group('/users', function() use ($app) {
-        $app->get('/list', function() use ($app) {
-            if (!require_admin()) {return;}
-            render_json(all_users()->toArray());
-        });
-        $app->get('/skills/:netid', function($netid) use ($app) {
-            render_json(skills_netid($netid));
-        });
-        $app->post('/skills/:netid', function($netid) use ($app) {
-            // We need to be logged in, AND have it be the correct user (or an admin)
-            if (!require_authenticated(false,$netid,true)) {return;}
+    $app->post('/skills/:netid', function($netid) use ($app) {
+        // We need to be logged in, AND have it be the correct user (or an admin)
+        if (!require_authenticated(false,$netid,true)) {return;}
 
-            $data = $app->request->getBody();
-            if (!$data) {
-                $app->stop();
-            }
-            $data = json_decode($data,true);
-            update_skills($netid, $data);
-            render_json(array("success"=>true));
-        });
+        $data = $app->request->getBody();
+        if (!$data) {
+            $app->stop();
+        }
+        $data = json_decode($data,true);
+        update_skills($netid, $data);
+        render_json(array("success"=>true));
     });
-    $app->get('/whoami', function() use ($app) {
+});
+$app->group('/helphours', function() use ($app) {
+    $app->get('/get/:userid', function($userid) use ($app) {
+        if ($app->request->params('unapproved')) {
+            $helphours = helpHourQuery::create()->where('helpHour.UserId = ?', $userid)->find();
+            render_json($helphours->toArray());
+        }
+        else {
+            $helphours = helpHourQuery::create()->where('helpHour.UserId = ?', $userid)->where('helpHour.approved = true')->find();
+            render_json($helphours->toArray());
+        }
+    });
+    $app->get('/now', function() use($app) {
+        render_json(array());
+
+        $helpHours = helpHourQuery::create()
+            ->where('helpHour.' . date('l'). ' = true')
+            ->where('helpHour.StartTime < ?', date("H:i"))
+            ->where('helpHour.EndTime > ?', date("H:i"))
+            ->where('helpHour.approved = 1')
+            ->find();
+
+        render_json($helpHours->toArray());
+    });
+    $app->post('/submit', function() use($app) {
+        if (!require_authenticated()) { return; }
+        $data = json_decode($app->request->getBody());
         $who = get_loggedin_info();
-        render_json($who);
+        $data->UserId = $who['user']['Id'];
+        $obj = new helpHour();
+        $obj->fromJSON(json_encode($data));
+        $obj->setStartTime(convert_timezone($obj->getStartTime()));
+        $obj->setEndTime(convert_timezone($obj->getEndTime()));
+        $obj->save();
+        render_json($obj->toArray());
     });
-//});
+});
+$app->get('/whoami', function() use ($app) {
+    $who = get_loggedin_info();
+    render_json($who);
+});
 
 $app->run();

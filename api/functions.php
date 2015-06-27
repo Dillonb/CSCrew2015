@@ -156,4 +156,9 @@ function update_skills($netid, $data) {
         $allSkills[$skill['Id']]->save();
     }
 }
+function convert_timezone($time) {
+    $dt = new DateTime($time, new DateTimeZone("UTC"));
+    $dt->setTimezone(new DateTimeZone("America/New_York"));
+    return $dt->format("H:i");
+}
 ?>

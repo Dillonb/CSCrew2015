@@ -6,8 +6,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="js/cscrewapp.js"></script>
     <script src="js/userservice.js"></script>
+    <script src="js/helphourservice.js"></script>
     <script src="js/cscrewctrl.js"></script>
     <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/cscrew.css">
@@ -29,14 +31,14 @@
                 <li><a href="#" ui-sref="news">News</a></li>
                 <li><a href="#" ui-sref="get-help">Get Help</a></li>
                 <li><a ng-show="currentUser.user.IsAdmin" href="admin">Admin</li>
-                <li><a ng-hide="currentUser.authenticated" href="login">Login</a></li>
+                <li><a ng-hide="currentUserLoaded && currentUser.authenticated" href="login">Login</a></li>
             </ul>
+            <div class="navbar-right navbar-text" ng-hide="currentUserLoaded">Loading... </div>
             <div class="navbar-right navbar-text" ng-show="currentUser.authenticated">
                 <a ui-sref="profile">Welcome, {{ currentUser.user.Name }}</a>
             </div>
         </div>
     </nav>
-    <div class="container" ui-view>
-    </div>
+    <div class="container" ui-view></div>
 </body>
 </html>

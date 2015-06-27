@@ -1,9 +1,0 @@
-propel.database = mysql
-
-propel.project = cscrew
-
-propel.database.url = mysql:host=webdb-core.uvm.edu;dbname=dbelivea_cscrewtest
-propel.database.user = dbelivea_admin
-propel.database.password = p0lhjFb0zoDA
-
-propel.defaultTimeStampFormat = c

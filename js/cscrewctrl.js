@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory) {
+app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory) {
     $scope.users = [];
 
     $scope.loadUsers = function() {
@@ -10,6 +10,7 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory) {
     $scope.currentUser = function() {
         userFactory.getCurrentUser().then(function(data) {
             $scope.currentUser = data;
+            $scope.currentUserLoaded = true;
         });
     }
     $scope.loadCurrentUserSkills = function() {
@@ -32,4 +33,29 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory) {
             $scope.skillsSubmitError = true;
         });
     }
+    $scope.submit_helphour_form = function(data) {
+        helpHourFactory.submitHelpHourRequest(data).then(function(data) {
+            //Re-request the user's help hours
+            $scope.loadCurrentUserHelpHours();
+        }, function(reason) {
+            alert(reason);
+        });
+    };
+    $scope.loadCurrentUserHelpHours = function() {
+        var load = function(currentUser) {
+            if (currentUser.user) {
+                helpHourFactory.getUserHelpHours(currentUser.user.Id, true).then(function(data) {
+                    $scope.currentUserHelpHours = data;
+                });
+            }
+        }
+
+        // Wait until currentUser becomes defined to load the hours
+        if ($scope.currentUser.user) {
+            load($scope.currentUser);
+        }
+        else {
+            $scope.$watch('currentUser', load);
+        }
+    };
 });
