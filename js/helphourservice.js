@@ -1,4 +1,4 @@
-app.factory('helpHourFactory', function($http, $q) {
+app.factory('helpHourFactory', function($http, $q, $interval) {
         var service = {};
 
         service.submitHelpHourRequest = function(data) {
@@ -18,6 +18,25 @@ app.factory('helpHourFactory', function($http, $q) {
         };
 
         service.helpHoursNow = function() {
+            var deferred = $q.defer();
+            $http({
+                method:'GET',
+                url:'api/helphours/now'
+            }).success(function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].StartTimeMoment = moment(moment().format("YYYY-MM-DD") + " " + data[i].StartTime);
+                    data[i].duration = moment.duration(moment("1970-01-01 " + data[i].EndTime) - moment("1970-01-01 " + data[i].StartTime));
+
+
+                    data[i].updateTimeRemaining = function() {
+                        this.timeRemaining = moment() - this.StartTimeMoment;
+                    }.bind(data[i]);
+                    data[i].updateTimeRemaining();
+                    data[i].timeRemainingInterval = $interval(data[i].updateTimeRemaining, 1000);
+                }
+                deferred.resolve(data);
+            });
+            return deferred.promise;
         };
 
         service.helpHoursToday = function() {

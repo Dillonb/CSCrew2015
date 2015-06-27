@@ -1,5 +1,8 @@
 app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory) {
     $scope.users = [];
+    $scope.timeNow = moment();
+    $scope.today = function() { return moment().format("YYYY-MM-DD"); }
+    $scope.now = function() { return moment(); }
 
     $scope.loadUsers = function() {
         userFactory.getAllUsers().then(function(data) {
@@ -57,5 +60,10 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         else {
             $scope.$watch('currentUser', load);
         }
+    };
+    $scope.loadHelpHoursNow = function() {
+        helpHourFactory.helpHoursNow().then(function(data) {
+            $scope.helpHoursNow = data;
+        });
     };
 });

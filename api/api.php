@@ -116,9 +116,10 @@ $app->group('/helphours', function() use ($app) {
 
         $helpHours = helpHourQuery::create()
             ->where('helpHour.' . date('l'). ' = true')
-            ->where('helpHour.StartTime < ?', date("H:i"))
+            ->where('helpHour.StartTime <= ?', date("H:i"))
             ->where('helpHour.EndTime > ?', date("H:i"))
             ->where('helpHour.approved = 1')
+            ->joinWith('User')
             ->find();
 
         render_json($helpHours->toArray());
