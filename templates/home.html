@@ -3,7 +3,8 @@
 <ul ng-init="loadHelpHoursNow()">
     <li ng-repeat="helphour in helpHoursNow">
         <p>{{ helphour.User.Name }}</p>
-        <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
+        <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
+        <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</p>
         <p>Ends <span am-time-ago="today() + ' ' + helphour.EndTime"></span></p>
         <progressbar max="helphour.duration.asMilliseconds()" value="helphour.timeRemaining"></progressbar>
     </li>

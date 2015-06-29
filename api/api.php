@@ -122,7 +122,20 @@ $app->group('/helphours', function() use ($app) {
             ->joinWith('User')
             ->find();
 
-        render_json($helpHours->toArray());
+        // Extract skills
+        $skills = array();
+        foreach ($helpHours as $helphour) {
+            if (!array_key_exists($helphour->getUser()->getNetid(), $skills)) {
+                $skills[$helphour->getUser()->getNetid()] = $helphour->getUser()->getSkills()->toArray();
+            }
+        }
+
+        // Convert everything to an array and merge it all
+        $helpHours = $helpHours->toArray();
+        foreach ($helpHours as $key=>$value) {
+            $helpHours[$key]['User']['Skills'] = $skills[$value['User']['Netid']];
+        }
+        render_json($helpHours);
     });
     $app->post('/submit', function() use($app) {
         if (!require_authenticated()) { return; }
