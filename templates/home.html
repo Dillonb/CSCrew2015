@@ -1,4 +1,4 @@
-<p>This is the homepage.</p>
+<!-- <p>This is the homepage.</p>
 <p>Help hours now:</p>
 <ul ng-init="loadHelpHoursNow()">
     <li ng-repeat="helphour in helpHoursNow">
@@ -8,3 +8,19 @@
         <progressbar max="helphour.duration.asMilliseconds()" value="helphour.timeRemaining"></progressbar>
     </li>
 </ul>
+-->
+
+<div class="row">
+  <div class="col-md-6">
+    <h1>Welcome to CS Crew</h1>
+    <p>We are a student-led community of individuals studying or  interested in Computer Science at the University of Vermont. Founded in 2010 by Anthony Sweet, Mark Cooper, and Beau Cameron, we provide a space for students to further their knowledge and skills in CS related concepts and applications. We are located in Votey 332 and welcome anyone who wants to come in to work on projects, get help during help hours, study, and network.
+  </div>
+  <div class="col-md-6"> 
+    <h2>Today's Help Hours</h2>
+    <div class="row" ng-app="" ng-init="hours=['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM', '9:00 PM', '10:00 PM']">
+      <li ng-repeat="hour in hours">
+	{{ hour }}
+      </li>
+    </div>
+  </div>
+</div>

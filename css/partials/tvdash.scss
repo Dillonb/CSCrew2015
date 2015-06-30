@@ -1,0 +1,21 @@
+.main-panel {
+    div#usage-chart {
+        float:right;
+    }
+    div.tiling-panel {
+        width: calc(50% - 10px);
+        margin: 5px;
+        float:left;
+    }
+    .main-panel-heading {
+        background-color:#333;
+        h1 {
+            color: #ccc;
+            font-weight: bold;
+            img {
+                width: 10%;
+                height: 10%;
+            }
+        }
+    }
+}
