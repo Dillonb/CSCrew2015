@@ -1,0 +1,44 @@
+// modules
+@import '../modules/typography';
+@import '../modules/colors';
+
+// partials
+@import 'todayshelphours';
+@import 'contactform';
+
+body {
+      font-family: $font-text;
+      font-size: $text-size-paragraph;
+}
+
+@for $index from 1 through 6 {
+  h#{$index}{
+    font-family: $font-heading;
+  }
+}
+
+.cscrew-header-logo {
+    width: 10%;
+}
+
+form#form-new-helphour {
+    padding: 20px;
+    p.timepicker {
+        display: inline-block;
+    }
+    &.ng-invalid {
+        background-color:red;
+    }
+    .ng-invalid {
+        background-color: blue;
+    }
+    ul.weekselect {
+        padding-left: 0px;
+        li {
+            display: inline-block;
+            input[type="checkbox"] {
+                display:none;
+            }
+        }
+    }
+}

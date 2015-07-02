@@ -1,3 +1,4 @@
+<!--
 <p>This is the homepage.</p>
 <p>Help hours now:</p>
 <ul ng-init="loadHelpHoursNow()">
@@ -19,3 +20,58 @@
         <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
     </li>
 </ul>
+-->
+
+<div class="row">
+  <div class="col-md-6">
+    <h1>Welcome to CS Crew</h1>
+    <p>We are a student-led community of individuals studying or  interested in Computer Science at the University of Vermont. Founded in 2010 by Anthony Sweet, Mark Cooper, and Beau Cameron, we provide a space for students to further their knowledge and skills in CS related concepts and applications. We are located in Votey 332 and welcome anyone who wants to come in to work on projects, get help during help hours, study, and network.
+  </div>
+  <div class="col-md-6"> 
+    <div id="todays-help-hours" ng-app="" ng-init="students = [
+                         {'name': 'Henry',
+                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/a1/4e/7e/a14e7ea5b9deba79cf4fda3da128\
+df19.jpg',
+                          'hours': '10:00 AM - 1:00 PM',
+                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
+			  'active': 'n'},
+                         {'name': 'Taeyon',
+                          'image': 'http://36.media.tumblr.com/76853308dbdbc44f54cae7fc176b26d0/tumblr_ncgllvV0pi1q\
+byzjyo4_250.png',
+                          'hours': '12:00 PM - 5:00 PM',
+                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
+			  'active': 'y'},
+			  {'name': 'Morgan',                                                              
+                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/b7/88/9a/b7889ab568a731fc63b5acd744122896.jpg',                                                                                                                                                                    
+                          'hours': '12:00 PM - 5:00 PM',                                                                                                                             
+                          'skills': 'JavaScript, HTML/CSS, Front End Dev',                                                                                                           
+                          'active': 'y'}, 
+                         {'name': 'Dara',
+                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/a5/4c/7f/a54c7faeb55c504c0495276c2123\
+242e.jpg',
+                          'hours': '2:00 PM - 5:00 PM',
+                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
+			  'active': 'n'},
+{'name': 'Dara',                                                                                                                                            
+                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/6b/6f/3a/6b6f3a1a72b67569e8e7c0fe3800a4b1.jpg',                                                                                                                                                                           
+                          'hours': '2:00 PM - 5:00 PM',                                                                                                                              
+                          'skills': 'JavaScript, HTML/CSS, Front End Dev',                                                                                                           
+                          'active': 'n'} 
+                         ]">
+      <h2>Today's Help Hours</h2>
+      <ul class="list-unstyled">
+	<li ng-repeat="student in students">
+	  <div ng:class="{true:'todays-help-hours-active row', false:'todays-help-hours-inactive row'}[student.active=='y']">
+	    <div class="col-md-4">
+	      <img ng-src="{{student.image}}">
+	    </div>
+	    <div class="col-md-8">
+	      <h3>{{student.name}} <small>{{student.hours}}</small></h3>
+	      <p>{{student.skills}}</p>
+	    </div>
+	  </div>
+	</li>
+      </ul>
+    </div>
+   </div>
+</div>
