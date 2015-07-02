@@ -1,0 +1,49 @@
+// modules
+@import '../modules/typography';
+@import '../modules/colors';
+@import '../modules/figures';
+
+// partials
+@import 'mainnav';
+@import 'todayshelphours';
+@import 'contactform';
+@import 'members';
+
+html { font-size: $base-font-size; }
+
+body {
+      font-family: $font-lora;
+      font-size: $base-font-size;
+}
+
+@for $index from 1 through 6 {
+  h#{$index}{
+    font-family: $font-mont;
+  }
+}
+
+.cscrew-header-logo {
+    width: 10%;
+}
+
+form#form-new-helphour {
+    padding: 20px;
+    p.timepicker {
+        display: inline-block;
+    }
+    &.ng-invalid {
+        background-color:red;
+    }
+    .ng-invalid {
+        background-color: blue;
+    }
+    ul.weekselect {
+        padding-left: 0px;
+        li {
+            display: inline-block;
+            input[type="checkbox"] {
+                display:none;
+            }
+        }
+    }
+}
