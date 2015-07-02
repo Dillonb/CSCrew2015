@@ -161,4 +161,21 @@ function convert_timezone($time) {
     $dt->setTimezone(new DateTimeZone("America/New_York"));
     return $dt->format("H:i");
 }
+
+function process_helphour_resultset($helpHours) {
+    // Extract skills
+    $skills = array();
+    foreach ($helpHours as $helphour) {
+        if (!array_key_exists($helphour->getUser()->getNetid(), $skills)) {
+            $skills[$helphour->getUser()->getNetid()] = $helphour->getUser()->getSkills()->toArray();
+        }
+    }
+
+    // Convert everything to an array and merge it all
+    $helpHours = $helpHours->toArray();
+    foreach ($helpHours as $key=>$value) {
+        $helpHours[$key]['User']['Skills'] = $skills[$value['User']['Netid']];
+    }
+    return $helpHours;
+}
 ?>

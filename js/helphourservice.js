@@ -40,9 +40,25 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
         };
 
         service.helpHoursToday = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/today'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
         };
 
         service.helpHoursThisWeek = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/thisweek'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
         };
 
         service.getUserHelpHours = function(userid, include_unapproved) {

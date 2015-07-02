@@ -111,9 +111,22 @@ $app->group('/helphours', function() use ($app) {
             render_json($helphours->toArray());
         }
     });
+    $app->get('/today', function() use($app) {
+        $helpHours = helpHourQuery::create()
+            ->where('helpHour.' . date('l') . ' = true')
+            ->where('helpHour.approved = 1')
+            ->joinWith('User')
+            ->find();
+        render_json(process_helphour_resultset($helpHours));
+    });
+    $app->get('/thisweek', function() use ($app) {
+        $helpHours = helpHourQuery::create()
+            ->where('helpHour.approved = 1')
+            ->joinWith('User')
+            ->find();
+        render_json(process_helphour_resultset($helpHours));
+    });
     $app->get('/now', function() use($app) {
-        render_json(array());
-
         $helpHours = helpHourQuery::create()
             ->where('helpHour.' . date('l'). ' = true')
             ->where('helpHour.StartTime <= ?', date("H:i"))
@@ -121,21 +134,7 @@ $app->group('/helphours', function() use ($app) {
             ->where('helpHour.approved = 1')
             ->joinWith('User')
             ->find();
-
-        // Extract skills
-        $skills = array();
-        foreach ($helpHours as $helphour) {
-            if (!array_key_exists($helphour->getUser()->getNetid(), $skills)) {
-                $skills[$helphour->getUser()->getNetid()] = $helphour->getUser()->getSkills()->toArray();
-            }
-        }
-
-        // Convert everything to an array and merge it all
-        $helpHours = $helpHours->toArray();
-        foreach ($helpHours as $key=>$value) {
-            $helpHours[$key]['User']['Skills'] = $skills[$value['User']['Netid']];
-        }
-        render_json($helpHours);
+        render_json(process_helphour_resultset($helpHours));
     });
     $app->post('/submit', function() use($app) {
         if (!require_authenticated()) { return; }

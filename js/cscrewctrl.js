@@ -66,4 +66,9 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.helpHoursNow = data;
         });
     };
+    $scope.loadHelpHoursToday = function() {
+        helpHourFactory.helpHoursToday().then(function(data) {
+            $scope.helpHoursToday = data;
+        });
+    };
 });

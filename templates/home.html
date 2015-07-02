@@ -9,3 +9,13 @@
         <progressbar max="helphour.duration.asMilliseconds()" value="helphour.timeRemaining"></progressbar>
     </li>
 </ul>
+
+<p>Help hours today:</p>
+<ul ng-init="loadHelpHoursToday()">
+    <li ng-repeat="helphour in helpHoursToday | orderBy: 'StartTime'">
+        <p><span am-time-ago="today() + ' ' + helphour.StartTime"></span></p>
+        <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</p>
+        <p>{{ helphour.User.Name }}</p>
+        <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
+    </li>
+</ul>
