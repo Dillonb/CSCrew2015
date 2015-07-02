@@ -1,0 +1,62 @@
+.picture-container {
+	   overflow: hidden;
+	   padding: 0;
+}
+
+#todays-help-hours {
+		img { width: 100%; }
+		ul { margin: 15px 0 10px 5px; }
+		li:first-child { 
+			       .todays-help-hours-inactive, .todays-help-hours-active { border-radius: 20px 20px 0 0; }
+			       .col-md-4 { border-radius: 20px 0 0 0; }
+		}
+		li:last-child {
+			      .todays-help-hours-inactive, .todays-help-hours-active { border-radius:	0 0 20px 20px; }
+			      .col-md-4 { border-radius: 0 0 0 20px; }
+		}
+
+}
+
+.todays-help-hours-inactive {
+			     background-color: #f3f3f3;
+			     margin: 0;
+			     img { opacity: .7; }
+			     .col-md-4 {
+			     	       @extend .picture-container;
+				       width: 75px;
+				       height: 75px;
+			     }
+			     
+			     h3 {
+			     	margin-top: 10px;
+				font-size: 20px;
+				color: #b4b4b4;
+				}
+			h4 {
+			   font-size: 16px;
+			   color: #cdcdcd;
+			   margin-left: 2px;
+			   }
+				
+}
+
+.todays-help-hours-active {
+
+			  background-color: #D6EDF7;
+			  margin: 0;
+			  .col-md-4 {
+                                     @extend .picture-container;
+				      width: 121px;
+				      height: 121px;
+                             }
+
+                             h3 {
+                                margin-top: 20px;
+                                font-size: 30px;
+                                }
+                        h4 {
+                           font-size: 18px;
+			   margin-left: 6px;
+                           }
+
+}

@@ -1,0 +1,78 @@
+@mixin transition($speed) {
+  -webkit-transition: $speed;
+  -moz-transition: $speed;
+  -o-transition: $speed;
+  transition: $speed;
+}
+
+$input-color: #5d93db;
+
+$input-length: 30em;
+
+.contactForm {
+  border: 1px solid #a8a8a8;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px #a8a8a8;
+  font-family: sans-serif;
+  width: 40em;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 2em;
+
+  label {
+    display: block;
+    max-width: $input-length;
+    margin: auto;
+
+    &:after {
+      content: "\A";
+      white-space: pre;
+    };
+  }
+
+  input[type=text] {
+    display: block;
+    line-height: 1.5em;
+    border-radius: 2px;
+    outline: none;
+    margin: .35em auto 1em;
+    border: 1px solid #a8a8a8;
+    padding: .25em;
+    @include transition(.5s);
+    font-size: 1em;
+    min-width: $input-length;
+
+    &:focus {
+      @include transition(.3s);
+      border: 1px solid $input-color;
+      box-shadow: 0 0 .5em .05em $input-color;
+    }
+
+    &:hover {
+      @extend :focus;
+    }
+  }
+
+  textarea {
+    @extend input[type=text];
+    font-family: sans-serif;
+    resize: none;
+    min-height: 10em;
+  }
+
+  .inputFld {
+    display: block;
+    max-width: $input-length;
+    margin: 0 auto;
+
+    input[type=submit] {
+      background: url('../png/sendMail.png') no-repeat 0;
+      outline: none;
+      border: none;
+      height: 2em;
+      width: 2em;
+      border-radius: 5em;
+      cursor: pointer;
+    }
+  }
+}

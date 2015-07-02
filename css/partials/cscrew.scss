@@ -1,5 +1,10 @@
+// modules
 @import '../modules/typography';
 @import '../modules/colors';
+
+// partials
+@import 'todayshelphours';
+@import 'contactform';
 
 body {
       font-family: $font-text;
