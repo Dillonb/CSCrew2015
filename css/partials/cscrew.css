@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lora|Montserrat:400,700|Archivo+Black);
+@import url(https://fonts.googleapis.com/css?family=Lora|Montserrat:400,700|Archivo+Black|Lato:300,400);
 nav {
   font-family: "Montserrat", sans-serif;
   text-transform: lowercase;
@@ -145,6 +145,10 @@ h5 {
 
 h6 {
   font-family: "Montserrat", sans-serif; }
+
+.container {
+  width: 100%;
+  padding: 0 3%; }
 
 .cscrew-header-logo {
   width: 10%; }
