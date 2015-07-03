@@ -45,6 +45,11 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
                 method: 'GET',
                 url: 'api/helphours/today'
             }).success(function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].StartTimeMoment = moment(moment().format("YYYY-MM-DD") + " " + data[i].StartTime);
+                    data[i].EndTimeMoment = moment(moment().format("YYYY-MM-DD") + " " + data[i].EndTime);
+                    data[i].dateRange = moment.range(data[i].StartTimeMoment, data[i].EndTimeMoment);
+                }
                 deferred.resolve(data);
             });
             return deferred.promise;
