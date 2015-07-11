@@ -22,6 +22,9 @@ function netid_info($netid) {
         $person = $entries["0"];
         return $person;
     }
+    else {
+        print ldap_error($ld->ldap);
+    }
 }
 
 function get_user($netid) {

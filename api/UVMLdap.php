@@ -438,13 +438,13 @@ class UVMLdap {
     }
 
     // Turn on SSL encryption
-    if ( ! @ldap_start_tls($ldap) ) {
+    //if ( ! @ldap_start_tls($ldap) ) {
       //$error = ldap_error($ldap);
       //print "<p>Error: $error<br />\n";
       //print "<p>Server: $server Port: $port\n";
       //ldap_close($ldap);
       //fatal_error($error);
-    }
+    //}
 
     $this->ldap = $ldap;
     return $ldap;
