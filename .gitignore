@@ -7,3 +7,4 @@ api/.htaccess
 css/.sass-cache/*
 composer.phar
 composer.lock
+.sass-cache
