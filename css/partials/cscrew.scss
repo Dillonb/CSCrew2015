@@ -26,12 +26,6 @@ form#form-new-helphour {
     p.timepicker {
         display: inline-block;
     }
-    &.ng-invalid {
-        background-color:red;
-    }
-    .ng-invalid {
-        background-color: blue;
-    }
     ul.weekselect {
         padding-left: 0px;
         li {
