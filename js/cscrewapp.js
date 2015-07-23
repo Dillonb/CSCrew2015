@@ -27,5 +27,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state("profile", {
             url: "/profile",
             templateUrl: "templates/profile.html"
+        })
+        .state("admin", {
+            url: "/admin",
+            templateUrl: "templates/admin.html"
+        })
+        .state("admin.helphours", {
+            url: "/helphours",
+            templateUrl: "templates/admin/helphours.html"
         });
 });

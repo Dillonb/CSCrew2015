@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Help Hours Pending Approval</h3>
+    </div>
+    <div class="panel-body" ng-init="loadUnapprovedHelpHours()">
+        <div ng-show="!unapprovedHelpHoursLoaded">Loading...</div>
+        <ul class="list-group" ng-show="unapprovedHelpHoursLoaded">
+            <li ng-repeat="helphour in unapprovedHelpHours" class="list-group-item">
+                <p>
+                    {{ helphour.User.Name }} ({{ helphour.User.Netid }})
+                </p>
+                <p>
+                    Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
+                </p>
+                <p>
+                    <span ng-show="helphour.Monday">Monday</span>
+                    <span ng-show="helphour.Tuesday">Tuesday</span>
+                    <span ng-show="helphour.Wednesday">Wednesday</span>
+                    <span ng-show="helphour.Thursday">Thursday</span>
+                    <span ng-show="helphour.Friday">Friday</span>
+                    <span ng-show="helphour.Saturday">Saturday</span>
+                    <span ng-show="helphour.Sunday">Sunday</span>
+                </p>
+                <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
+                <p><a href="#" class="btn btn-success" ng-click="approveHelpHour(helphour.Id)">Approve</a> <a href="#" class="btn btn-danger" ng-click="denyHelpHour(helphour.Id)">Deny</a></p>
+            </li>
+            <li class="list-group-item" ng-show="!unapprovedHelpHours.length">There are no help hours pending approval!</li>
+        </ul>
+    </div>
+</div>

@@ -136,6 +136,26 @@ $app->group('/helphours', function() use ($app) {
             ->find();
         render_json(process_helphour_resultset($helpHours));
     });
+    $app->get('/unapproved', function() use($app) {
+        if (!require_admin()) { return; }
+        $helpHours = helpHourQuery::create()
+            ->where('helpHour.approved = 0')
+            ->joinWith('User')
+            ->find();
+        render_json(process_helphour_resultset($helpHours));
+    });
+    $app->get('/approve/:id', function($id) use ($app) {
+        if (!require_admin()) { return; }
+        $helpHour = helpHourQuery::create()->findPk($id);
+        $helpHour->setApproved(1);
+        $helpHour->save();
+        render_json("Success");
+    });
+    $app->get('/unapprove/:id', function($id) use ($app) {
+        if (!require_admin()) { return; }
+        helpHourQuery::create()->findPk($id)->delete();
+        render_json("Success");
+    });
     $app->post('/submit', function() use($app) {
         if (!require_authenticated()) { return; }
         $data = json_decode($app->request->getBody());

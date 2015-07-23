@@ -66,6 +66,41 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             return deferred.promise;
         };
 
+        service.unapprovedHelpHours = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/unapproved'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        };
+
+        service.approveHelpHour = function(id) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/approve/' + id
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        service.denyHelpHour = function(id) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/unapprove/' + id
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
         service.getUserHelpHours = function(userid, include_unapproved) {
             var deferred = $q.defer();
             var url = 'api/helphours/get/' + userid;

@@ -1,0 +1,10 @@
+<p ng-if="!currentUser.user.IsAdmin">
+    Access denied.
+</p>
+<div ng-if="currentUser.user.IsAdmin">
+    <ul class="nav nav-tabs">
+        <li><a href="#" ui-sref="admin">Admin Home</a></li>
+        <li><a href="#" ui-sref="admin.helphours">Help Hours</a></li>
+    </ul>
+    <div ng-controller="AdminCtrl" ui-view></div>
+</div>
