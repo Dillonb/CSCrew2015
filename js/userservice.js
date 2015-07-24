@@ -59,5 +59,17 @@ app.factory('userFactory', function($http, $q) {
             });
             return deferred.promise;
         };
+        service.getMembers = function() {
+            var deferred = $q.defer();
+            $http({
+                method:'GET',
+                url: 'api/users/members'
+            }).success(function(data) {
+                deferred.resolve(data);
+            }).error(function() {
+                deferred.reject(false);
+            });
+            return deferred.promise;
+        };
         return service;
 });

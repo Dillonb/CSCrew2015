@@ -117,8 +117,15 @@ $app->group('/users', function() use ($app) {
         $profile->setUser($user);
         print "Saving";
         $profile->save();
-        //render_json($profile);
+        render_json($profile);
 
+    });
+    $app->get('/members', function() use ($app) {
+        $members = memberProfileQuery::create()
+            ->joinWith('User')
+            ->where('Visible = 1')
+            ->find();
+        render_json($members->toArray());
     });
 });
 $app->group('/helphours', function() use ($app) {

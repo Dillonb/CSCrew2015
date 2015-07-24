@@ -1,68 +1,46 @@
 <div class="row">
-  <div class="col-md-4">
-    <h1>Search Members</h1>
-    <ul class="list-unstyled">
-      <li>Name</li>
-      <li>Skills</li>
-      </li>Classes Taken</li>
-    </ul>
-  </div>
-  <div class="col-md-8"> 
-    <div id="member-profiles" ng-app="" ng-init="students = [
-                         {'name': 'Henry',
-                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/a1/4e/7e/a14e7ea5b9deba79cf4fda3da128df19.jpg',
-                          'hours': '10:00 AM - 1:00 PM',
-                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
-			    'active': 'n'},
-                         {'name': 'Taeyon',
-                          'image': 'http://36.media.tumblr.com/76853308dbdbc44f54cae7fc176b26d0/tumblr_ncgllvV0pi1qbyzjyo4_250.png',
-                          'hours': '12:00 PM - 5:00 PM',
-                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
-			    'active': 'y'},
-			      {'name': 'Morgan',                                                              
-                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/b7/88/9a/b7889ab568a731fc63b5acd744122896.jpg',                                                                                                                                                                    
-                          'hours': '12:00 PM - 5:00 PM',                                                                                                                             
-                          'skills': 'JavaScript, HTML/CSS, Front End Dev',                                                                                                           
-                          'active': 'y'}, 
-                         {'name': 'Dara',
-                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/a5/4c/7f/a54c7faeb55c504c0495276c2123242e.jpg',
-                          'hours': '2:00 PM - 5:00 PM',
-                          'skills': 'JavaScript, HTML/CSS, Front End Dev',
-			    'active': 'n'},
-{'name': 'Dara',                                                                                                                                            
-                          'image': 'https://s-media-cache-ak0.pinimg.com/736x/6b/6f/3a/6b6f3a1a72b67569e8e7c0fe3800a4b1.jpg',                                                                                                                                                                           
-                          'hours': '2:00 PM - 5:00 PM',                                                                                                                              
-                          'skills': 'JavaScript, HTML/CSS, Front End Dev',                                                                                                           
-                          'active': 'n'} 
-                         ]">
-      <ul class="list-unstyled">
-	<li ng-repeat="student in students">
-	    <div class="row">
-	          <div class="col-md-4">
-		          <img ng-src="{{student.image}}">
-		  </div>
-		  <div class="col-md-8">
-		    <h2>{{student.name}}</h2>
-		    <div class="row">
-		      <div class="col-md-2">
-			Hours
-		      </div>
-		      <div class="col-md-10">
-			{{student.hours}}
-		      </div>
-		    </div>
-		    <div class="row">
-		       <div class="col-md-2">
-			 Skills
-		       </div>
-		       <div class="col-md-10">
-			 {{student.skills}}
-		       </div>
-                    </div>
-		 </div>
-	    </div>
-	 </li>
-      </ul>
+    <div class="col-md-4">
+        <h1>Search Members</h1>
+        <!--
+        <ul class="list-unstyled">
+            <li>Name</li>
+            <li>Skills</li>
+            <li>Classes Taken</li>
+        </ul>
+        -->
+        <input type="text" ng-model="memberFilter" class="form-control">
     </div>
-   </div>
+
+    <div class="col-md-8">
+        <div id="member-profiles" ng-init="getMembers()">
+            <ul class="list-unstyled">
+                <li ng-repeat="member in members | filter: memberFilter">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img ng-if="member.User.Image" ng-src="{{ helphour.User.Image }}">
+                            <img ng-if="!member.User.Image" ng-src="img/qmark.png">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>{{ member.User.Name }}</h2>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Bio
+                                </div>
+                                <div class="col-md-10">
+                                    {{ member.Bio }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Skills
+                                </div>
+                                <div class="col-md-10">
+                                    Skills go here
+                                </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

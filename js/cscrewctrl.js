@@ -79,4 +79,9 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             console.log(response);
         });
     };
+    $scope.getMembers = function() {
+        userFactory.getMembers().then(function(data) {
+            $scope.members = data;
+        });
+    };
 });
