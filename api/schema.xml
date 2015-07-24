@@ -80,4 +80,15 @@
 
         <behavior name="timestampable" />
     </table>
+
+    <table name="memberprofile" phpName="memberProfile">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+
+        <column name="visible" type="boolean" default="false" />
+        <column name="bio" type="varchar" />
+
+        <foreign-key foreignTable="user">
+            <reference local="id" foreign="id" />
+        </foreign-key>
+    </table>
 </database>

@@ -3,8 +3,20 @@
     <div class="panel-body">
         <p>{{ currentUser.user.Name }}</p>
         <p>{{ currentUser.user.Netid }}</p>
-        <p><label><input type="checkbox" ng-model="showOnMembersPage"> Show me on the members page</label></p>
-        <p><a class="btn btn-default">Submit</a></p>
+        <form>
+            <div class="form-group">
+                <label><input type="checkbox" ng-model="showOnMembersPage"> Show me on the members page</label>
+            </div>
+            <div class="form-group">
+                <label>Short bio</label>
+                <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Upload a picture</label>
+                <input type="file" id="userAvatar">
+            </div>
+            <div class="form-group"><a class="btn btn-default">Submit</a></div>
+        </form>
     </div>
 </div>
     <div ng-show="currentUserSkills" class="panel panel-default">

@@ -55,6 +55,7 @@ class UserTableMap extends TableMap
         $this->addRelation('signIn', 'signIn', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'signIns');
         $this->addRelation('UserSkill', 'UserSkill', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'UserSkills');
         $this->addRelation('helpHour', 'helpHour', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'helpHours');
+        $this->addRelation('memberProfile', 'memberProfile', RelationMap::ONE_TO_ONE, array('id' => 'id', ), null, null);
         $this->addRelation('Skill', 'Skill', RelationMap::MANY_TO_MANY, array(), null, null, 'Skills');
     } // buildRelations()
 

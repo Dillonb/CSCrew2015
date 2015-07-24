@@ -36,6 +36,10 @@
  * @method UserQuery rightJoinhelpHour($relationAlias = null) Adds a RIGHT JOIN clause to the query using the helpHour relation
  * @method UserQuery innerJoinhelpHour($relationAlias = null) Adds a INNER JOIN clause to the query using the helpHour relation
  *
+ * @method UserQuery leftJoinmemberProfile($relationAlias = null) Adds a LEFT JOIN clause to the query using the memberProfile relation
+ * @method UserQuery rightJoinmemberProfile($relationAlias = null) Adds a RIGHT JOIN clause to the query using the memberProfile relation
+ * @method UserQuery innerJoinmemberProfile($relationAlias = null) Adds a INNER JOIN clause to the query using the memberProfile relation
+ *
  * @method User findOne(PropelPDO $con = null) Return the first User matching the query
  * @method User findOneOrCreate(PropelPDO $con = null) Return the first User matching the query, or a new User object populated from the query conditions when no match is found
  *
@@ -652,6 +656,80 @@ abstract class BaseUserQuery extends ModelCriteria
         return $this
             ->joinhelpHour($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'helpHour', 'helpHourQuery');
+    }
+
+    /**
+     * Filter the query by a related memberProfile object
+     *
+     * @param   memberProfile|PropelObjectCollection $memberProfile  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterBymemberProfile($memberProfile, $comparison = null)
+    {
+        if ($memberProfile instanceof memberProfile) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $memberProfile->getId(), $comparison);
+        } elseif ($memberProfile instanceof PropelObjectCollection) {
+            return $this
+                ->usememberProfileQuery()
+                ->filterByPrimaryKeys($memberProfile->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterBymemberProfile() only accepts arguments of type memberProfile or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the memberProfile relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinmemberProfile($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('memberProfile');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'memberProfile');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the memberProfile relation memberProfile object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   memberProfileQuery A secondary query class using the current class as primary query
+     */
+    public function usememberProfileQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinmemberProfile($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'memberProfile', 'memberProfileQuery');
     }
 
     /**

@@ -85,6 +85,11 @@ abstract class BaseUser extends BaseObject implements Persistent
     protected $collhelpHoursPartial;
 
     /**
+     * @var        memberProfile one-to-one related memberProfile object
+     */
+    protected $singlememberProfile;
+
+    /**
      * @var        PropelObjectCollection|Skill[] Collection to store aggregation of Skill objects.
      */
     protected $collSkills;
@@ -473,6 +478,8 @@ abstract class BaseUser extends BaseObject implements Persistent
 
             $this->collhelpHours = null;
 
+            $this->singlememberProfile = null;
+
             $this->collSkills = null;
         } // if (deep)
     }
@@ -676,6 +683,12 @@ abstract class BaseUser extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->singlememberProfile !== null) {
+                if (!$this->singlememberProfile->isDeleted() && ($this->singlememberProfile->isNew() || $this->singlememberProfile->isModified())) {
+                        $affectedRows += $this->singlememberProfile->save($con);
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -872,6 +885,12 @@ abstract class BaseUser extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->singlememberProfile !== null) {
+                    if (!$this->singlememberProfile->validate($columns)) {
+                        $failureMap = array_merge($failureMap, $this->singlememberProfile->getValidationFailures());
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -975,6 +994,9 @@ abstract class BaseUser extends BaseObject implements Persistent
             }
             if (null !== $this->collhelpHours) {
                 $result['helpHours'] = $this->collhelpHours->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->singlememberProfile) {
+                $result['memberProfile'] = $this->singlememberProfile->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
             }
         }
 
@@ -1167,6 +1189,11 @@ abstract class BaseUser extends BaseObject implements Persistent
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addhelpHour($relObj->copy($deepCopy));
                 }
+            }
+
+            $relObj = $this->getmemberProfile();
+            if ($relObj) {
+                $copyObj->setmemberProfile($relObj->copy($deepCopy));
             }
 
             //unflag object copy
@@ -1970,6 +1997,42 @@ abstract class BaseUser extends BaseObject implements Persistent
     }
 
     /**
+     * Gets a single memberProfile object, which is related to this object by a one-to-one relationship.
+     *
+     * @param PropelPDO $con optional connection object
+     * @return memberProfile
+     * @throws PropelException
+     */
+    public function getmemberProfile(PropelPDO $con = null)
+    {
+
+        if ($this->singlememberProfile === null && !$this->isNew()) {
+            $this->singlememberProfile = memberProfileQuery::create()->findPk($this->getPrimaryKey(), $con);
+        }
+
+        return $this->singlememberProfile;
+    }
+
+    /**
+     * Sets a single memberProfile object as related to this object by a one-to-one relationship.
+     *
+     * @param                  memberProfile $v memberProfile
+     * @return User The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setmemberProfile(memberProfile $v = null)
+    {
+        $this->singlememberProfile = $v;
+
+        // Make sure that that the passed-in memberProfile isn't already associated with this object
+        if ($v !== null && $v->getUser(null, false) === null) {
+            $v->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * Clears out the collSkills collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
@@ -2205,6 +2268,9 @@ abstract class BaseUser extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->singlememberProfile) {
+                $this->singlememberProfile->clearAllReferences($deep);
+            }
             if ($this->collSkills) {
                 foreach ($this->collSkills as $o) {
                     $o->clearAllReferences($deep);
@@ -2226,6 +2292,10 @@ abstract class BaseUser extends BaseObject implements Persistent
             $this->collhelpHours->clearIterator();
         }
         $this->collhelpHours = null;
+        if ($this->singlememberProfile instanceof PropelCollection) {
+            $this->singlememberProfile->clearIterator();
+        }
+        $this->singlememberProfile = null;
         if ($this->collSkills instanceof PropelCollection) {
             $this->collSkills->clearIterator();
         }
