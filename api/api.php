@@ -125,7 +125,8 @@ $app->group('/users', function() use ($app) {
             ->joinWith('User')
             ->where('Visible = 1')
             ->find();
-        render_json($members->toArray());
+        $members = process_member_resultset($members);
+        render_json($members);
     });
 });
 $app->group('/helphours', function() use ($app) {
