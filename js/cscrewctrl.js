@@ -1,21 +1,21 @@
 app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory) {
     $scope.users = [];
     $scope.timeNow = moment();
-    $scope.today = function() { return moment().format("YYYY-MM-DD"); }
-    $scope.now = function() { return moment(); }
+    $scope.today = function() { return moment().format("YYYY-MM-DD"); };
+    $scope.now = function() { return moment(); };
 
     $scope.loadUsers = function() {
         userFactory.getAllUsers().then(function(data) {
             $scope.users = data;
             console.log(data);
         });
-    }
+    };
     $scope.currentUser = function() {
         userFactory.getCurrentUser().then(function(data) {
             $scope.currentUser = data;
             $scope.currentUserLoaded = true;
         });
-    }
+    };
     $scope.loadCurrentUserSkills = function() {
         // Wait until currentUser becomes defined to load the skills
         $scope.$watch('currentUser', function(currentUser) {
@@ -25,7 +25,7 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
                 });
             }
         });
-    }
+    };
     $scope.submitSkills = function() {
         $scope.skillsSubmitting = true;
         userFactory.submitUserSkills($scope.currentUser.user.Netid, $scope.currentUserSkills).then(function(data) {
@@ -35,7 +35,7 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.skillsSubmitting = false;
             $scope.skillsSubmitError = true;
         });
-    }
+    };
     $scope.submit_helphour_form = function(data) {
         helpHourFactory.submitHelpHourRequest(data).then(function(data) {
             //Re-request the user's help hours
@@ -51,7 +51,7 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
                     $scope.currentUserHelpHours = data;
                 });
             }
-        }
+        };
 
         // Wait until currentUser becomes defined to load the hours
         if ($scope.currentUser.user) {
@@ -69,6 +69,14 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
     $scope.loadHelpHoursToday = function() {
         helpHourFactory.helpHoursToday().then(function(data) {
             $scope.helpHoursToday = data;
+        });
+    };
+    $scope.submitProfile = function() {
+        console.log("Submitting profile");
+        console.log($scope.currentUser.profile);
+        console.log($scope);
+        userFactory.submitProfile($scope.currentUser.user.Netid, $scope.currentUser.profile).then(function(response) {
+            console.log(response);
         });
     };
 });

@@ -755,10 +755,6 @@ abstract class BasememberProfilePeer
             $criteria = $values->buildCriteria(); // build Criteria from memberProfile object
         }
 
-        if ($criteria->containsKey(memberProfilePeer::ID) && $criteria->keyContainsValue(memberProfilePeer::ID) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.memberProfilePeer::ID.')');
-        }
-
 
         // Set the correct dbName
         $criteria->setDbName(memberProfilePeer::DATABASE_NAME);

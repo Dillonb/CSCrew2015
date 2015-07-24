@@ -15,7 +15,6 @@ function netid_info($netid) {
     $result = @ldap_search($ld->ldap, $ld->ldap_base, $filter);
     if ($result) {
         $entries = ldap_get_entries($ld->ldap,$result);
-        render_json($entries);
         if (count($entries) != 2 || (array_key_exists("count", $entries) && $entries["count"] != 1)) {
             return false;
         }
@@ -57,6 +56,17 @@ function get_user($netid) {
             return false;
         }
     }
+}
+
+function get_user_profile($netid) {
+    $user = get_user($netid);
+    $profile = $user->getmemberProfile();
+    if (!$profile) {
+        $profile = new memberProfile();
+        $profile->setUser($user);
+        $profile->save();
+    }
+    return $profile;
 }
 
 function signin_netid($netid, $reason_id) {

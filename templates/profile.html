@@ -3,19 +3,19 @@
     <div class="panel-body">
         <p>{{ currentUser.user.Name }}</p>
         <p>{{ currentUser.user.Netid }}</p>
-        <form>
+        <form ng-submit="submitProfile()">
             <div class="form-group">
-                <label><input type="checkbox" ng-model="showOnMembersPage"> Show me on the members page</label>
+                <label><input type="checkbox" ng-model="currentUser.profile.Visible"> Show me on the members page</label>
             </div>
             <div class="form-group">
                 <label>Short bio</label>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" ng-model="currentUser.profile.Bio"></textarea>
             </div>
             <div class="form-group">
-                <label>Upload a picture</label>
+                <label>Upload a picture (max 128x128 pixels)</label>
                 <input type="file" id="userAvatar">
             </div>
-            <div class="form-group"><a class="btn btn-default">Submit</a></div>
+            <div class="form-group"><input class="btn btn-default" type="submit" value="Submit"></div>
         </form>
     </div>
 </div>

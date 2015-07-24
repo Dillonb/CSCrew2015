@@ -99,6 +99,27 @@ $app->group('/users', function() use ($app) {
         update_skills($netid, $data);
         render_json(array("success"=>true));
     });
+    $app->get('/profile/:netid', function($netid) use ($app) {
+        render_json(get_user_profile($netid)->toArray());
+
+    });
+    $app->post('/profile/:netid', function($netid) use ($app) {
+        // Require either the user whose profile this is or an admin
+        if (!require_authenticated(false, $netid, true)) { return; }
+        print "Getting profile";
+        $profile = get_user_profile($netid);
+        // Ensure the user can't be changed
+        $user = $profile->getUser();
+        print "Setting from JSON";
+        print $app->request->getBody();
+        $profile->fromJSON($app->request->getBody());
+        // Set the user back
+        $profile->setUser($user);
+        print "Saving";
+        $profile->save();
+        //render_json($profile);
+
+    });
 });
 $app->group('/helphours', function() use ($app) {
     $app->get('/get/:userid', function($userid) use ($app) {
@@ -171,6 +192,7 @@ $app->group('/helphours', function() use ($app) {
 });
 $app->get('/whoami', function() use ($app) {
     $who = get_loggedin_info();
+    $who['profile'] = get_user_profile($who['username'])->toArray();
     render_json($who);
 });
 

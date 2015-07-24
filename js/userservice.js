@@ -12,7 +12,7 @@ app.factory('userFactory', function($http, $q) {
                     deferred.reject("Error retrieving current user.");
                 });
             return deferred.promise;
-        }
+        };
 
         service.getAllUsers = function() {
             var deferred = $q.defer();
@@ -25,7 +25,7 @@ app.factory('userFactory', function($http, $q) {
                     deferred.reject("Error retrieving user list.");
                 });
             return deferred.promise;
-        }
+        };
 
         service.getUserSkills = function(netid) {
             var deferred = $q.defer();
@@ -38,7 +38,7 @@ app.factory('userFactory', function($http, $q) {
                     deferred.reject("Error retrieving user's skills.");
                 });
             return deferred.promise;
-        }
+        };
         service.submitUserSkills = function(netid, skills) {
             var deferred = $q.defer();
             $http.post('api/users/skills/' + netid, skills)
@@ -48,6 +48,16 @@ app.factory('userFactory', function($http, $q) {
                     deferred.reject(false);
                 });
             return deferred.promise;
-        }
+        };
+        service.submitProfile = function(netid, profile) {
+            var deferred = $q.defer();
+            $http.post('api/users/profile/' + netid, profile)
+            .success(function(response) {
+                deferred.resolve(response);
+            }).error(function() {
+                deferred.reject(false);
+            });
+            return deferred.promise;
+        };
         return service;
 });

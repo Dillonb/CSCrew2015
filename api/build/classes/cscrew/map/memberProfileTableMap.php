@@ -36,7 +36,7 @@ class memberProfileTableMap extends TableMap
         $this->setPhpName('memberProfile');
         $this->setClassname('memberProfile');
         $this->setPackage('cscrew');
-        $this->setUseIdGenerator(true);
+        $this->setUseIdGenerator(false);
         // columns
         $this->addForeignPrimaryKey('id', 'Id', 'INTEGER' , 'user', 'id', true, null, null);
         $this->addColumn('visible', 'Visible', 'BOOLEAN', false, 1, false);

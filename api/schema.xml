@@ -82,7 +82,7 @@
     </table>
 
     <table name="memberprofile" phpName="memberProfile">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="id" type="integer" required="true" primaryKey="true" />
 
         <column name="visible" type="boolean" default="false" />
         <column name="bio" type="varchar" />
