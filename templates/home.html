@@ -14,7 +14,7 @@
                                 <img ng-if="helphour.User.Image" ng-src="{{ helphour.User.Image }}">
                                 <img ng-if="!helphour.User.Image" ng-src="img/qmark.png">
                             </div>
-                            <div class="col-mg-8">
+                            <div class="col-md-8">
                                 <h3>
                                     {{ helphour.User.Name }}
                                     <small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
