@@ -9,18 +9,19 @@ nav {
   overflow: hidden;
   padding: 0; }
 
-#todays-help-hours img {
-  width: 100%; }
-#todays-help-hours ul {
-  margin: 15px 0 10px 5px; }
-#todays-help-hours li:first-child .todays-help-hours-inactive, #todays-help-hours li:first-child .todays-help-hours-active {
+#todays-help-hours {
+  background-color: #f8f8f8;
   border-radius: 20px 20px 0 0; }
-#todays-help-hours li:first-child .col-md-4 {
-  border-radius: 20px 0 0 0; }
-#todays-help-hours li:last-child .todays-help-hours-inactive, #todays-help-hours li:last-child .todays-help-hours-active {
-  border-radius: 0 0 20px 20px; }
-#todays-help-hours li:last-child .col-md-4 {
-  border-radius: 0 0 0 20px; }
+  #todays-help-hours h2 {
+    padding: 20px 0 20px 20px; }
+  #todays-help-hours img {
+    width: 100%; }
+  #todays-help-hours ul {
+    margin: 15px 0 10px 5px; }
+  #todays-help-hours li:last-child .todays-help-hours-inactive, #todays-help-hours li:last-child .todays-help-hours-active {
+    border-radius: 0 0 20px 20px; }
+  #todays-help-hours li:last-child .col-md-4 {
+    border-radius: 0 0 0 20px; }
 
 .todays-help-hours-inactive {
   background-color: #f3f3f3;
@@ -43,8 +44,8 @@ nav {
   background-color: #D6EDF7;
   margin: 0; }
   .todays-help-hours-active .col-md-4 {
-    width: 121px;
-    height: 121px; }
+    width: 150px;
+    height: 150px; }
   .todays-help-hours-active h3 {
     margin-top: 20px;
     font-size: 30px; }
@@ -98,7 +99,7 @@ nav {
     max-width: 30em;
     margin: 0 auto; }
     .contactForm .inputFld input[type=submit] {
-      background: url("../png/sendMail.png") no-repeat 0;
+      background: url("../../img/sendMail.png") no-repeat 0;
       outline: none;
       border: none;
       height: 2em;
