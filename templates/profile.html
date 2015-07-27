@@ -15,7 +15,10 @@
                 <label>Upload a picture (max 128x128 pixels)</label>
                 <input type="file" id="userAvatar">
             </div>
-            <div class="form-group"><input class="btn btn-default" type="submit" value="Submit"></div>
+            <div class="form-group">
+                <input ng-hide="profileSubmitting" class="btn btn-default" type="submit" value="Submit">
+                <a class="btn btn-info" ng-show="profileSubmitting">Loading...</a>
+            </div>
         </form>
     </div>
 </div>
