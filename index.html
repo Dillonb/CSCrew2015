@@ -32,6 +32,7 @@
                 <li ui-sref-active="active"><a href="#" ui-sref="members">Members</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="contact">Contact</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="get-help">Get Help</a></li>
+                <li ui-sref-active="active" ng-if="currentUser.authenticated"><a href="#" ui-sref="profile">My Account</a></li>
                 <li ui-sref-active="active">
                     <a ng-if="currentUser.user.IsAdmin" href="#" ui-sref="admin.home" ng-init="loadPendingAdminNotifications()">Admin <span class="badge">{{ numUnapprovedHelpHours }}</span></a>
                     <a ng-if="!(currentUserLoaded && currentUser.authenticated)" href="login">Login</a>
@@ -39,7 +40,7 @@
             </ul>
             <div class="navbar-right navbar-text" ng-hide="currentUserLoaded">Loading... </div>
             <div class="navbar-right navbar-text" ng-show="currentUser.authenticated">
-                <a ui-sref="profile">Welcome, {{ currentUser.user.Name }}</a>
+                Welcome, {{ currentUser.user.Name }}
             </div>
         </div>
     </nav>
