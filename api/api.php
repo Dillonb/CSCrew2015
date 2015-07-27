@@ -131,6 +131,7 @@ $app->group('/users', function() use ($app) {
 });
 $app->group('/helphours', function() use ($app) {
     $app->get('/all', function() use ($app) {
+        if (!require_admin()) { return; }
         $helphours = helpHourQuery::create()
         ->joinWith('User')
         ->find();
