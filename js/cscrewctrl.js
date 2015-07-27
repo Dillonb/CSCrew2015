@@ -72,11 +72,9 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         });
     };
     $scope.submitProfile = function() {
-        console.log("Submitting profile");
-        console.log($scope.currentUser.profile);
-        console.log($scope);
+        $scope.profileSubmitting = true;
         userFactory.submitProfile($scope.currentUser.user.Netid, $scope.currentUser.profile).then(function(response) {
-            console.log(response);
+            $scope.profileSubmitting = false;
         });
     };
     $scope.getMembers = function() {

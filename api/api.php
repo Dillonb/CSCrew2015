@@ -106,18 +106,14 @@ $app->group('/users', function() use ($app) {
     $app->post('/profile/:netid', function($netid) use ($app) {
         // Require either the user whose profile this is or an admin
         if (!require_authenticated(false, $netid, true)) { return; }
-        print "Getting profile";
         $profile = get_user_profile($netid);
         // Ensure the user can't be changed
         $user = $profile->getUser();
-        print "Setting from JSON";
-        print $app->request->getBody();
         $profile->fromJSON($app->request->getBody());
         // Set the user back
         $profile->setUser($user);
-        print "Saving";
         $profile->save();
-        render_json($profile);
+        render_json($profile->toArray());
 
     });
     $app->get('/members', function() use ($app) {
