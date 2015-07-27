@@ -87,4 +87,21 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.numUnapprovedHelpHours = data;
         });
     };
+
+    $scope.loadHelpHoursThisWeek = function() {
+        helpHourFactory.helpHoursThisWeek().then(function(data) {
+            $scope.helpHoursThisWeek = data;
+        });
+    };
+
+
+    $scope.weekdays = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
 });

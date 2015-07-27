@@ -151,7 +151,7 @@ $app->group('/helphours', function() use ($app) {
             ->find();
         render_json(process_helphour_resultset($helpHours));
     });
-    $app->get('/thisweek', function() use ($app) {
+    $app->get('/active', function() use ($app) {
         $helpHours = helpHourQuery::create()
             ->where('helpHour.approved = 1')
             ->joinWith('User')
