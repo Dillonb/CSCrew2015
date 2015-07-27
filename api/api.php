@@ -130,6 +130,12 @@ $app->group('/users', function() use ($app) {
     });
 });
 $app->group('/helphours', function() use ($app) {
+    $app->get('/all', function() use ($app) {
+        $helphours = helpHourQuery::create()
+        ->joinWith('User')
+        ->find();
+        render_json($helphours->toArray());
+    });
     $app->get('/get/:userid', function($userid) use ($app) {
         if ($app->request->params('unapproved')) {
             $helphours = helpHourQuery::create()->where('helpHour.UserId = ?', $userid)->find();
