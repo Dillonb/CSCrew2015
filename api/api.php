@@ -180,6 +180,10 @@ $app->group('/helphours', function() use ($app) {
             ->find();
         render_json(process_helphour_resultset($helpHours));
     });
+    $app->get('/unapproved/count', function() use($app) {
+        if (!require_admin()) { return; }
+        render_json(helpHourQuery::create()->where('helpHour.Approved = 0')->count());
+    });
     $app->get('/approve/:id', function($id) use ($app) {
         if (!require_admin()) { return; }
         $helpHour = helpHourQuery::create()->findPk($id);

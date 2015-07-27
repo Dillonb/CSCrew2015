@@ -77,6 +77,17 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             return deferred.promise;
         };
 
+        service.numUnapproved = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/unapproved/count'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        };
+
         service.allHelpHours = function() {
             var deferred = $q.defer();
             $http({

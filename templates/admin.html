@@ -4,7 +4,7 @@
 <div ng-if="currentUser.user.IsAdmin">
     <ul class="nav nav-tabs">
         <li ui-sref-active="active"><a href="#" ui-sref="admin.home">Admin Home</a></li>
-        <li ui-sref-active="active"><a href="#" ui-sref="admin.helphours">Help Hours</a></li>
+        <li ui-sref-active="active"><a href="#" ui-sref="admin.helphours">Help Hours <span class="badge">{{ numUnapprovedHelpHours }}</span></a></li>
         <li ui-sref-active="active"><a href="#" ui-sref="admin.signinreasons">Sign-In Reasons</a></li>
         <li ui-sref-active="active"><a href="#" ui-sref="admin.userskills">User Skills</a></li>
     </ul>

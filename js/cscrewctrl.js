@@ -84,4 +84,9 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.members = data;
         });
     };
+    $scope.loadPendingAdminNotifications = function() {
+        helpHourFactory.numUnapproved().then(function(data) {
+            $scope.numUnapprovedHelpHours = data;
+        });
+    };
 });
