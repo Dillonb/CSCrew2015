@@ -36,24 +36,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">Help Hours</div>
     <ul class="list-group">
-        <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
-            <p>
-                Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
-            </p>
-            <p>
-                <span ng-show="helphour.Monday">Monday</span>
-                <span ng-show="helphour.Tuesday">Tuesday</span>
-                <span ng-show="helphour.Wednesday">Wednesday</span>
-                <span ng-show="helphour.Thursday">Thursday</span>
-                <span ng-show="helphour.Friday">Friday</span>
-                <span ng-show="helphour.Saturday">Saturday</span>
-                <span ng-show="helphour.Sunday">Sunday</span>
-            </p>
-            <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
-        </li>
-        <li ng-if="!currentUserHelpHours.length" class="list-group-item">
-            You have no help hours active or in review!
-        </li>
         <li class="list-group-item" ng-init="loadCurrentUserHelpHours()">
             <h2>Submit help hours for review</h2>
             <form name="form_new_helphour" action="#" id="form-new-helphour">
@@ -81,6 +63,24 @@
                     <div class="alert alert-danger" ng-show="form_new_helphour.$invalid">Please fill out the form above completely.</div>
                 </p>
             </form>
+        </li>
+        <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
+            <p>
+                Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
+            </p>
+            <p>
+                <span ng-show="helphour.Monday">Monday</span>
+                <span ng-show="helphour.Tuesday">Tuesday</span>
+                <span ng-show="helphour.Wednesday">Wednesday</span>
+                <span ng-show="helphour.Thursday">Thursday</span>
+                <span ng-show="helphour.Friday">Friday</span>
+                <span ng-show="helphour.Saturday">Saturday</span>
+                <span ng-show="helphour.Sunday">Sunday</span>
+            </p>
+            <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
+        </li>
+        <li ng-if="!currentUserHelpHours.length" class="list-group-item">
+            You have no help hours active or in review!
         </li>
     </ul>
 </div>
