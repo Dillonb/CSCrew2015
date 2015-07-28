@@ -2,6 +2,7 @@ api/runtime-conf.xml
 api/build.properties
 api/build/conf/*
 api/build/sql/*
+api/images/*.png
 *.swp
 api/.htaccess
 css/.sass-cache/*

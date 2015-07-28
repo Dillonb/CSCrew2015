@@ -72,10 +72,37 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         });
     };
     $scope.submitProfile = function() {
-        $scope.profileSubmitting = true;
-        userFactory.submitProfile($scope.currentUser.user.Netid, $scope.currentUser.profile).then(function(response) {
-            $scope.profileSubmitting = false;
-        });
+        var userAvatar = document.getElementById('userAvatar');
+        var doSubmit = function(netid, data) {
+            $scope.profileSubmitting = true;
+            userFactory.submitProfile($scope.currentUser.user.Netid, $scope.currentUser.profile).then(function(response) {
+                $scope.profileSubmitting = false;
+            });
+        };
+        // Check if the user uploaded an avatar.
+        if (userAvatar.files && userAvatar.files.length) {
+            var file = userAvatar.files[0];
+            // Make sure we're processing an image.
+            if (!file.type.match('image.*')) {
+                return;
+            }
+            var reader = new FileReader();
+
+            reader.onload = function(ev) {
+                // File as a data url
+                var contents = ev.target.result;
+                console.log(contents);
+                var submitData = $scope.currentUser.profile;
+                submitData.profileImage = contents;
+
+                doSubmit($scope.currentUser.user.Netid, submitData);
+            };
+            reader.readAsDataURL(file);
+        }
+        // No avatar
+        else {
+            doSubmit($scope.currentUser.user.Netid, $scope.currentUser.profile);
+        }
     };
     $scope.getMembers = function() {
         userFactory.getMembers().then(function(data) {
