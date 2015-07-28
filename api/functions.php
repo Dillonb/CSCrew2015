@@ -191,4 +191,15 @@ function process_helphour_resultset($helpHours) {
     }
     return $helpHours;
 }
+function process_member_resultset($members) {
+   $processedMembers = array(); 
+
+   foreach ($members as $member) {
+        $processedMember = $member->toArray();
+        $processedMember['User'] = $member->getUser()->toArray();
+        $processedMember['User']['Skills'] = $member->getUser()->getSkills()->toArray();
+        $processedMembers[] = $processedMember;
+   }
+   return $processedMembers;
+}
 ?>

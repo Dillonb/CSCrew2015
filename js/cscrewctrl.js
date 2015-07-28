@@ -72,11 +72,9 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         });
     };
     $scope.submitProfile = function() {
-        console.log("Submitting profile");
-        console.log($scope.currentUser.profile);
-        console.log($scope);
+        $scope.profileSubmitting = true;
         userFactory.submitProfile($scope.currentUser.user.Netid, $scope.currentUser.profile).then(function(response) {
-            console.log(response);
+            $scope.profileSubmitting = false;
         });
     };
     $scope.getMembers = function() {
@@ -84,4 +82,26 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.members = data;
         });
     };
+    $scope.loadPendingAdminNotifications = function() {
+        helpHourFactory.numUnapproved().then(function(data) {
+            $scope.numUnapprovedHelpHours = data;
+        });
+    };
+
+    $scope.loadHelpHoursThisWeek = function() {
+        helpHourFactory.helpHoursThisWeek().then(function(data) {
+            $scope.helpHoursThisWeek = data;
+        });
+    };
+
+
+    $scope.weekdays = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
 });

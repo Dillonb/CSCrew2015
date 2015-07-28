@@ -106,18 +106,14 @@ $app->group('/users', function() use ($app) {
     $app->post('/profile/:netid', function($netid) use ($app) {
         // Require either the user whose profile this is or an admin
         if (!require_authenticated(false, $netid, true)) { return; }
-        print "Getting profile";
         $profile = get_user_profile($netid);
         // Ensure the user can't be changed
         $user = $profile->getUser();
-        print "Setting from JSON";
-        print $app->request->getBody();
         $profile->fromJSON($app->request->getBody());
         // Set the user back
         $profile->setUser($user);
-        print "Saving";
         $profile->save();
-        render_json($profile);
+        render_json($profile->toArray());
 
     });
     $app->get('/members', function() use ($app) {
@@ -125,10 +121,18 @@ $app->group('/users', function() use ($app) {
             ->joinWith('User')
             ->where('Visible = 1')
             ->find();
-        render_json($members->toArray());
+        $members = process_member_resultset($members);
+        render_json($members);
     });
 });
 $app->group('/helphours', function() use ($app) {
+    $app->get('/all', function() use ($app) {
+        if (!require_admin()) { return; }
+        $helphours = helpHourQuery::create()
+        ->joinWith('User')
+        ->find();
+        render_json($helphours->toArray());
+    });
     $app->get('/get/:userid', function($userid) use ($app) {
         if ($app->request->params('unapproved')) {
             $helphours = helpHourQuery::create()->where('helpHour.UserId = ?', $userid)->find();
@@ -147,7 +151,7 @@ $app->group('/helphours', function() use ($app) {
             ->find();
         render_json(process_helphour_resultset($helpHours));
     });
-    $app->get('/thisweek', function() use ($app) {
+    $app->get('/active', function() use ($app) {
         $helpHours = helpHourQuery::create()
             ->where('helpHour.approved = 1')
             ->joinWith('User')
@@ -171,6 +175,10 @@ $app->group('/helphours', function() use ($app) {
             ->joinWith('User')
             ->find();
         render_json(process_helphour_resultset($helpHours));
+    });
+    $app->get('/unapproved/count', function() use($app) {
+        if (!require_admin()) { return; }
+        render_json(helpHourQuery::create()->where('helpHour.Approved = 0')->count());
     });
     $app->get('/approve/:id', function($id) use ($app) {
         if (!require_admin()) { return; }

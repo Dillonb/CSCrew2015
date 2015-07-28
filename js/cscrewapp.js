@@ -29,8 +29,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "templates/profile.html"
         })
         .state("admin", {
+            abstract: true,
             url: "/admin",
             templateUrl: "templates/admin.html"
+        })
+        .state("admin.home", {
+            url: "/home",
+            templateUrl: "templates/admin/home.html"
         })
         .state("admin.helphours", {
             url: "/helphours",

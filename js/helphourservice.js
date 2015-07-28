@@ -59,9 +59,25 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: 'api/helphours/thisweek'
+                url: 'api/helphours/active'
             }).success(function(data) {
-                deferred.resolve(data);
+                var helphours = {};
+                var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+                // Initialize the helphours object
+                for(var i = 0; i < week.length; i++) {
+                    helphours[week[i]] = [];
+                }
+
+                // Sort the help hours into each weekday
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < week.length; j++) {
+                        if (data[i][week[j]]) {
+                            helphours[week[j]].push(data[i]);
+                        }
+                    }
+                }
+                deferred.resolve(helphours);
             });
             return deferred.promise;
         };
@@ -71,6 +87,28 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             $http({
                 method: 'GET',
                 url: 'api/helphours/unapproved'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        };
+
+        service.numUnapproved = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/unapproved/count'
+            }).success(function(data) {
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        };
+
+        service.allHelpHours = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/all'
             }).success(function(data) {
                 deferred.resolve(data);
             });
