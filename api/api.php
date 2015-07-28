@@ -78,6 +78,14 @@ $app->group('/signins', function() use ($app) {
         $reasons = signInReasonQuery::create()->find();
         render_json($reasons->toArray());
     });
+    $app->get('/stats', function() use ($app) {
+        $beginOfDay = strtotime("midnight", time());
+        $stats = array();
+        $stats['signinsToday'] = signInQuery::create()->filterByCreatedAt(array('min'=>$beginOfDay))->count();
+        $stats['uniqueUsers'] = UserQuery::create()->count();
+
+        render_json($stats);
+    });
 });
 $app->group('/users', function() use ($app) {
     $app->get('/list', function() use ($app) {

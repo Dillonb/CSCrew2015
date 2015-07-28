@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory) {
+app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory, signinFactory) {
     $scope.users = [];
     $scope.timeNow = moment();
     $scope.today = function() { return moment().format("YYYY-MM-DD"); };
@@ -88,13 +88,6 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         });
     };
 
-    $scope.loadHelpHoursThisWeek = function() {
-        helpHourFactory.helpHoursThisWeek().then(function(data) {
-            $scope.helpHoursThisWeek = data;
-        });
-    };
-
-
     $scope.weekdays = [
         'Monday',
         'Tuesday',
@@ -104,4 +97,16 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
         'Saturday',
         'Sunday'
     ];
+
+    $scope.loadHelpHoursThisWeek = function() {
+        helpHourFactory.helpHoursThisWeek().then(function(data) {
+            $scope.helpHoursThisWeek = data;
+        });
+    };
+
+    $scope.loadSigninStats = function() {
+        signinFactory.stats().then(function(data) {
+            $scope.signinStats = data;
+        });
+    };
 });
