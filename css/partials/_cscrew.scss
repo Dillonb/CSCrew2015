@@ -12,8 +12,8 @@
 html { font-size: $base-font-size; }
 
 body {
-      font-family: $font-lora;
-      font-size: $base-font-size;
+      font-family: $font-mont;
+      font-size: 90%;
 }
 
 @for $index from 1 through 6 {

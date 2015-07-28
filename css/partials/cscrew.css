@@ -11,13 +11,11 @@ nav {
 
 #todays-help-hours {
   background-color: #f8f8f8;
-  border-radius: 20px 20px 0 0; }
+  border-radius: 20px; }
   #todays-help-hours h2 {
     padding: 20px 0 20px 20px; }
   #todays-help-hours img {
     width: 100%; }
-  #todays-help-hours ul {
-    margin: 15px 0 10px 5px; }
   #todays-help-hours li:last-child .todays-help-hours-inactive, #todays-help-hours li:last-child .todays-help-hours-active {
     border-radius: 0 0 20px 20px; }
   #todays-help-hours li:last-child .col-md-4 {
@@ -29,8 +27,8 @@ nav {
   .todays-help-hours-inactive img {
     opacity: .7; }
   .todays-help-hours-inactive .col-md-4 {
-    width: 75px;
-    height: 75px; }
+    width: 105px;
+    height: 105px; }
   .todays-help-hours-inactive h3 {
     margin-top: 10px;
     font-size: 20px;
@@ -126,8 +124,8 @@ html {
   font-size: 100%; }
 
 body {
-  font-family: "Lora", serif;
-  font-size: 100%; }
+  font-family: "Montserrat", sans-serif;
+  font-size: 90%; }
 
 h1 {
   font-family: "Montserrat", sans-serif; }
