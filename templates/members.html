@@ -17,8 +17,8 @@
                 <li ng-repeat="member in members | filter: memberFilter">
                     <div class="row">
                         <div class="col-md-4">
-                            <img ng-if="member.User.Image" ng-src="{{ helphour.User.Image }}">
-                            <img ng-if="!member.User.Image" ng-src="img/qmark.png">
+                            <img ng-if="member.User.Picture" ng-src="{{ member.User.Picture }}">
+                            <img ng-if="!member.User.Picture" ng-src="img/qmark.png">
                         </div>
                         <div class="col-md-8">
                             <h2>{{ member.User.Name }}</h2>
