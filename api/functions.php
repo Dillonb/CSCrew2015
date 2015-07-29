@@ -175,19 +175,51 @@ function convert_timezone($time) {
     return $dt->format("H:i");
 }
 
+function is_helphour_signedin($helphour) {
+    $count = helpHourSigninQuery::create()
+            ->filterByCreatedAt(array(
+                'min' => $helphour->getStartTime(),
+                'max' => $helphour->getEndTime()
+                ))
+            ->filterbyhelphour($helphour)
+            ->count();
+    if ($count == 0) {
+        return false;
+    }
+    return true;
+}
+
+function is_helphour_active($helphour) {
+    return (intval($helphour->getStartTime("U")) < time() && intval($helphour->getEndTime("U")) > time());
+}
+
+function signin_helphour($helphour) {
+    if (!is_helphour_signedin($helphour) && is_helphour_active($helphour)) {
+        $helphour->addhelpHourSignin(new helpHourSignin());
+        $helphour->save();
+        return true;
+    }
+    return false;
+}
+
 function process_helphour_resultset($helpHours) {
     // Extract skills
     $skills = array();
+    // Get signin status
+    $signins = array();
     foreach ($helpHours as $helphour) {
+        // Skills
         if (!array_key_exists($helphour->getUser()->getNetid(), $skills)) {
             $skills[$helphour->getUser()->getNetid()] = $helphour->getUser()->getSkills()->toArray();
         }
+        $signins[$helphour->getId()] = is_helphour_signedin($helphour);
     }
 
     // Convert everything to an array and merge it all
     $helpHours = $helpHours->toArray();
     foreach ($helpHours as $key=>$value) {
         $helpHours[$key]['User']['Skills'] = $skills[$value['User']['Netid']];
+        $helpHours[$key]['SignedIn'] = $signins[$value['Id']];
     }
     return $helpHours;
 }

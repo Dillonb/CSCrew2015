@@ -231,6 +231,16 @@ $app->group('/helphours', function() use ($app) {
         $obj->save();
         render_json($obj->toArray());
     });
+    $app->get('/signin/:id', function($id) use ($app) {
+        $helphour = helpHourQuery::create()->findPk($id);
+        if (!require_authenticated(false, $helphour->getUser()->getNetid())) { return; }
+        if (signin_helphour($helphour)) {
+            render_json("Signed in correctly.");
+        }
+        else {
+            render_json("Already signed in or other error.");
+        }
+    });
 });
 $app->get('/whoami', function() use ($app) {
     $who = get_loggedin_info();

@@ -13,6 +13,10 @@
             </div>
             <div class="form-group">
                 <label>Upload a picture (max 512x512 pixels)</label>
+                <p>
+                    <img ng-if="currentUser.user.Picture" ng-src="{{ currentUser.user.Picture }}">
+                    <img ng-if="!currentUser.user.Picture" src="img/qmark.png">
+                </p>
                 <input type="file" id="userAvatar" name="userAvatar">
             </div>
             <div class="form-group">

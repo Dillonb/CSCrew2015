@@ -20,6 +20,12 @@
                             <img ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
                         </div>
                         <div class="col-md-8">
+                            <span ng-if="helphour.dateRange.contains(now())">
+                                <!-- If the user has signed in for this help hour -->
+                                <span ng-if="helphour.SignedIn">Check mark goes here</span>
+                                <!-- If the user has NOT signed in for this help hour -->
+                                <span ng-if="!helphour.SignedIn">X mark goes here</span>
+                            </span>
                             <h3>
                                 {{ helphour.User.Name }}
                                 <small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
