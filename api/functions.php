@@ -190,7 +190,7 @@ function is_helphour_signedin($helphour) {
 }
 
 function is_helphour_active($helphour) {
-    return (intval($helphour->getStartTime("U")) < time() && intval($helphour->getEndTime("U")) > time());
+    return (intval($helphour->getStartTime("U")) < time() && intval($helphour->getEndTime("U")) > time() && $helphour->onWeekday(date('l')));
 }
 
 function signin_helphour($helphour) {

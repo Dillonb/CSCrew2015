@@ -151,8 +151,22 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             }).success(function(data) {
                 deferred.resolve(data);
             }).error(function() {
-                deferred.reject(data);
+                deferred.reject();
             });
+            return deferred.promise;
+        };
+
+        service.signin = function(id) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/helphours/signin/' + id
+            }).success(function(data) {
+                deferred.resolve(data);
+            }).error(function() {
+                deferred.reject();
+            });
+
             return deferred.promise;
         };
 

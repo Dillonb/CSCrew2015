@@ -66,9 +66,21 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
             $scope.helpHoursNow = data;
         });
     };
+    $scope.pendingHelpHourSignins = [];
     $scope.loadHelpHoursToday = function() {
         helpHourFactory.helpHoursToday().then(function(data) {
             $scope.helpHoursToday = data;
+            $scope.pendingHelpHourSignins = [];
+            // Check and see if the current user has any help hours they're not signed in for
+            if ($scope.currentUser.authenticated) {
+                for (var i = 0; i < $scope.helpHoursToday.length; i++) {
+                    if ($scope.helpHoursToday[i].User.Netid === $scope.currentUser.user.Netid && $scope.helpHoursToday[i].dateRange.contains($scope.now())) {
+                        if (!$scope.helpHoursToday[i].SignedIn) {
+                            $scope.pendingHelpHourSignins.push($scope.helpHoursToday[i]);
+                        }
+                    }
+                }
+            }
         });
     };
     $scope.submitProfile = function() {
@@ -134,6 +146,11 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
     $scope.loadSigninStats = function() {
         signinFactory.stats().then(function(data) {
             $scope.signinStats = data;
+        });
+    };
+    $scope.signinHelpHour = function(helphour) {
+        helpHourFactory.signin(helphour.Id).then(function(response) {
+            $scope.loadHelpHoursToday();
         });
     };
 });

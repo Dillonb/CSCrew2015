@@ -1,3 +1,9 @@
+<div class="row" ng-if="pendingHelpHourSignins">
+    <div class="alert alert-danger" ng-repeat="helphour in pendingHelpHourSignins">
+        You are not signed in for your current help hours from {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
+        <a class="btn btn-default" ng-click="signinHelpHour(helphour)">Sign in now</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6">
         <h1>Welcome to CS Crew</h1>
