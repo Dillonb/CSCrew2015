@@ -8,7 +8,7 @@
                 <label><input type="checkbox" ng-model="currentUser.profile.Visible"> Show me on the members page</label>
             </div>
             <div class="form-group">
-                <label>Short bio</label>
+                <label>Short bio <span ng-class="{overflow: currentUser.profile.Bio.length > 255}">({{ currentUser.profile.Bio.length }} / 255)</span></label>
                 <textarea class="form-control" ng-model="currentUser.profile.Bio"></textarea>
             </div>
             <div class="form-group">
