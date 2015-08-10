@@ -22,8 +22,8 @@
                     <div ng-class="{true:'todays-help-hours-active row', false:'todays-help-hours-inactive row'}[helphour.dateRange.contains(now())]"
                         class="todays-help-hours-inactive row">
                         <div class="col-md-4">
-                            <img ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
-                            <img ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
+                            <img alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
+                            <img alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
                         </div>
                         <div class="col-md-8">
                             <span ng-if="helphour.dateRange.contains(now())">
