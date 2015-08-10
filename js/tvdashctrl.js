@@ -1,13 +1,21 @@
-app.controller('MainCtrl', function($scope, $interval, signinFactory) {
+app.controller('MainCtrl', function($scope, $interval, signinFactory, helpHourFactory) {
         $scope.signins = [];
         $scope.helphours = [];
+        $scope.today = function() { return moment().format("YYYY-MM-DD"); };
+        $scope.now = function() { return moment(); };
         $scope.updateSignins = function() {
             signinFactory.getSigninsToday().then(function(data) {
                 $scope.signins = data;
                 console.log(data);
                 $scope.updateChart();
             });
-        }
+        };
+        $scope.updateHelphours = function() {
+            helpHourFactory.helpHoursNow().then(function(data) {
+                $scope.helphours = data;
+                console.log(data);
+            });
+        };
 
         $scope.updateChart = function() {
             var data = new google.visualization.DataTable();
@@ -42,8 +50,13 @@ app.controller('MainCtrl', function($scope, $interval, signinFactory) {
 
             var chart = new google.visualization.PieChart(document.getElementById('usage-chart'));
             chart.draw(data, options);
+        };
+
+        function refreshData() {
+            $scope.updateSignins();
+            $scope.updateHelphours();
         }
 
-        var autoUpdate = $interval($scope.updateSignins, 10000);
-        $scope.updateSignins();
+        var autoUpdate = $interval(refreshData, 10000);
+        refreshData();
 });

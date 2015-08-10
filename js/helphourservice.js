@@ -25,7 +25,9 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             }).success(function(data) {
                 for (var i = 0; i < data.length; i++) {
                     data[i].StartTimeMoment = moment(moment().format("YYYY-MM-DD") + " " + data[i].StartTime);
+                    data[i].EndTimeMoment = moment(moment().format("YYYY-MM-DD") + " " + data[i].EndTime);
                     data[i].duration = moment.duration(moment("1970-01-01 " + data[i].EndTime) - moment("1970-01-01 " + data[i].StartTime));
+                    data[i].dateRange = moment.range(data[i].StartTimeMoment, data[i].EndTimeMoment);
 
 
                     data[i].updateTimeRemaining = function() {
