@@ -1,6 +1,10 @@
-nav {
-    font-family: $font-mont;
+.navbar-default {
+    padding: 8px;
     text-transform: lowercase;
     font-variant: small-caps;	
     font-weight: 700;
+    background-color: #fff;
+    border-bottom: 4px solid #DCDCDC;
+    border-radius: 0;
+    font-size: 1.3em;
 }

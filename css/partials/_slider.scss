@@ -1,0 +1,68 @@
+$slide-width: 1000px;
+$slide-height: 200px;
+
+#slider {
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+	width: $slide-width;
+	height: $slide-height;
+
+	h1 {
+	   color: white;
+	   font-size: 4em;
+	   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+	}
+
+	ul {
+	   list-style: none;
+	   position: absolute;
+	   left: 0px;
+	   top: 0px;
+	   width: 9000px;
+	   transition: left .3s linear;
+	   -moz-transition: left .3s linear;
+	   -o-transition: left .3s linear;
+	   -webkit-transition: left .3s linear;
+	   margin-left: -25px;
+	   -webkit-animation: slide-animation 15s infinite;
+
+	   &:hover {
+	   	   -moz-animation-play-state: paused;
+		   -webkit-animation-play-state: paused;
+	   }
+	}
+
+	li {
+	   float: left;
+	   position: relative;
+	   width: $slide-width;
+	   display: inline-block;
+	}
+
+
+}
+
+.slide-container {
+		  margin: 0 auto;
+		  width: $slide-width;
+		  text-align: center;
+		  min-height: $slide-height - 80;
+}
+
+@-webkit-keyframes slide-animation {
+		   0% {opacity:0;}
+		   2% {opacity:1;}
+		   20% {left:0px; opacity:1;}
+		   22.5% {opacity:0.6;}
+		   25% {left:-$slide-width; opacity:1;}
+		   45% {left:-$slide-width; opacity:1;}
+		   47.5% {opacity:0.6;}
+		   50% {left:-$slide-width * 2; opacity:1;}
+		   70% {left:-$slide-width * 2; opacity:1;}
+		   72.5% {opacity:0.6;}
+		   75% {left:-$slide-width * 3; opacity:1;}
+		   95% {opacity:1;}
+		   98% {left:-$slide-width * 3; opacity:0;} 
+		   100% {left:0px; opacity:0;}
+}

@@ -4,3 +4,9 @@ $font-arch: 'Archivo Black', sans-serif;
 $font-mont: 'Montserrat', sans-serif;
 $font-lora: 'Lora', serif;
 $font-lato: 'Lato', sans-serif;
+
+
+* {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}

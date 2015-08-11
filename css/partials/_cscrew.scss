@@ -8,12 +8,14 @@
 @import 'todayshelphours';
 @import 'contactform';
 @import 'members';
+@import 'slider';
 
 html { font-size: $base-font-size; }
 
 body {
       font-family: $font-mont;
       font-size: 90%;
+      background: #74D9B0;
 }
 
 @for $index from 1 through 6 {

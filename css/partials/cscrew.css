@@ -1,9 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Lora|Montserrat:400,700|Archivo+Black|Lato:300,400);
-nav {
-  font-family: "Montserrat", sans-serif;
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; }
+
+.navbar-default {
+  padding: 8px;
   text-transform: lowercase;
   font-variant: small-caps;
-  font-weight: 700; }
+  font-weight: 700;
+  background-color: #fff;
+  border-bottom: 4px solid #DCDCDC;
+  border-radius: 0;
+  font-size: 1.3em; }
 
 .picture-container, .todays-help-hours-inactive .col-md-4, .todays-help-hours-active .col-md-4 {
   overflow: hidden;
@@ -13,7 +21,8 @@ nav {
   background-color: #f8f8f8;
   border-radius: 20px; }
   #todays-help-hours h2 {
-    padding: 20px 0 20px 20px; }
+    padding: 20px 0 20px 20px;
+    margin: 0; }
   #todays-help-hours img {
     width: 100%; }
   #todays-help-hours li:last-child .todays-help-hours-inactive, #todays-help-hours li:last-child .todays-help-hours-active {
@@ -120,12 +129,87 @@ nav {
   #member-profiles .col-md-4 img {
     width: 100%; }
 
+#slider {
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 1000px;
+  height: 200px; }
+  #slider h1 {
+    color: white;
+    font-size: 4em;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2); }
+  #slider ul {
+    list-style: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 9000px;
+    transition: left .3s linear;
+    -moz-transition: left .3s linear;
+    -o-transition: left .3s linear;
+    -webkit-transition: left .3s linear;
+    margin-left: -25px;
+    -webkit-animation: slide-animation 15s infinite; }
+    #slider ul:hover {
+      -moz-animation-play-state: paused;
+      -webkit-animation-play-state: paused; }
+  #slider li {
+    float: left;
+    position: relative;
+    width: 1000px;
+    display: inline-block; }
+
+.slide-container {
+  margin: 0 auto;
+  width: 1000px;
+  text-align: center;
+  min-height: 120px; }
+
+@-webkit-keyframes slide-animation {
+  0% {
+    opacity: 0; }
+  2% {
+    opacity: 1; }
+  20% {
+    left: 0px;
+    opacity: 1; }
+  22.5% {
+    opacity: 0.6; }
+  25% {
+    left: -1000px;
+    opacity: 1; }
+  45% {
+    left: -1000px;
+    opacity: 1; }
+  47.5% {
+    opacity: 0.6; }
+  50% {
+    left: -2000px;
+    opacity: 1; }
+  70% {
+    left: -2000px;
+    opacity: 1; }
+  72.5% {
+    opacity: 0.6; }
+  75% {
+    left: -3000px;
+    opacity: 1; }
+  95% {
+    opacity: 1; }
+  98% {
+    left: -3000px;
+    opacity: 0; }
+  100% {
+    left: 0px;
+    opacity: 0; } }
 html {
   font-size: 100%; }
 
 body {
   font-family: "Montserrat", sans-serif;
-  font-size: 90%; }
+  font-size: 90%;
+  background: #74D9B0; }
 
 h1 {
   font-family: "Montserrat", sans-serif; }
