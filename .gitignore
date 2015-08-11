@@ -8,3 +8,4 @@ css/.sass-cache/*
 composer.phar
 composer.lock
 .sass-cache
+css/modules/.sass-cache/*
