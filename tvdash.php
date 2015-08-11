@@ -7,14 +7,18 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="js/tvdashapp.js"></script>
     <script src="js/signinservice.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/angular-moment.min.js"></script>
+    <script src="js/helphourservice.js"></script>
     <script src="js/tvdashctrl.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment-range/2.0.2/moment-range.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/tvdash.css">
-    <script type="text/javascript">
-    google.load('visualization', '1.0', {'packages':['corechart']});
-    google.setOnLoadCallback(function() {
-        angular.bootstrap(document.body, ['cscrewtvdash']);
+<script type="text/javascript">
+google.load('visualization', '1.0', {'packages':['corechart']});
+google.setOnLoadCallback(function() {
+    angular.bootstrap(document.body, ['cscrewtvdash']);
     });
     </script>
 </head>
@@ -42,9 +46,31 @@
                     <h3>Help Hours Now</h3>
                 </div>
                 <div class="panel-body">
-                    <ul id="help-hours-list">
+                    <ul id="help-hours-list" class="list-unstyled">
                         <li ng-show="!helphours.length">There is currently no one with scheduled Help Hours at the moment. Feel free to ask anyone in the room for assistance!</li>
-                        <li ng-repeat="helphour in helphours">Once I work out how help hour data is stored, do this.</li>
+                        <li ng-repeat="helphour in helphours | orderBy: 'StartTime'">
+                            <div class="todays-help-hours-inactive row">
+                                <div class="col-md-4">
+                                    <img alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
+                                    <img alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
+                                </div>
+                                <div class="col-md-8">
+                                    <span ng-if="helphour.dateRange.contains(now())">
+                                        <!-- If the user has signed in for this help hour -->
+                                        <span ng-if="helphour.SignedIn">Check mark goes here</span>
+                                        <!-- If the user has NOT signed in for this help hour -->
+                                        <span ng-if="!helphour.SignedIn">X mark goes here</span>
+                                    </span>
+                                    <h3>
+                                        {{ helphour.User.Name }}
+                                        <small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
+                                        <small ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</small>
+                                        <small ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</small>
+                                    </h3>
+                                    <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

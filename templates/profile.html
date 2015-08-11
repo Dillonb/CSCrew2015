@@ -8,12 +8,16 @@
                 <label><input type="checkbox" ng-model="currentUser.profile.Visible"> Show me on the members page</label>
             </div>
             <div class="form-group">
-                <label>Short bio</label>
+                <label>Short bio <span ng-class="{overflow: currentUser.profile.Bio.length > 255}">({{ currentUser.profile.Bio.length }} / 255)</span></label>
                 <textarea class="form-control" ng-model="currentUser.profile.Bio"></textarea>
             </div>
             <div class="form-group">
-                <label>Upload a picture (max 128x128 pixels)</label>
-                <input type="file" id="userAvatar">
+                <label>Upload a picture (max 512x512 pixels)</label>
+                <p>
+                    <img ng-if="currentUser.user.Picture" ng-src="{{ currentUser.user.Picture }}">
+                    <img ng-if="!currentUser.user.Picture" src="img/qmark.png">
+                </p>
+                <input type="file" id="userAvatar" name="userAvatar">
             </div>
             <div class="form-group">
                 <input ng-hide="profileSubmitting" class="btn btn-default" type="submit" value="Submit">
@@ -36,24 +40,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">Help Hours</div>
     <ul class="list-group">
-        <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
-            <p>
-                Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
-            </p>
-            <p>
-                <span ng-show="helphour.Monday">Monday</span>
-                <span ng-show="helphour.Tuesday">Tuesday</span>
-                <span ng-show="helphour.Wednesday">Wednesday</span>
-                <span ng-show="helphour.Thursday">Thursday</span>
-                <span ng-show="helphour.Friday">Friday</span>
-                <span ng-show="helphour.Saturday">Saturday</span>
-                <span ng-show="helphour.Sunday">Sunday</span>
-            </p>
-            <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
-        </li>
-        <li ng-if="!currentUserHelpHours.length" class="list-group-item">
-            You have no help hours active or in review!
-        </li>
         <li class="list-group-item" ng-init="loadCurrentUserHelpHours()">
             <h2>Submit help hours for review</h2>
             <form name="form_new_helphour" action="#" id="form-new-helphour">
@@ -81,6 +67,24 @@
                     <div class="alert alert-danger" ng-show="form_new_helphour.$invalid">Please fill out the form above completely.</div>
                 </p>
             </form>
+        </li>
+        <li ng-repeat="helphour in currentUserHelpHours" class="list-group-item">
+            <p>
+                Status: <span ng-show="helphour.Approved">Approved.</span><span ng-hide="helphour.Approved">Pending</span>
+            </p>
+            <p>
+                <span ng-show="helphour.Monday">Monday</span>
+                <span ng-show="helphour.Tuesday">Tuesday</span>
+                <span ng-show="helphour.Wednesday">Wednesday</span>
+                <span ng-show="helphour.Thursday">Thursday</span>
+                <span ng-show="helphour.Friday">Friday</span>
+                <span ng-show="helphour.Saturday">Saturday</span>
+                <span ng-show="helphour.Sunday">Sunday</span>
+            </p>
+            <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}</p>
+        </li>
+        <li ng-if="!currentUserHelpHours.length" class="list-group-item">
+            You have no help hours active or in review!
         </li>
     </ul>
 </div>

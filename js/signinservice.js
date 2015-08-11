@@ -39,5 +39,18 @@ app.factory('signinFactory', function($http, $q) {
             });
             return deferred.promise;
         }
+
+        service.stats = function() {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/signins/stats'
+            }).success(function(data) {
+                deferred.resolve(data);
+            }).error(function() {
+                deferred.reject("Error getting stats.");
+            });
+            return deferred.promise;
+        };
         return service;
 });

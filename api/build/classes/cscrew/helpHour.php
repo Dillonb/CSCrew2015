@@ -15,4 +15,23 @@
  */
 class helpHour extends BasehelpHour
 {
+	function onWeekday($day) {
+		$day = strtolower($day);
+		switch ($day) {
+			case 'monday':
+				return $this->getMonday();
+			case 'tuesday':
+				return $this->getTuesday();
+			case 'wednesday':
+				return $this->getWednesday();
+			case 'thursday':
+				return $this->getThursday();
+			case 'friday':
+				return $this->getFriday();
+			case 'saturday':
+				return $this->getSaturday();
+			case 'sunday':
+				return $this->getSunday();
+		}
+	}
 }

@@ -2,6 +2,9 @@
 require_once('vendor/autoload.php');
 require_once('functions.php');
 
+define("MAX_IMAGE_WIDTH", 512);
+define("MAX_IMAGE_HEIGHT", 512);
+
 $app = new \Slim\Slim();
 
 function render_json($data) {
@@ -78,6 +81,14 @@ $app->group('/signins', function() use ($app) {
         $reasons = signInReasonQuery::create()->find();
         render_json($reasons->toArray());
     });
+    $app->get('/stats', function() use ($app) {
+        $beginOfDay = strtotime("midnight", time());
+        $stats = array();
+        $stats['signinsToday'] = signInQuery::create()->filterByCreatedAt(array('min'=>$beginOfDay))->count();
+        $stats['uniqueUsers'] = UserQuery::create()->count();
+
+        render_json($stats);
+    });
 });
 $app->group('/users', function() use ($app) {
     $app->get('/list', function() use ($app) {
@@ -101,15 +112,31 @@ $app->group('/users', function() use ($app) {
     });
     $app->get('/profile/:netid', function($netid) use ($app) {
         render_json(get_user_profile($netid)->toArray());
-
     });
     $app->post('/profile/:netid', function($netid) use ($app) {
         // Require either the user whose profile this is or an admin
         if (!require_authenticated(false, $netid, true)) { return; }
+        $profileJSON = json_decode($app->request->getBody());
+        $settingImage = false;
+        if (array_key_exists("profileImage", $profileJSON)) {
+            $profileImage = $profileJSON->profileImage;
+            if (preg_match('/data:(image\/[a-zA-Z]+);base64,(.+)/', $profileImage, $matches)) {
+                $profileImage = imagecreatefromstring(base64_decode($matches[2]));
+                if (imagesx($profileImage) <= MAX_IMAGE_WIDTH && imagesy($profileImage) <= MAX_IMAGE_HEIGHT) {
+                    $settingImage = true;
+                    $path = realpath(dirname(__FILE__)) . '/images/' . $netid . '.png';
+                    imagepng($profileImage, $path);
+                }
+            }
+        }
         $profile = get_user_profile($netid);
         // Ensure the user can't be changed
         $user = $profile->getUser();
         $profile->fromJSON($app->request->getBody());
+        if ($settingImage) {
+            $user->setPicture('api/images/' . $netid . '.png');
+            $user->save();
+        }
         // Set the user back
         $profile->setUser($user);
         $profile->save();
@@ -203,6 +230,16 @@ $app->group('/helphours', function() use ($app) {
         $obj->setEndTime(convert_timezone($obj->getEndTime()));
         $obj->save();
         render_json($obj->toArray());
+    });
+    $app->get('/signin/:id', function($id) use ($app) {
+        $helphour = helpHourQuery::create()->findPk($id);
+        if (!require_authenticated(false, $helphour->getUser()->getNetid())) { return; }
+        if (signin_helphour($helphour)) {
+            render_json("Signed in correctly.");
+        }
+        else {
+            render_json("Already signed in or other error.");
+        }
     });
 });
 $app->get('/whoami', function() use ($app) {
