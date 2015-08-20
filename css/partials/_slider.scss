@@ -1,3 +1,17 @@
+
+.banner {
+	position: relative;
+	overflow: auto;
+	
+	ul {
+	   li {
+	      float: left;
+	   }
+	}
+}
+
+/*
+
 $slide-width: 1000px;
 $slide-height: 200px;
 
@@ -66,3 +80,5 @@ $slide-height: 200px;
 		   98% {left:-$slide-width * 3; opacity:0;} 
 		   100% {left:0px; opacity:0;}
 }
+
+*/

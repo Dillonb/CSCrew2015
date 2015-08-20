@@ -1,46 +1,42 @@
-<span class="inline-heading">Search Members</span>
-<input type="text" ng-model="memberFilter" class="form-control">
-<div class="row">
-    <div class="col-md-4">
-        <!--
-        <ul class="list-unstyled">
-            <li>Name</li>
-            <li>Skills</li>
-            <li>Classes Taken</li>
-        </ul>
-        -->
-    </div>
-
-    <div class="col-md-8">
-        <div id="member-profiles" ng-init="getMembers()">
-            <ul class="list-unstyled">
-                <li ng-repeat="member in members | filter: memberFilter">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img ng-if="member.User.Picture" ng-src="{{ member.User.Picture }}">
-                            <img ng-if="!member.User.Picture" ng-src="img/qmark.png">
-                        </div>
-                        <div class="col-md-8">
-                            <h2>{{ member.User.Name }}</h2>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    Bio
+<section class="gold">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12 search-members">
+                <h2>Search</h2> <input type="text" ng-model="memberFilter" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div id="member-profiles" ng-init="getMembers()">
+                <ul class="list-unstyled">
+                    <li ng-repeat="member in members | filter: memberFilter">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img ng-if="member.User.Picture" ng-src="{{ member.User.Picture }}">
+                                <img ng-if="!member.User.Picture" ng-src="img/qmark.png">
+                            </div>
+                            <div class="col-md-8">
+                                <h2>{{ member.User.Name }}</h2>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Bio
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ member.Bio }}
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    {{ member.Bio }}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        Skills
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span ng-repeat="skill in member.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    Skills
-                                </div>
-                                <div class="col-md-10">
-                                    <span ng-repeat="skill in member.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
-                                </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>

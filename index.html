@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>CS Crew</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/unslider.min.js"></script>
     <script src="js/cscrewapp.js"></script>
     <script src="js/userservice.js"></script>
     <script src="js/helphourservice.js"></script>
@@ -29,9 +31,7 @@
                 </a>
             </div>
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a href="#" ui-sref="events">Events</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="members">Members</a></li>
-                <li ui-sref-active="active"><a href="#" ui-sref="contact">Contact</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="get-help">Get Help</a></li>
                 <li ui-sref-active="active" ng-if="currentUser.authenticated"><a href="#" ui-sref="profile">My Account</a></li>
                 <li ui-sref-active="active">

@@ -1,60 +1,79 @@
 .picture-container {
-	   overflow: hidden;
-	   padding: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relatve;
+}
+
+.help-picture {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #todays-help-hours {
-		   background-color: #f8f8f8;
-		   border-radius: 20px;
-		   h2 { padding: 20px 0 20px 20px; margin: 0;}
-		img { width: 100%; }
-		li:last-child {
-			      .todays-help-hours-inactive, .todays-help-hours-active { border-radius:	0 0 20px 20px; }
-			      .col-md-4 { border-radius: 0 0 0 20px; }
-		}
-
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    h2 {
+        padding: 20px 0 20px 20px;
+        margin: 0;
+    }
+    li:last-child {
+        .todays-help-hours-inactive,
+        .todays-help-hours-active {
+            border-radius: 0 0 20px 20px;
+        }
+        .col-xs-4 {
+            border-radius: 0 0 0 20px;
+        }
+    }
 }
 
 .todays-help-hours-inactive {
-			     background-color: #f3f3f3;
-			     margin: 0;
-			     img { opacity: .7; }
-			     .col-md-4 {
-			     	       @extend .picture-container;
-				       width: 105px;
-				       height: 105px;
-			     }
-			     
-			     h3 {
-			     	margin-top: 10px;
-				font-size: 20px;
-				color: #b4b4b4;
-				}
-			h4 {
-			   font-size: 16px;
-			   color: #cdcdcd;
-			   margin-left: 2px;
-			   }
-				
+    background-color: #f3f3f3;
+    margin: 0;
+    .col-xs-4 {
+        @extend .picture-container;
+        width: 105px;
+        height: 105px;
+        img {
+            @extend .help-picture;
+            opacity: .7;
+        }
+    }
+    h3 {
+        margin-top: 10px;
+        font-size: 20px;
+        color: #b4b4b4;
+    }
+    h4 {
+        font-size: 16px;
+        color: #cdcdcd;
+        margin-left: 2px;
+    }
 }
 
 .todays-help-hours-active {
-
-			  background-color: #D6EDF7;
-			  margin: 0;
-			  .col-md-4 {
-                                     @extend .picture-container;
-				      width: 150px;
-				      height: 150px;
-                             }
-
-                             h3 {
-                                margin-top: 20px;
-                                font-size: 30px;
-                                }
-                        h4 {
-                           font-size: 18px;
-			   margin-left: 6px;
-                           }
-
+    background-color: #D6EDF7;
+    margin: 0;
+    .col-xs-4 {
+        @extend .picture-container;
+        width: 150px;
+        height: 150px;
+        img {
+            @extend .help-picture;
+        }
+    }
+    h3 {
+        margin-top: 20px;
+        font-size: 30px;
+    }
+    h4 {
+        font-size: 18px;
+        margin-left: 6px;
+    }
 }
