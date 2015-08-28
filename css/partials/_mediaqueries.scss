@@ -1,0 +1,44 @@
+@media (max-width: 650px) {
+    /* WELCOME */
+    .welcome-banner {
+        font-size: 4em;
+    }
+    .todays-help-hours-inactive,
+    .todays-help-hours-active {
+        .col-xs-4,
+        .col-xs-8 {
+            width: 100%;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    /* TODAY'S HELP HOURS */
+    #todays-help-hours {
+        li:last-child {
+            .todays-help-hours-inactive,
+            .todays-help-hours-active {
+                border-radius: 0 0 20px 20px;
+            }
+            .col-xs-4 {
+                border-radius: 0;
+            }
+        }
+    }
+    /* MEMBERS */
+    .member-title {
+        .col-xs-4 {
+            width: 100%;
+            border-radius: 24px 24px 0 0;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .member-field {
+    	.col-xs-4 { width: 1px / 3px * 100%; }
+    }
+}

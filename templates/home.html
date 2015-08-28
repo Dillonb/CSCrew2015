@@ -1,129 +1,104 @@
 <div class="row" ng-if="pendingHelpHourSignins">
-    <div class="alert alert-danger" ng-repeat="helphour in pendingHelpHourSignins">
+    <div class="alert alert-danger custom-alert" ng-repeat="helphour in pendingHelpHourSignins">
         You are not signed in for your current help hours from {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
         <a class="btn btn-default" ng-click="signinHelpHour(helphour)">Sign in now</a>
     </div>
 </div>
-<!-- <div  id="slider">
-  <ul class="list-unstyled">
-	<li>
-	  <div class="slide-container">
-	<h1>Welcome to CS Crew</h1>
-	<span style="font-size: 5em;"></span>
-	</div>
-	</li>
-	<li>
-	  <div class="slide-container">
-	<h1>UVM's Largest<br/>Computer Science Club</h1>
-	  </div>
-	</li>
-	<li>
-	  <div class="slide-container">
-		<h1>Study With<br/>Your Peers </h1>
-	</div>
-	</li>
-	<li>
-	  <div class="slide-container">
-		<h1>Check Out<br/>Our Events </h1>
-		</div>
-	</li>
-  </ul>
-</div>
--->
-
-<!-- WELCOME -->
-<section class="cantaloupe">
-    <div class="row">
-        <div class="col-md-12 welcome-banner">
-	  <h1>Welcome to</h1><div class="clip-text clip-text_seven">CS Crew</div>
-        </div>
-	  <!-- <div class="clip-text clip-text_seven">CS Crew</div> -->
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section class="mint">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>About</h2>
-            <hr/>
-            <p>
-                We are a student-led community of individuals studying or interested in Computer Science at the University of Vermont. Founded in 2010 by Anthony Sweet, Mark Cooper, and Beau Cameron, we provide a space for students to further their knowledge and skills in CS related concepts and applications. We are located in Votey 332 and welcome anyone who wants to come in to work on projects, get help during help hours, study, and network.
-            </p>
-            <p ng-init="loadSigninStats()" ng-show="signinStats">
-                There have been {{ signinStats.signinsToday }} room sign-in(s) today, with {{ signinStats.uniqueUsers }} unique visitors.
-            </p>
-        </div>
-    </div>
-</section>
-<!-- TODAY'S HELP HOURS -->
-<section class="gold">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="todays-help-hours" ng-init="loadHelpHoursToday()">
-                <h2>Today's Help Hours</h2>
-                <ul class="list-unstyled">
-                    <li ng-repeat="helphour in helpHoursToday | orderBy: 'StartTime'">
-                        <div ng-class="{true:'todays-help-hours-active row', false:'todays-help-hours-inactive row'}[helphour.dateRange.contains(now())]" class="todays-help-hours-inactive row">
-                            <div class="col-xs-4">
-                                <img alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
-                                <img alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
-                            </div>
-                            <div class="col-xs-8">
-                                <span ng-if="helphour.dateRange.contains(now())">
-								<!-- If the user has signed in for this help hour -->
-								<span ng-if="helphour.SignedIn">Check mark goes here</span>
-                                <!-- If the user has NOT signed in for this help hour -->
-                                <span ng-if="!helphour.SignedIn">X mark goes here</span>
-                                </span>
-                                <h3>
-								{{ helphour.User.Name }}
-								<small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
-								<small ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</small>
-								<small ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</small>
-							</h3>
-                                <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+<section class="squish">
+    <!-- WELCOME -->
+    <section class="cantaloupe white-text pad-block">
+        <div class="row">
+            <div class="col-md-12 welcome-banner">
+                <span>Welcome to</span>
+                <div class="clip-text clip-text_one">CS Crew</div>
             </div>
         </div>
-    </div>
-</section>
-<!-- EVENTS -->
-<section class="cantaloupe">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Events</h2>
-            <hr/>
-            <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=335&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=uvm.cscrew%40gmail.com&amp;color=%232F6309&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="335" frameborder="0" scrolling="no"></iframe>
+    </section>
+    <!-- ABOUT -->
+    <section class="mint white-text pad-block">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>About</h2>
+                <hr/>
+                <p>
+                    We are a student-led community of individuals studying or interested in Computer Science at the University of Vermont. Founded in 2010 by Anthony Sweet, Mark Cooper, and Beau Cameron, we provide a space for students to further their knowledge and skills in CS related concepts and applications. We are located in Votey 332 and welcome anyone who wants to come in to work on projects, get help during help hours, study, and network.
+                </p>
+                <p ng-init="loadSigninStats()" ng-show="signinStats">
+                    There have been {{ signinStats.signinsToday }} room sign-in(s) today, with {{ signinStats.uniqueUsers }} unique visitors.
+                </p>
+            </div>
         </div>
-    </div>
-</section>
-<!-- CONTACT -->
-<section class="mint">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Contact</h2>
-            <hr/>
-            <p>Feel free to send us a message at any time with questions or feedback.</p>
-            <form>
-                <div class="form-group">
-                    <label for="inputName">Name (Optional)</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+    </section>
+    <!-- TODAY'S HELP HOURS -->
+    <section class="gold pad-block">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="todays-help-hours" ng-init="loadHelpHoursToday()">
+                    <h2>Today's Help Hours</h2>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="helphour in helpHoursToday | orderBy: 'StartTime'">
+                            <div ng-class="{true:'todays-help-hours-active bg-info row', false:'todays-help-hours-inactive row text-muted'}[helphour.dateRange.contains(now())]">
+                                <div class="col-xs-4">
+                                    <img alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
+                                    <img alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
+                                </div>
+                                <div class="col-xs-8">
+                                    <h3>
+                                {{ helphour.User.Name }}
+
+<span ng-if="helphour.dateRange.contains(now())">
+                                <!-- If the user has signed in for this help hour -->
+                                <small ng-if="helphour.SignedIn" class="text-success">Signed In</small>
+                                <!-- If the user has NOT signed in for this help hour -->
+                                <small ng-if="!helphour.SignedIn" class="text-danger">Not Signed In</small></h3>
+                                    <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
+                                        <span ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</span>
+                                        <span ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</span>
+                                    </p>
+                                    <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
+                                    </p>
+                                </div>
+				</div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail">Email Address (Optional)</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                </div>
-                <div class="form-group">
-                	<label for="inputMessage">Message</label>
-                    <textarea class="form-control" id="inputMessage" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Send</button>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
+    <!-- EVENTS -->
+    <section class="cantaloupe white-text pad-block">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Events</h2>
+                <hr/>
+                <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=335&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=uvm.cscrew%40gmail.com&amp;color=%232F6309&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="335" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+    </section>
+    <!-- CONTACT -->
+    <section class="mint white-text pad-block">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Contact</h2>
+                <hr/>
+                <p>Feel free to send us a message at any time with questions or feedback.</p>
+                <form>
+                    <div class="form-group">
+                        <label for="inputName">Name (Optional)</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email Address (Optional)</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMessage">Message</label>
+                        <textarea class="form-control" id="inputMessage" rows="3" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
 </section>

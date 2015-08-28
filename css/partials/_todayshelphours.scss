@@ -1,7 +1,7 @@
 .picture-container {
     overflow: hidden;
     padding: 0;
-    position: relatve;
+    position: relative;
 }
 
 .help-picture {
@@ -38,8 +38,9 @@
     margin: 0;
     .col-xs-4 {
         @extend .picture-container;
-        width: 105px;
-        height: 105px;
+        width: 140px;
+        height: 140px;
+        background: #fff;
         img {
             @extend .help-picture;
             opacity: .7;
@@ -48,7 +49,7 @@
     h3 {
         margin-top: 10px;
         font-size: 20px;
-        color: #b4b4b4;
+        color: darken(#777, 10);
     }
     h4 {
         font-size: 16px;
@@ -58,12 +59,12 @@
 }
 
 .todays-help-hours-active {
-    background-color: #D6EDF7;
     margin: 0;
     .col-xs-4 {
         @extend .picture-container;
-        width: 150px;
-        height: 150px;
+        width: 170px;
+        height: 170px;
+        background: #fff;
         img {
             @extend .help-picture;
         }
@@ -76,4 +77,10 @@
         font-size: 18px;
         margin-left: 6px;
     }
+}
+
+.custom-alert {
+	      margin-bottom: 0;
+	      text-align: center;
+	      border-width: 1px 0;
 }

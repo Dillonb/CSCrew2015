@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lora|Montserrat:400,700|Archivo+Black|Lato:300,400);
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 * {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility; }
@@ -12,22 +11,34 @@
   border-radius: 0;
   margin-bottom: 0; }
 
+.navbar {
+  border: 0; }
+
+.navbar-nav > li > a {
+  padding-bottom: 20px; }
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+  color: #555;
+  background-color: #FFF;
+  border-top: 6px solid;
+  padding-top: 9px; }
+
 .welcome-banner {
-  text-align: center; }
-  .welcome-banner h1 {
-    font-size: 4em;
-    border: .1em solid white;
-    padding: 1em;
-    margin: 1em;
-    -webkit-animation: fadein 2s;
-    /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 2s;
-    /* Firefox < 16 */
-    -ms-animation: fadein 2s;
-    /* Internet Explorer */
-    -o-animation: fadein 2s;
-    /* Opera < 12.1 */
-    animation: fadein 2s; }
+  text-align: center;
+  font-size: 6em;
+  padding: .3em;
+  margin: .3em auto;
+  -webkit-animation: fadein 2s;
+  /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s;
+  /* Firefox < 16 */
+  -ms-animation: fadein 2s;
+  /* Internet Explorer */
+  -o-animation: fadein 2s;
+  /* Opera < 12.1 */
+  animation: fadein 2s; }
 
 @keyframes fadein {
   from {
@@ -62,51 +73,15 @@
   Based from this article from Divya Manian - 
   http://nimbupani.com/using-background-clip-for-text-with-css-fallback.html
 */
-* {
-  margin: 0;
-  padding: 0; }
-
-*,
-:before,
-:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
-.wrapper {
-  text-align: center; }
-
-.title {
-  font-size: 2em;
-  position: relative;
-  margin: 0 auto 1em;
-  padding: 1em 1em .25em 1em;
-  text-align: center;
-  text-transform: uppercase; }
-
-.title:after {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 240px;
-  height: 4px;
-  margin-left: -120px;
-  content: '';
-  background-color: #fff; }
-
 /* Clip text element */
 .clip-text {
-  font-size: 6em;
+  font-size: 1.4em;
   font-weight: bold;
   line-height: 1;
   position: relative;
   display: inline-block;
-  margin: .25em;
-  padding: .5em .75em;
   text-align: center;
-  /* Color fallback */
   color: #fff;
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; }
 
 .clip-text:before,
@@ -114,90 +89,41 @@
   position: absolute;
   content: ''; }
 
-/* Background */
-.clip-text:before {
-  z-index: -2;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: inherit; }
-
-/* Text Background (black zone) */
-.clip-text:after {
-  position: absolute;
-  z-index: -1;
-  top: .125em;
-  right: .125em;
-  bottom: .125em;
-  left: .125em;
-  background-color: #000; }
-
-/* Change the background position to display letter when the black zone isn't here */
-.clip-text--no-textzone:before {
-  background-position: -.25em 0; }
-
-.clip-text--no-textzone:after {
-  content: none; }
-
-/* Use Background-size cover for photo background and no-repeat background */
-.clip-text--cover,
-.clip-text--cover:before {
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover; }
-
 /* Background image from http://thepatternlibrary.com/ and http://lorempixel.com */
 .clip-text_one {
-  background-image: url(http://i.imgur.com/pJewmf8.jpg); }
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/OzExPUf.png) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
 .clip-text_two {
-  background-image: url(http://i.imgur.com/KCa8KHY.png); }
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/NH1nLsV.png) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
-.clip-text_tree {
-  background-image: url(http://i.imgur.com/IuijDCu.png); }
+.clip-text_three {
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/6F6eAzr.png) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
 .clip-text_four {
-  background-image: url(http://i.imgur.com/tkKlzYz.jpg); }
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/PIJWrEi.jpg) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
 .clip-text_five {
-  background-image: url(http://i.imgur.com/4NiBrXs.gif); }
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/hH0upNX.jpg) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
 .clip-text_six {
-  background-image: url(http://i.imgur.com/d2awmPs.jpg); }
-
-.clip-text_seven {
-  background-image: url(http://i.imgur.com/OzExPUf.png); }
-
-.clip-text_eight {
-  background-image: url(http://i.imgur.com/BFlh0FX.jpg); }
-
-.clip-text_nine {
-  background-image: url(http://i.imgur.com/2Nrxex6.jpg); }
-
-.clip-text_ten {
-  background-image: url(http://i.imgur.com/hCrSRTN.png); }
-
-.clip-text_eleven {
-  background-image: url(http://lorempixel.com/480/200/fashion/10/cc);
-  background-size: cover; }
-
-.clip-text_twelve {
-  background-image: url(http://lorempixel.com/480/200/people/7/cc); }
-
-.clip-text_thirteen {
-  background-image: url(http://lorempixel.com/480/200/food/5/cc); }
-
-.clip-text_fourteen {
-  background-image: url(http://lorempixel.com/480/200/city/9/cc); }
-
-.clip-text_fifteen {
-  background-image: url(http://i.imgur.com/kqvmLut.jpg); }
+  background: -webkit-linear-gradient(transparent, transparent), url(http://i.imgur.com/jGIGWOA.jpg) repeat;
+  background: -o-linear-gradient(transparent, transparent);
+  -webkit-background-clip: text; }
 
 .picture-container, .todays-help-hours-inactive .col-xs-4, .todays-help-hours-active .col-xs-4 {
   overflow: hidden;
   padding: 0;
-  position: relatve; }
+  position: relative; }
 
 .help-picture, .todays-help-hours-inactive .col-xs-4 img, .todays-help-hours-active .col-xs-4 img {
   position: absolute;
@@ -225,31 +151,37 @@
   background-color: #f3f3f3;
   margin: 0; }
   .todays-help-hours-inactive .col-xs-4 {
-    width: 105px;
-    height: 105px; }
+    width: 140px;
+    height: 140px;
+    background: #fff; }
     .todays-help-hours-inactive .col-xs-4 img {
       opacity: .7; }
   .todays-help-hours-inactive h3 {
     margin-top: 10px;
     font-size: 20px;
-    color: #b4b4b4; }
+    color: #5e5e5e; }
   .todays-help-hours-inactive h4 {
     font-size: 16px;
     color: #cdcdcd;
     margin-left: 2px; }
 
 .todays-help-hours-active {
-  background-color: #D6EDF7;
   margin: 0; }
   .todays-help-hours-active .col-xs-4 {
-    width: 150px;
-    height: 150px; }
+    width: 170px;
+    height: 170px;
+    background: #fff; }
   .todays-help-hours-active h3 {
     margin-top: 20px;
     font-size: 30px; }
   .todays-help-hours-active h4 {
     font-size: 18px;
     margin-left: 6px; }
+
+.custom-alert {
+  margin-bottom: 0;
+  text-align: center;
+  border-width: 1px 0; }
 
 .contactForm {
   border: 1px solid #a8a8a8;
@@ -305,108 +237,94 @@
       border-radius: 5em;
       cursor: pointer; }
 
-.search-members h2 {
-  font-size: 2em;
-  padding-right: 2%;
-  display: inline;
-  vertical-align: middle; }
 .search-members input {
   display: inline;
-  width: 50%; }
+  width: 100%; }
 
 #member-profiles ul {
   margin-top: 2em; }
 #member-profiles li {
   background-color: #f3f3f3;
-  margin-bottom: 4em;
-  border-radius: 2em; }
-#member-profiles .col-xs-4 {
-  width: 14em;
-  height: 13em;
-  overflow: hidden;
-  padding: 0;
-  border-radius: 2em 0 0 2em; }
-  #member-profiles .col-xs-4 img {
+  margin: 3em 3%;
+  border-radius: 24px; }
+  #member-profiles li:last-child {
+    margin-bottom: 0; }
+
+.member-title {
+  border-radius: 24px 24px 0 0;
+  background: #4870B1;
+  color: #ffffff; }
+  .member-title .col-xs-4 {
+    padding-left: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    border-radius: 20px 0 0 0;
+    width: 200px;
+    height: 200px;
+    background: #fff; }
+  .member-title img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 100%; }
+  .member-title h2 {
+    margin-top: 1.3em;
+    font-size: 3em; }
+
+.member-field {
+  padding-top: 1em; }
+  .member-field .col-xs-4 {
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+    font-size: 1.6em; }
+  .member-field .col-xs-8 {
+    padding-top: .5em; }
+
+.last {
+  padding-bottom: 2em; }
+
+@media (max-width: 650px) {
+  /* WELCOME */
+  .welcome-banner {
+    font-size: 4em; }
+
+  .todays-help-hours-inactive .col-xs-4,
+  .todays-help-hours-inactive .col-xs-8,
+  .todays-help-hours-active .col-xs-4,
+  .todays-help-hours-active .col-xs-8 {
     width: 100%; }
+    .todays-help-hours-inactive .col-xs-4 img,
+    .todays-help-hours-inactive .col-xs-8 img,
+    .todays-help-hours-active .col-xs-4 img,
+    .todays-help-hours-active .col-xs-8 img {
+      width: 100%;
+      height: auto; }
 
-.banner {
-  position: relative;
-  overflow: auto; }
-  .banner ul li {
-    float: left; }
+  /* TODAY'S HELP HOURS */
+  #todays-help-hours li:last-child .todays-help-hours-inactive,
+  #todays-help-hours li:last-child .todays-help-hours-active {
+    border-radius: 0 0 20px 20px; }
+  #todays-help-hours li:last-child .col-xs-4 {
+    border-radius: 0; }
 
-/*
+  /* MEMBERS */
+  .member-title .col-xs-4 {
+    width: 100%;
+    border-radius: 24px 24px 0 0; }
+  .member-title img {
+    width: 100%;
+    height: auto; }
 
-$slide-width: 1000px;
-$slide-height: 200px;
-
-#slider {
-	margin: auto;
-	overflow: hidden;
-	position: relative;
-	width: $slide-width;
-	height: $slide-height;
-
-	h1 {
-	   color: white;
-	   font-size: 4em;
-	   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
-	}
-
-	ul {
-	   list-style: none;
-	   position: absolute;
-	   left: 0px;
-	   top: 0px;
-	   width: 9000px;
-	   transition: left .3s linear;
-	   -moz-transition: left .3s linear;
-	   -o-transition: left .3s linear;
-	   -webkit-transition: left .3s linear;
-	   margin-left: -25px;
-	   -webkit-animation: slide-animation 15s infinite;
-
-	   &:hover {
-	   	   -moz-animation-play-state: paused;
-		   -webkit-animation-play-state: paused;
-	   }
-	}
-
-	li {
-	   float: left;
-	   position: relative;
-	   width: $slide-width;
-	   display: inline-block;
-	}
-
-
-}
-
-.slide-container {
-		  margin: 0 auto;
-		  width: $slide-width;
-		  text-align: center;
-		  min-height: $slide-height - 80;
-}
-
-@-webkit-keyframes slide-animation {
-		   0% {opacity:0;}
-		   2% {opacity:1;}
-		   20% {left:0px; opacity:1;}
-		   22.5% {opacity:0.6;}
-		   25% {left:-$slide-width; opacity:1;}
-		   45% {left:-$slide-width; opacity:1;}
-		   47.5% {opacity:0.6;}
-		   50% {left:-$slide-width * 2; opacity:1;}
-		   70% {left:-$slide-width * 2; opacity:1;}
-		   72.5% {opacity:0.6;}
-		   75% {left:-$slide-width * 3; opacity:1;}
-		   95% {opacity:1;}
-		   98% {left:-$slide-width * 3; opacity:0;} 
-		   100% {left:0px; opacity:0;}
-}
-
-*/
+  .member-field .col-xs-4 {
+    width: 33.33333%; } }
 html {
   font-size: 110%; }
 
@@ -438,23 +356,38 @@ form#form-new-helphour {
         display: none; }
 
 .mint {
-  padding: 40px 0;
-  background: #74D9B0;
-  color: #ffffff; }
+  background: #74D9B0; }
 
 .gold {
-  padding: 40px 0;
-  background: #FFD54D;
-  color: #333333; }
+  background: #FFD54D; }
 
 .cantaloupe {
-  padding: 40px 0;
-  background: #A5EC92;
-  color: #ffffff; }
+  background: #A5EC92; }
 
-.row {
+.pad-block {
+  padding: 40px 0; }
+
+.squish .row {
   max-width: 45em;
   margin: 0 auto;
   display: block; }
+
+.white-text {
+  color: #fff; }
+
+/** PROFILE **/
+.profile {
+  padding: 40px 3%; }
+
+/* GET HELP */
+.get-help {
+  padding: 24px 3% 40px; }
+  .get-help .panel {
+    background-color: transparent; }
+
+/** IMAGES **/
+.portrait {
+  width: 100%;
+  height: auto; }
 
 /*# sourceMappingURL=cscrew.css.map */

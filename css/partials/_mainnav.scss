@@ -1,8 +1,25 @@
 .navbar-default {
     text-transform: lowercase;
-    font-variant: small-caps;	
+    font-variant: small-caps;
     font-weight: 700;
     background-color: #fff;
     border-radius: 0;
     margin-bottom: 0;
+}
+
+.navbar {
+	border: 0;
+}
+
+.navbar-nav>li>a {
+    padding-bottom: 20px;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
+    color: #555;
+    background-color: #FFF;
+    border-top: 6px solid;
+    padding-top: 9px;
 }

@@ -7,69 +7,94 @@
 @import 'todayshelphours';
 @import 'contactform';
 @import 'members';
-@import 'slider';
+@import 'mediaqueries';
+
 html {
-		font-size: $base-font-size;
+    font-size: $base-font-size;
 }
 
 body {
-		font-family: $font-mont;
-		font-size: 100%;
+    font-family: $font-mont;
+    font-size: 100%;
 }
 
-
 hr {
-	width: 300px;
-	margin: 20px 0;
+    width: 300px;
+    margin: 20px 0;
 }
 
 .container {
-		width: 100%;
-		margin: 0;
-		padding: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .cscrew-header-logo {
-		width: 10%;
+    width: 10%;
 }
 
 form#form-new-helphour {
-		padding: 20px;
-		p.timepicker {
-				display: inline-block;
-		}
-		ul.weekselect {
-				padding-left: 0px;
-				li {
-						display: inline-block;
-						input[type="checkbox"] {
-								display: none;
-						}
-				}
-		}
+    padding: 20px;
+    p.timepicker {
+        display: inline-block;
+    }
+    ul.weekselect {
+        padding-left: 0px;
+        li {
+            display: inline-block;
+            input[type="checkbox"] {
+                display: none;
+            }
+        }
+    }
 }
 
-@mixin color-block($color, $text) {
-	padding: 40px 0;
-	background: $color;
-	color: $text;
-}
 
 .mint {
-	@include color-block($mint, $white);
+    background: $mint;
 }
 
 .gold {
-	@include color-block($gold, $dark-gray);
+    background: $gold;
 }
 
 .cantaloupe {
-	@include color-block($cantaloupe, $white);
-
+    background: $cantaloupe;
 }
 
-.row {
-	max-width: 45em;
-	margin: 0 auto;
-	display: block;
+.pad-block {
+    padding: 40px 0;
+}
+
+.squish {
+    .row {
+        max-width: 45em;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.white-text {
+	color: #fff;
+}
+
+/** PROFILE **/
+
+.profile {
+    padding: 40px 3%;
+}
+
+/* GET HELP */
+
+.get-help {
+    padding: 24px 3% 40px;
+    .panel { background-color: transparent;}
+}
+
+
+/** IMAGES **/
+
+.portrait {
+    width: 100%;
+    height: auto;
 }

@@ -1,27 +1,28 @@
-Help hours this week:
-
-<table class="table" ng-init="loadHelpHoursThisWeek()">
-    <thead>
-        <tr>
-            <th ng-repeat="day in weekdays">
-                {{ day }}
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td ng-repeat="day in weekdays">
-                <div class="panel" ng-repeat="helphour in helpHoursThisWeek[day] | orderBy: 'StartTime'">
-                    <div class="panel-body">
-                        <p>
-                            {{ helphour.User.Name }}
-                        </p>
-                        <p>
-                            {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm:ss a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm:ss a' }}
-                        </p>
+<section class="get-help mint white-text">
+    <h2>Help hours this week:</h2>
+    <table class="table mint" ng-init="loadHelpHoursThisWeek()">
+        <thead>
+            <tr>
+                <th ng-repeat="day in weekdays">
+                    {{ day }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td ng-repeat="day in weekdays">
+                    <div class="panel" ng-repeat="helphour in helpHoursThisWeek[day] | orderBy: 'StartTime'">
+                        <div class="panel-body">
+                            <p>
+                                {{ helphour.User.Name }}
+                            </p>
+                            <p>
+                                {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
