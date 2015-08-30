@@ -10,3 +10,5 @@ composer.phar
 composer.lock
 .sass-cache
 css/modules/.sass-cache/*
+dist/*
+node_modules/*

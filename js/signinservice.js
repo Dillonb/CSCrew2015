@@ -12,7 +12,7 @@ app.factory('signinFactory', function($http, $q) {
                     deferred.reject("Error retrieving list of signins");
                 });
             return deferred.promise;
-        }
+        };
 
         service.getReasons = function() {
             var deferred = $q.defer();
@@ -25,7 +25,7 @@ app.factory('signinFactory', function($http, $q) {
                     deferred.reject("Error retrieving list of reasons.");
                 });
             return deferred.promise;
-        }
+        };
 
         service.signinNetid = function(netid,reason) {
             var deferred = $q.defer();
@@ -38,7 +38,7 @@ app.factory('signinFactory', function($http, $q) {
                 deferred.reject("Error signing in.");
             });
             return deferred.promise;
-        }
+        };
 
         service.stats = function() {
             var deferred = $q.defer();
