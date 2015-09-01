@@ -234,4 +234,7 @@ function process_member_resultset($members) {
    }
    return $processedMembers;
 }
+function send_contactform_email($fromName, $fromEmail, $message) {
+    mail("uvm.cscrew@gmail.com", "CS Crew Contact Form", "From: ${fromName} <". $fromEmail . ">\n" . $message);
+}
 ?>

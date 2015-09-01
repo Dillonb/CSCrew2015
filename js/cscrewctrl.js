@@ -1,4 +1,4 @@
-app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory, signinFactory) {
+app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, helpHourFactory, signinFactory, $http) {
     $scope.users = [];
     $scope.timeNow = moment();
     $scope.today = function() { return moment().format("YYYY-MM-DD"); };
@@ -151,6 +151,27 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, userFactory, he
     $scope.signinHelpHour = function(helphour) {
         helpHourFactory.signin(helphour.Id).then(function(response) {
             $scope.loadHelpHoursToday();
+        });
+    };
+    $scope.contactForm = {};
+    $scope.contactFormReady = true;
+    $scope.submitContactForm = function() {
+        $scope.contactFormLoading = true;
+        $scope.contactFormReady = false;
+        $scope.contactFormError = false;
+        $http({
+            method:'POST',
+            url:'api/contact',
+            data: {
+                fromName: $scope.contactForm.fromName,
+                fromEmail: $scope.contactForm.fromEmail,
+                message: $scope.contactForm.message
+            }
+        }).success(function(data) {
+            $scope.contactFormLoading = false;
+        }).error(function() {
+            $scope.contactFormLoading = false;
+            $scope.contactFormError = true;
         });
     };
 });

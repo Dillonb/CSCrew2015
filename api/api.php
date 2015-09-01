@@ -247,5 +247,15 @@ $app->get('/whoami', function() use ($app) {
     $who['profile'] = get_user_profile($who['username'])->toArray();
     render_json($who);
 });
+$app->post('/contact', function() use ($app) {
+    $data = $app->request->getBody();
+    if (!$data) {
+        $app->stop();
+    }
+    $data = json_decode($data,true);
+    $data['fromName']  = array_key_exists('fromName', $data) ? $data['fromName'] : "Anonymous";
+    $data['fromEmail'] = array_key_exists('fromEmail', $data) ? $data['fromEmail'] : "anon@anon";
+    send_contactform_email($data['fromName'], $data['fromEmail'], $data['message']);
+});
 
 $app->run();
