@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>CS Crew Room Sign-In</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- build:js -->
     <script src="js/signinapp.js"></script>
     <script src="js/signinservice.js"></script>
     <script src="js/signinctrl.js"></script>
+    <!-- endbuild -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/signin.css">

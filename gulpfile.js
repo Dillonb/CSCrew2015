@@ -48,6 +48,20 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('signinscripts', function() {
+    return gulp.src([
+        'js/signinapp.js',
+        'js/signinservice.js',
+        'js/signinctrl.js'
+    ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(ngannotate())
+    .pipe(uglify())
+    .pipe(concat('signin.js'))
+    .pipe(gulp.dest('dist/js'));
+});
+
 // Concatenate and minify vendor JS
 gulp.task('vendorjs', function() {
 	return gulp.src([
@@ -98,7 +112,6 @@ gulp.task('copylogin', function() {
 gulp.task('copyother', function() {
 	return gulp.src([
 				'.htaccess',
-				'signin.php',
 				'tvdash.php'
 			])
 			.pipe(gulp.dest('dist'));
@@ -113,6 +126,15 @@ gulp.task('indexhtml', function() {
 			.pipe(gulp.dest('dist'));
 });
 
+gulp.task('signinphp', function() {
+    return gulp.src('signin.php')
+        .pipe(htmlReplace({
+            'js': ['js/signin.js']
+        }))
+        .pipe(gulp.dest('dist'));
+});
 
-gulp.task('copy', ['copyapi', 'copyimg', 'copylogin', 'copyother']);
-gulp.task('default', ['templates', 'admintemplates', 'scripts', 'vendorjs', 'css', 'copy', 'indexhtml']);
+
+// copyapi is broken for now, do it manually.
+gulp.task('copy', [/*'copyapi',*/ 'copyimg', 'copylogin', 'copyother']);
+gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'vendorjs', 'css', 'copy', 'indexhtml', 'signinphp']);
