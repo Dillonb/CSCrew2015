@@ -90,12 +90,6 @@ gulp.task('csspartials', function() {
 // All CSS
 gulp.task('css', ['cssmain', 'csspartials']);
 
-// Copy API
-gulp.task('copyapi', function() {
-	return gulp.src('api/**',{dot:true, follow:true})
-			.pipe(gulp.dest('dist/api'));
-});
-
 // Copy images
 gulp.task('copyimg', function() {
 	return gulp.src('img/*')
@@ -135,6 +129,5 @@ gulp.task('signinphp', function() {
 });
 
 
-// copyapi is broken for now, do it manually.
-gulp.task('copy', [/*'copyapi',*/ 'copyimg', 'copylogin', 'copyother']);
+gulp.task('copy', ['copyimg', 'copylogin', 'copyother']);
 gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'vendorjs', 'css', 'copy', 'indexhtml', 'signinphp']);
