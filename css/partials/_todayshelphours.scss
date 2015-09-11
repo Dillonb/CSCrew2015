@@ -1,3 +1,4 @@
+
 .picture-container {
     overflow: hidden;
     padding: 0;
@@ -31,6 +32,7 @@
             border-radius: 0 0 0 20px;
         }
     }
+    p { margin: 0 0 8px; }
 }
 
 .todays-help-hours-inactive {
@@ -48,6 +50,7 @@
     }
     h3 {
         margin-top: 10px;
+	margin-bottom: 5px;
         font-size: 20px;
         color: darken(#777, 10);
     }
@@ -71,6 +74,7 @@
     }
     h3 {
         margin-top: 20px;
+	margin-bottom: 10px;
         font-size: 30px;
     }
     h4 {

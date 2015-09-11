@@ -55,7 +55,7 @@
                                         <span ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</span>
                                         <span ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</span>
                                     </p>
-                                    <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
+                                    <p class="small-font"><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span>
                                     </p>
                                 </div>
 				</div>
@@ -103,5 +103,27 @@
                 </form>
             </div>
         </div>
+    </section>
+    <section class="gold white-text pad-block">
+      <div class="row">
+	<div class="col-md-12">
+	  <h2>FAQs</h2>
+	  <hr/>
+	  </div>
+	<div class="row mb">
+	  <div class="col-md-4">
+	  <strong>Q: How do I become a member of CS Crew?</strong>
+	</div>
+	<div class="col-md-8">
+	  <strong>A:</strong> Becoming a member is an informal process where it's up to you whether you want to consider yourself a member of CS Crew or not. If you visit the CS Crew room frequently and participate in our events, then we would certainly call you a member! If you want to visibly show your membership, just sign in at the top of our website with your UVM netID and add yourself to the 'Members' page of the website.</div></div>
+	  <div class="row mb">
+	    <div class="col-md-4">
+	  <strong>Q: Can CS Crew help me with my homework during Help Hours?</strong>
+	  </div>
+	    <div class="col-md-8">
+	  <strong>A:</strong> Yes we can, but we are not TAs. We cannot give you direct answers to your homework problems, but we can point you in the right direction with more general help.
+	  </div>
+	  </div>
+      </div>
     </section>
 </section>
