@@ -35,7 +35,7 @@ app.controller('MainCtrl', function($scope, $interval, signinFactory, helpHourFa
                 dataBuild[signin.reason.Text] += 1;
             }
 
-            for (key in dataBuild) {
+            for (var key in dataBuild) {
                 if (dataBuild.hasOwnProperty(key)) {
                     rows.push([key,dataBuild[key]]);
                 }
