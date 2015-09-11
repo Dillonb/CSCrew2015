@@ -7,10 +7,10 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, signinFactory) 
     $scope.signinNetid = function() {
         var netid = $scope.netid;
         var reason = $scope.reason;
-        if ($scope.netid == null || $scope.netid == "") {
+        if ($scope.netid === null || $scope.netid === "") {
             return;
         }
-        if ($scope.reason == "" || $scope.reason == null) {
+        if ($scope.reason === "" || $scope.reason === null) {
             return;
         }
         $scope.loading = true;
@@ -33,10 +33,10 @@ app.controller('MainCtrl', function($scope, $interval, $timeout, signinFactory) 
                     $scope.loading = false;
                 }, 5000);
         });
-    }
+    };
     $scope.updateReasons = function() {
         signinFactory.getReasons().then(function(data) {
             $scope.reasons = data;
         });
-    }
+    };
 });
