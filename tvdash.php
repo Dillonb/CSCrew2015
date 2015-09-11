@@ -5,6 +5,7 @@
     <title>CS Crew TV Dashboard</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- build:js -->
     <script src="js/tvdashapp.js"></script>
     <script src="js/signinservice.js"></script>
