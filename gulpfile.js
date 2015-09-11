@@ -62,6 +62,21 @@ gulp.task('signinscripts', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('tvdashscripts', function() {
+    return gulp.src([
+        "js/tvdashapp.js",
+        "js/signinservice.js",
+        "js/helphourservice.js",
+        "js/tvdashctrl.js",
+    ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(ngannotate())
+    .pipe(uglify())
+    .pipe(concat('tvdash.js'))
+    .pipe(gulp.dest('dist/js'));
+});
+
 // Concatenate and minify vendor JS
 gulp.task('vendorjs', function() {
 	return gulp.src([
@@ -106,7 +121,6 @@ gulp.task('copylogin', function() {
 gulp.task('copyother', function() {
 	return gulp.src([
 				'.htaccess',
-				'tvdash.php'
 			])
 			.pipe(gulp.dest('dist'));
 });
@@ -128,6 +142,14 @@ gulp.task('signinphp', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('tvdashphp', function() {
+    return gulp.src('tvdash.php')
+        .pipe(htmlReplace({
+            'js': ['js/tvdash.js', 'js/vendor.js']
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
 
 gulp.task('copy', ['copyimg', 'copylogin', 'copyother']);
-gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'vendorjs', 'css', 'copy', 'indexhtml', 'signinphp']);
+gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'tvdashscripts', 'vendorjs', 'css', 'copy', 'indexhtml', 'signinphp', 'tvdashphp']);

@@ -5,12 +5,14 @@
     <title>CS Crew TV Dashboard</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- build:js -->
     <script src="js/tvdashapp.js"></script>
     <script src="js/signinservice.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/angular-moment.min.js"></script>
     <script src="js/helphourservice.js"></script>
     <script src="js/tvdashctrl.js"></script>
+    <!-- endbuild -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment-range/2.0.2/moment-range.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
