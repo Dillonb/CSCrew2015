@@ -80,6 +80,18 @@ google.setOnLoadCallback(function() {
                     </ul>
                 </div>
             </div>
+            <div id="top3-signins" class="panel panel-default tiling-panel">
+                <div class="panel-heading">
+                    <h3>Top 3 visitors all time</h3>
+                </div>
+                <div class="panel-body">
+                    <ul id="signins-top3">
+                        <li ng-repeat="signin in signins | orderBy: numSignIns | limitTo: 3">
+                            {{ $index + 1 }}. {{ signin.user.Name }} - {{ signin.numSignIns }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div id="calendar" class="panel panel-default tiling-panel">
                 <div class="panel-heading">
                     <h3>Upcoming Events</h3>
