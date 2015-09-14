@@ -36,7 +36,10 @@ google.setOnLoadCallback(function() {
                     <h3>Room Statistics for Today</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="panel panel-default" id="usage-chart"></div>
+                    <div class="panel panel-default">
+                        <div id="usage-chart"></div>
+                        <div id="year-chart"></div>
+                    </div>
                     <ul id="signins-list">
                         <li ng-repeat="signin in signins">
                             [{{ signin.CreatedAt | date:'shortTime' }}] {{ signin.user.Name }} ({{ signin.numSignIns }})

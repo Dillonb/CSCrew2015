@@ -7,7 +7,7 @@ app.controller('MainCtrl', function($scope, $interval, signinFactory, helpHourFa
             signinFactory.getSigninsToday().then(function(data) {
                 $scope.signins = data;
                 console.log(data);
-                $scope.updateChart();
+                $scope.updateCharts();
             });
         };
         $scope.updateHelphours = function() {
@@ -17,39 +17,65 @@ app.controller('MainCtrl', function($scope, $interval, signinFactory, helpHourFa
             });
         };
 
-        $scope.updateChart = function() {
-            var data = new google.visualization.DataTable();
+        $scope.updateCharts = function() {
+            var usageData = new google.visualization.DataTable();
+            var yearData = new google.visualization.DataTable();
 
-            data.addColumn('string', 'Reason');
-            data.addColumn('number', 'Count');
+            usageData.addColumn('string', 'Reason');
+            usageData.addColumn('number', 'Count');
 
-            var rows = [];
-            var dataBuild = {};
+
+            yearData.addColumn('string', 'Year');
+            yearData.addColumn('number', 'Count');
+
+            var usageRows = [];
+            var usageDataBuild = {};
+
+            var yearRows = [];
+            var yearDataBuild = {};
 
             for (var i = 0; i < $scope.signins.length; i++) {
                 var signin = $scope.signins[i];
 
-                if (!dataBuild.hasOwnProperty(signin.reason.Text)) {
-                    dataBuild[signin.reason.Text] = 0;
+                if (!usageDataBuild.hasOwnProperty(signin.reason.Text)) {
+                    usageDataBuild[signin.reason.Text] = 0;
                 }
-                dataBuild[signin.reason.Text] += 1;
+                usageDataBuild[signin.reason.Text] += 1;
+
+                if (!yearDataBuild.hasOwnProperty(signin.user.Year)) {
+                    yearDataBuild[signin.user.Year] = 0;
+                }
+                yearDataBuild[signin.user.Year] += 1;
             }
 
-            for (var key in dataBuild) {
-                if (dataBuild.hasOwnProperty(key)) {
-                    rows.push([key,dataBuild[key]]);
+            for (var key in usageDataBuild) {
+                if (usageDataBuild.hasOwnProperty(key)) {
+                    usageRows.push([key,usageDataBuild[key]]);
                 }
             }
 
-            data.addRows(rows);
+            for (key in yearDataBuild) {
+                if (yearDataBuild.hasOwnProperty(key)) {
+                    yearRows.push([key, yearDataBuild[key]]);
+                }
+            }
 
-            var options = {
+            usageData.addRows(usageRows);
+            yearData.addRows(yearRows);
+
+            var usageOptions = {
                 'title': 'Room Usage',
                 'width': 400,
                 'height': 300};
+            var yearOptions = {
+                'title': 'Year Distribution',
+                'width': 400,
+                'height': 300};
 
-            var chart = new google.visualization.PieChart(document.getElementById('usage-chart'));
-            chart.draw(data, options);
+            var usageChart = new google.visualization.PieChart(document.getElementById('usage-chart'));
+            var yearChart = new google.visualization.PieChart(document.getElementById('year-chart'));
+            usageChart.draw(usageData, usageOptions);
+            yearChart.draw(yearData, yearOptions);
         };
 
         function refreshData() {
