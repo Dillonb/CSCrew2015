@@ -1,7 +1,7 @@
 <div class="row" ng-if="pendingHelpHourSignins">
     <div class="alert alert-danger custom-alert" ng-repeat="helphour in pendingHelpHourSignins">
-        You are not signed in for your current help hours from {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
-        <a class="btn btn-default" ng-click="signinHelpHour(helphour)">Sign in now</a>
+        You are not checked in for your current help hours from {{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
+        <a class="btn btn-default" ng-click="signinHelpHour(helphour)">Check in now</a>
     </div>
 </div>
 <section class="squish">
@@ -48,9 +48,9 @@
 
 <span ng-if="helphour.dateRange.contains(now())">
                                 <!-- If the user has signed in for this help hour -->
-                                <small ng-if="helphour.SignedIn" class="text-success">Signed In</small>
+                                <small ng-if="helphour.SignedIn" class="text-success">Checked In</small>
                                 <!-- If the user has NOT signed in for this help hour -->
-                                <small ng-if="!helphour.SignedIn" class="text-danger">Not Signed In</small></h3>
+                                <small ng-if="!helphour.SignedIn" class="text-danger">Not Checked In</small></h3>
                                     <p>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}
                                         <span ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</span>
                                         <span ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</span>
