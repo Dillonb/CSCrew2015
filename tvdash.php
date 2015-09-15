@@ -5,12 +5,15 @@
     <title>CS Crew TV Dashboard</title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- build:js -->
     <script src="js/tvdashapp.js"></script>
     <script src="js/signinservice.js"></script>
     <script src="js/moment.js"></script>
     <script src="js/angular-moment.min.js"></script>
     <script src="js/helphourservice.js"></script>
     <script src="js/tvdashctrl.js"></script>
+    <!-- endbuild -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment-range/2.0.2/moment-range.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -33,7 +36,10 @@ google.setOnLoadCallback(function() {
                     <h3>Room Statistics for Today</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="panel panel-default" id="usage-chart"></div>
+                    <div class="panel panel-default">
+                        <div id="usage-chart"></div>
+                        <div id="year-chart"></div>
+                    </div>
                     <ul id="signins-list">
                         <li ng-repeat="signin in signins">
                             [{{ signin.CreatedAt | date:'shortTime' }}] {{ signin.user.Name }} ({{ signin.numSignIns }})

@@ -17,6 +17,10 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
             return deferred.promise;
         };
 
+        function timeRemainingFn() {
+            this.timeRemaining = moment() - this.StartTimeMoment;
+        }
+
         service.helpHoursNow = function() {
             var deferred = $q.defer();
             $http({
@@ -30,9 +34,7 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
                     data[i].dateRange = moment.range(data[i].StartTimeMoment, data[i].EndTimeMoment);
 
 
-                    data[i].updateTimeRemaining = function() {
-                        this.timeRemaining = moment() - this.StartTimeMoment;
-                    }.bind(data[i]);
+                    data[i].updateTimeRemaining = timeRemainingFn.bind(data[i]);
                     data[i].updateTimeRemaining();
                     data[i].timeRemainingInterval = $interval(data[i].updateTimeRemaining, 1000);
                 }
@@ -66,13 +68,15 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
                 var helphours = {};
                 var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+                var i = 0;
+
                 // Initialize the helphours object
-                for(var i = 0; i < week.length; i++) {
+                for(i = 0; i < week.length; i++) {
                     helphours[week[i]] = [];
                 }
 
                 // Sort the help hours into each weekday
-                for (var i = 0; i < data.length; i++) {
+                for (i = 0; i < data.length; i++) {
                     for (var j = 0; j < week.length; j++) {
                         if (data[i][week[j]]) {
                             helphours[week[j]].push(data[i]);
