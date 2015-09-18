@@ -19,6 +19,8 @@ app.factory('helpHourFactory', function($http, $q, $interval) {
 
         function timeRemainingFn() {
             this.timeRemaining = moment() - this.StartTimeMoment;
+            this.percentage = (this.timeRemaining / this.duration) * 100;
+            this.style = {width: this.percentage + '%'};
         }
 
         service.helpHoursNow = function() {
