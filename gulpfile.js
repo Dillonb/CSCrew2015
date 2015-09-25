@@ -11,41 +11,41 @@ var htmlReplace = require('gulp-html-replace');
 
 // Build angular template cache
 gulp.task('templates', function() {
-	return gulp.src('templates/*.html')
-				.pipe(gulp.dest('dist/templates'))
-				.pipe(templateCache({
-					'root': 'templates/',
-					'module': 'cscrew'
-				}))
-				.pipe(gulp.dest('dist/js'));
+    return gulp.src('templates/*.html')
+    .pipe(gulp.dest('dist/templates'))
+    .pipe(templateCache({
+        'root': 'templates/',
+        'module': 'cscrew'
+    }))
+    .pipe(gulp.dest('dist/js'));
 });
 gulp.task('admintemplates', function() {
-	return gulp.src('templates/admin/*.html')
-				.pipe(gulp.dest('dist/templates/admin'))
-				.pipe(templateCache({
-					'root': 'templates/admin/',
-					'module': 'cscrew'
-				}))
-				.pipe(rename('admintemplates.js'))
-				.pipe(gulp.dest('dist/js'));
+    return gulp.src('templates/admin/*.html')
+    .pipe(gulp.dest('dist/templates/admin'))
+    .pipe(templateCache({
+        'root': 'templates/admin/',
+        'module': 'cscrew'
+    }))
+    .pipe(rename('admintemplates.js'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
     return gulp.src([
-			'js/cscrewapp.js',
-			'js/userservice.js',
-			'js/helphourservice.js',
-			'js/signinservice.js',
-			'js/cscrewctrl.js',
-			'js/adminctrl.js',
-		])
-		.pipe(jshint())
-        .pipe(jshint.reporter('default'))
-		.pipe(ngannotate())
-        .pipe(uglify())
-		.pipe(concat('cscrew.js'))
-        .pipe(gulp.dest('dist/js'));
+        'js/cscrewapp.js',
+        'js/userservice.js',
+        'js/helphourservice.js',
+        'js/signinservice.js',
+        'js/cscrewctrl.js',
+        'js/adminctrl.js',
+    ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(ngannotate())
+    .pipe(uglify())
+    .pipe(concat('cscrew.js'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('signinscripts', function() {
@@ -79,27 +79,27 @@ gulp.task('tvdashscripts', function() {
 
 // Concatenate and minify vendor JS
 gulp.task('vendorjs', function() {
-	return gulp.src([
-			'js/unslider.min.js',
-			'js/angular-ui-router.min.js',
-			'js/ui-bootstrap-tpls-0.13.0.min.js',
-			'js/moment.js',
-			'js/angular-moment.min.js'
-			])
-			.pipe(concat('vendor.js'))
-			.pipe(gulp.dest('dist/js'));
+    return gulp.src([
+        'js/unslider.min.js',
+        'js/angular-ui-router.min.js',
+        'js/ui-bootstrap-tpls-0.13.0.min.js',
+        'js/moment.js',
+        'js/angular-moment.min.js'
+    ])
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('dist/js'));
 })
 
 // Copy all CSS
 gulp.task('cssmain', function() {
-	return gulp.src('css/*.css')
-			.pipe(gulp.dest('dist/css'));
+    return gulp.src('css/*.css')
+    .pipe(gulp.dest('dist/css'));
 });
 
 // Copy all CSS partials
 gulp.task('csspartials', function() {
-	return gulp.src('css/partials/*.css')
-			.pipe(gulp.dest('dist/css/partials'));
+    return gulp.src('css/partials/*.css')
+    .pipe(gulp.dest('dist/css/partials'));
 });
 
 // All CSS
@@ -107,48 +107,68 @@ gulp.task('css', ['cssmain', 'csspartials']);
 
 // Copy images
 gulp.task('copyimg', function() {
-	return gulp.src('img/*')
-			.pipe(gulp.dest('dist/img'));
+    return gulp.src('img/*')
+    .pipe(gulp.dest('dist/img'));
 });
 
 // Copy login
 gulp.task('copylogin', function() {
-	return gulp.src('login/*')
-			.pipe(gulp.dest('dist/login'));
+    return gulp.src('login/*')
+    .pipe(gulp.dest('dist/login'));
 });
 
 // Copy other misc files
 gulp.task('copyother', function() {
-	return gulp.src([
-				'.htaccess',
-			])
-			.pipe(gulp.dest('dist'));
+    return gulp.src([
+        '.htaccess',
+    ])
+    .pipe(gulp.dest('dist'));
 });
 
 // Process index.html
 gulp.task('indexhtml', function() {
-	return gulp.src('*.html')
-			.pipe(htmlReplace({
-				'js': ['js/vendor.js', 'js/cscrew.js', 'js/templates.js']
-			}))
-			.pipe(gulp.dest('dist'));
+    return gulp.src('*.html')
+    .pipe(htmlReplace({
+        'js': ['js/vendor.js', 'js/cscrew.js', 'js/templates.js']
+    }))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('signinphp', function() {
     return gulp.src('signin.php')
-        .pipe(htmlReplace({
-            'js': ['js/signin.js']
-        }))
-        .pipe(gulp.dest('dist'));
+    .pipe(htmlReplace({
+        'js': ['js/signin.js']
+    }))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('tvdashphp', function() {
     return gulp.src('tvdash.php')
-        .pipe(htmlReplace({
-            'js': ['js/tvdash.js', 'js/vendor.js']
-        }))
-        .pipe(gulp.dest('dist'));
+    .pipe(htmlReplace({
+        'js': ['js/tvdash.js', 'js/vendor.js']
+    }))
+    .pipe(gulp.dest('dist'));
 });
+
+gulp.task('jshint', function() {
+    return gulp.src([
+        'js/adminctrl.js',
+        'js/cscrewctrl.js',
+        'js/signinctrl.js',
+        'js/tvdashapp.js',
+        'js/userservice.js',
+        'js/cscrewapp.js',
+        'js/helphourservice.js',
+        'js/signinapp.js',
+        'js/signinservice.js',
+        'js/tvdashctrl.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('fail'))
+});
+
+gulp.task('test', ['jshint'], function() {
+});
+
 
 
 gulp.task('copy', ['copyimg', 'copylogin', 'copyother']);
