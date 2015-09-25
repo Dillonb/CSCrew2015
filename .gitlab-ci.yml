@@ -1,11 +1,11 @@
 image: node:latest
 
 before_script:
-    npm install -g gulp
-    npm install
+    - npm install -g gulp
+    - npm install
 
 stages:
-    test
+    - test
 
 gulptest:
     stage: test
