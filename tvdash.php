@@ -74,6 +74,7 @@ google.setOnLoadCallback(function() {
                                         <small ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</small>
                                     </h3>
                                     <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
+                                    <p><div class="progress"><div class="progress-bar" role="progressbar" ng-style="{{ helphour.style }}"></div></div>
                                 </div>
                             </div>
                         </li>
