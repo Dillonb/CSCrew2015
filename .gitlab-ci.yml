@@ -1,0 +1,14 @@
+image: node:latest
+
+before_script:
+    npm install -g gulp
+    npm install
+
+stages:
+    test
+
+gulptest:
+    stage: test
+    script:
+        - gulp test
+    allow_failure: true
