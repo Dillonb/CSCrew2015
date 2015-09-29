@@ -3,7 +3,7 @@ New CS Crew website for 2015
 
 ## Setup instructions
 
-(Note: Must be run on Zoo.)
+(Note: Backend must be run on Zoo.)
 
 1. Run 'npm install' to install required development packages.
 2. Clone the accompanying CSCrew2015-back repository to a subdir of this repository called 'api'.
