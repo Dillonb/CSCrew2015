@@ -5,6 +5,18 @@ New CS Crew website for 2015
 
 (Note: Must be run on Zoo.)
 
-1. Copy _htaccess to .htaccess and edit the REWRITE_BASE to be correct for your install location.
-2. Copy build.properties-template and and runtime-conf-template.xml to build.properties and runtime-conf.xml respectively. Then edit both files with the correct database information.
-3. Run ./propel-gen to generate data files, then ./propel-gen insert-sql to insert the base database schema.
+1. Run 'npm install' to install required development packages.
+2. Clone the accompanying CSCrew2015-back repository to a subdir of this repository called 'api'.
+3. Follow the instructions in api/README.md
+
+
+## Development
+
+### SASS
+
+To ensure SASS files are automatically compiled while working, run 'gulp sass-watch'.
+
+
+## Deployment
+
+To deploy the site, run 'gulp'. Copy the entire 'dist' directory to the server. Also clone the CSCrew2015-back tree and follow the same process as above.
