@@ -106,8 +106,8 @@ gulp.task('inplace-sass', function() {
         .pipe(gulp.dest('css/'));
 });
 
-gulp.task('sass:watch', function () {
-      gulp.watch('css/**/*.scss', ['inplace-sass']);
+gulp.task('sass-watch', function () {
+    return gulp.watch(['css/*.scss','css/*/*.css'], ['inplace-sass']);
 });
 
 
