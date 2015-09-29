@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var ngannotate = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
 var htmlReplace = require('gulp-html-replace');
+var sourcemaps = require('gulp-sourcemaps');
 
 // Build angular template cache
 gulp.task('templates', function() {
@@ -102,7 +103,9 @@ gulp.task('dist-sass', function() {
 // Compile all SASS in-place
 gulp.task('inplace-sass', function() {
     return gulp.src('css/*.scss')
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sourcemaps.init())
+            .pipe(sass())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('css/'));
 });
 
