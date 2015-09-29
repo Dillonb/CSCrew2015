@@ -88,22 +88,32 @@ gulp.task('vendorjs', function() {
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/js'));
-})
-
-// Copy all CSS
-gulp.task('cssmain', function() {
-    return gulp.src('css/*.css')
-    .pipe(gulp.dest('dist/css'));
 });
 
-// Copy all CSS partials
-gulp.task('csspartials', function() {
-    return gulp.src('css/partials/*.css')
-    .pipe(gulp.dest('dist/css/partials'));
+gulp.task('sass', ['dist-sass','inplace-sass']);
+
+// Compile and copy all SASS
+gulp.task('dist-sass', function() {
+    return gulp.src('css/*.scss')
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(gulp.dest('dist/css/'));
 });
 
-// All CSS
-gulp.task('css', ['cssmain', 'csspartials']);
+// Compile all SASS in-place
+gulp.task('inplace-sass', function() {
+    return gulp.src('css/*.scss')
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(gulp.dest('css/'));
+});
+
+gulp.task('sass:watch', function () {
+      gulp.watch('css/**/*.scss', ['inplace-sass']);
+});
+
+
+
+gulp.task('sass:watch', function() {
+});
 
 // Copy images
 gulp.task('copyimg', function() {
@@ -172,4 +182,4 @@ gulp.task('test', ['jshint'], function() {
 
 
 gulp.task('copy', ['copyimg', 'copylogin', 'copyother']);
-gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'tvdashscripts', 'vendorjs', 'css', 'copy', 'indexhtml', 'signinphp', 'tvdashphp']);
+gulp.task('default', ['templates', 'admintemplates', 'scripts', 'signinscripts', 'tvdashscripts', 'vendorjs', 'sass', 'copy', 'indexhtml', 'signinphp', 'tvdashphp']);

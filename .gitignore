@@ -1,6 +1,9 @@
 api/
 *.swp
 css/.sass-cache/*
+*.css
+*.map
+css/*.map
 composer.phar
 composer.lock
 .sass-cache

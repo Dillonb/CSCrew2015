@@ -1,3 +1,34 @@
+// modules
+@import 'modules/typography';
+@import 'modules/colors';
+// partials
+@import 'partials/mainnav';
+@import 'partials/welcomebanner';
+@import 'partials/todayshelphours';
+@import 'partials/contactform';
+@import 'partials/members';
+@import 'partials/mediaqueries';
+
+html {
+    font-size: $base-font-size;
+}
+
+body {
+    font-family: $font-mont;
+    font-size: 100%;
+}
+
+hr {
+    width: 300px;
+    margin: 20px 0;
+}
+
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .cscrew-header-logo {
     width: 10%;
 }
@@ -7,19 +38,67 @@ form#form-new-helphour {
     p.timepicker {
         display: inline-block;
     }
-    &.ng-invalid {
-        background-color:red;
-    }
-    .ng-invalid {
-        background-color: blue;
-    }
     ul.weekselect {
         padding-left: 0px;
         li {
             display: inline-block;
             input[type="checkbox"] {
-                display:none;
+                display: none;
             }
         }
     }
+}
+
+
+.mint {
+    background: $mint;
+}
+
+.gold {
+    background: $gold;
+}
+
+.cantaloupe {
+    background: $cantaloupe;
+}
+
+.pad-block {
+    padding: 40px 0;
+}
+
+.mb {
+    margin-bottom: 1em !important;
+}
+
+.squish {
+    .row {
+        max-width: 45em;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.white-text {
+	color: #fff;
+}
+
+/** PROFILE **/
+
+.profile {
+    padding: 40px 3%;
+}
+
+/* GET HELP */
+
+.get-help {
+    padding: 24px 3% 40px;
+    .panel { background-color: transparent;}
+}
+
+
+/** IMAGES **/
+
+.portrait {
+    width: 100%;
+    height: auto;
 }
