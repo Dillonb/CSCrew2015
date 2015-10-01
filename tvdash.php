@@ -57,21 +57,20 @@ google.setOnLoadCallback(function() {
                         <li ng-repeat="helphour in helphours | orderBy: 'StartTime'">
                             <div class="todays-help-hours-inactive row">
                                 <div class="col-md-4">
-                                    <img alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
-                                    <img alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
+                                    <img class="hh-pic" alt="User avatar" ng-if="helphour.User.Picture" ng-src="{{ helphour.User.Picture }}">
+                                    <img class="hh-pic" alt="No picture available" ng-if="!helphour.User.Picture" ng-src="img/qmark.png">
                                 </div>
                                 <div class="col-md-8">
                                     <span ng-if="helphour.dateRange.contains(now())">
-                                        <!-- If the user has signed in for this help hour -->
-                                        <span ng-if="helphour.SignedIn">Check mark goes here</span>
-                                        <!-- If the user has NOT signed in for this help hour -->
-                                        <span ng-if="!helphour.SignedIn">X mark goes here</span>
+
                                     </span>
                                     <h3>
                                         {{ helphour.User.Name }}
                                         <small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
                                         <small ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</small>
                                         <small ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</small>
+					<small ng-if="helphour.SignedIn" class="text-success">Checked In</small> <!-- If the user has signed in for this help hour -->
+					<small ng-if="!helphour.SignedIn" class="text-danger">Not Checked In</small> <!-- If the user has NOT signed in for this help hour -->
                                     </h3>
                                     <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
                                     <p><div class="progress"><div class="progress-bar" role="progressbar" ng-style="{{ helphour.style }}"></div></div>
