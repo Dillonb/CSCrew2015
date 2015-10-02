@@ -11,4 +11,3 @@ gulptest:
     stage: test
     script:
         - gulp test
-    allow_failure: true
