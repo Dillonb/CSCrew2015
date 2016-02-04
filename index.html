@@ -35,6 +35,7 @@
             <ul class="nav navbar-nav">
                 <li ui-sref-active="active"><a href="#" ui-sref="members">Members</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="get-help">Get Help</a></li>
+                <li><a href="https://cscrew.w3.uvm.edu/mb">Message Board</a></li>
                 <li ui-sref-active="active" ng-if="currentUser.authenticated"><a href="#" ui-sref="profile">My Account</a></li>
                 <li ui-sref-active="active">
                     <a ng-if="currentUser.user.IsAdmin" href="#" ui-sref="admin.home" ng-init="loadPendingAdminNotifications()">Admin <span class="badge">{{ numUnapprovedHelpHours }}</span></a>
