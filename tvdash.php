@@ -69,8 +69,8 @@ google.setOnLoadCallback(function() {
                                         <small>{{ today() + " " + helphour.StartTime | amDateFormat: 'h:mm a' }} - {{ today() + " " + helphour.EndTime | amDateFormat: 'h:mm a' }}</small>
                                         <small ng-if="now().isBefore(helphour.StartTimeMoment)">(Starts <span am-time-ago="helphour.StartTimeMoment"></span>)</small>
                                         <small ng-if="helphour.dateRange.contains(now())">(Ends <span am-time-ago="helphour.EndTimeMoment"></span>)</small>
-					<small ng-if="helphour.SignedIn" class="text-success">Checked In</small> <!-- If the user has signed in for this help hour -->
-					<small ng-if="!helphour.SignedIn" class="text-danger">Not Checked In</small> <!-- If the user has NOT signed in for this help hour -->
+                                        <small ng-if="helphour.SignedIn" class="text-success">Checked In</small> <!-- If the user has signed in for this help hour -->
+                                        <small ng-if="!helphour.SignedIn" class="text-danger">Not Checked In</small> <!-- If the user has NOT signed in for this help hour -->
                                     </h3>
                                     <p><span ng-repeat="skill in helphour.User.Skills">{{ skill.Name}}<span ng-if="!$last">, </span></span></p>
                                     <p><div class="progress"><div class="progress-bar" role="progressbar" ng-style="{{ helphour.style }}"></div></div>
